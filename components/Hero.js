@@ -4,25 +4,11 @@ import ButtonPrimary from "./misc/ButtonPrimary";
 import {motion} from "framer-motion";
 import getScrollAnimation from "../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
+import SiteSettings from "../utils/SiteSettings"
+
 
 const Hero = ({
-  listUser = [
-    {
-      name: "Users",
-      number: "390",
-      icon: "/assets/Icon/heroicons_sm-user.svg",
-    },
-    {
-      name: "Locations",
-      number: "20",
-      icon: "/assets/Icon/gridicons_location.svg",
-    },
-    {
-      name: "Server",
-      number: "50",
-      icon: "/assets/Icon/bx_bxs-server.svg",
-    },
-  ],
+  listUser = SiteSettings.highlightsList,
 }) => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
 
@@ -37,11 +23,10 @@ const Hero = ({
             variants={scrollAnimation}>
             <div className=" flex flex-col justify-center items-start row-start-2 sm:row-start-1">
               <h1 className="text-3xl lg:text-4xl xl:text-5xl font-medium text-black-600 leading-normal">
-                Want anything to be easy with <strong>LaslesVPN</strong>.
+                {SiteSettings.topHeader} <strong>{SiteSettings.shortCompanyName}</strong>
               </h1>
               <p className="text-black-500 mt-4 mb-6">
-                Provide a network for all your needs with ease and fun using
-                LaslesVPN discover interesting features from us.
+                {SiteSettings.shortPitch}
               </p>
               <ButtonPrimary>Get Started</ButtonPrimary>
             </div>
@@ -71,13 +56,13 @@ const Hero = ({
             >
               <div className="flex mx-auto w-40 sm:w-auto">
                 <div className="flex items-center justify-center bg-orange-100 w-12 h-12 mr-6 rounded-full">
-                  <img src={listUsers.icon} className="h-6 w-6" />
+                  <listUsers.iconComponent fill={SiteSettings.iconComponentFill}/>
                 </div>
                 <div className="flex flex-col">
                   <p className="text-xl text-black-600 font-bold">
-                    {listUsers.number}+
+                    {listUsers.title}
                   </p>
-                  <p className="text-lg text-black-500">{listUsers.name}</p>
+                  <p className="text-lg text-black-500">{listUsers.description}</p>
                 </div>
               </div>
             </motion.div>

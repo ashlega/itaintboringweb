@@ -3,11 +3,23 @@ import Link from "next/link";
 // Import react scroll
 import { Link as LinkScroll } from "react-scroll";
 import ButtonOutline from "../misc/ButtonOutline.";
+import { signIn, signOut, useSession } from "next-auth/react"
+import ProfileMenu from "../Profile/ProfileMenu"
+import SiteSettings from "../../utils/SiteSettings"
+
+
+
+
+
 //import LogoVPN from "../../public/assets/Logo.svg";
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
+
+  const { data: session, status } = useSession()
+  const loading = status === "loading"
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScrollActive(window.scrollY > 20);
@@ -42,6 +54,7 @@ const Header = () => {
                   : " text-black-500 hover:text-orange-500 a")
               }
             >
+              
               About
             </LinkScroll>
             <LinkScroll
@@ -100,10 +113,31 @@ const Header = () => {
             </LinkScroll>
           </ul>
           <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <Link href="/" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
-                  Sign In
-            </Link>
-            <ButtonOutline>Sign Up</ButtonOutline>
+
+          {!session && (
+            <>
+              <a
+                className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all"
+                
+                onClick={(e) => {
+                  e.preventDefault()
+                  signIn()
+                }}
+              >
+                <ButtonOutline>Sign In</ButtonOutline>
+              </a>
+
+              
+            </>
+          )}
+
+          {session?.user && (
+            <>
+              <ProfileMenu/>
+              
+            </>
+          )}
+            
           </div>
         </nav>
       </header>
