@@ -6,7 +6,7 @@ import GridiconComputer from "gridicons/dist/computer";
 export default class SiteSettings {
     static iconComponentFill = "red";
     static title  = "Treecat Software Inc";
-    static topHeader  = "Power Platform is easy with";
+    static topHeader  = "Power Platform is better with";
     static companyName  = "Treecat Software Inc";
     static shortCompanyName  = "Treecat";
     static shortPitch  = "We provide targetted consulting and training services to the Canadian and US clients out of our Ottawa location";
@@ -17,7 +17,7 @@ export default class SiteSettings {
     static pricingSubHeader = "We have prepared a few sample offers just to give you an idea of what's possible"
     
     static NewsHeader = "Power Platform News and Events";
-    static NewsSubHeader = "For better or worse, Power Platform is always evolving. We hope you will find our weekly digest useful";
+    static NewsSubHeader = "For better or worse, Power Platform is always evolving. We hope you will find our Power Platform news digest useful";
 
     static SubscribeHeader = "Subscribe Now!"
     static SubscribeSubHeader = "We can send Power Platform weekly news right to your inbox every week! You don't need to do a thing... well, other than to make sure those emails don't go to your junk folder!"
@@ -85,8 +85,21 @@ export default class SiteSettings {
     static servicesList = [
       "Power Apps and Power Automate Consulting",
       "Power Apps and Power Automate Training",
-      "Power Pages Development and Training",
       "Power Platform Project Assessment",
       "Power Platform Solution Design and Architecture"
     ]
+
+    static USER_REQESTS = "/";
+
+    //Flow Urls
+    static USER_EXISTS_URL = process.env.API_USER_EXISTS_URL ?? ""
+    static CONSENT_ACCEPT_URL = process.env.API_CONSENT_ACCEPT_URL ?? ""
+    static REQUEST_ADD_URL = process.env.API_REQUEST_ADD_URL ?? ""
+    static REQUEST_LIST_URL = process.env.API_REQUEST_LIST_URL ?? ""
+    static REQUEST_TYPES_URL = process.env.API_REQUEST_TYPES_URL ?? ""
+    static CONTENT_URL = process.env.API_CONTENT_URL ?? ""
+
+    static REQUEST_LIST_TAG = "requestlisttag";
+    static USER_TAG = "userinfo";
+    static CONTENT_TAG = "content";
   }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 // Import react scroll
 import { Link as LinkScroll } from "react-scroll";
@@ -6,8 +6,6 @@ import ButtonOutline from "../misc/ButtonOutline.";
 import { signIn, signOut, useSession } from "next-auth/react"
 import ProfileMenu from "../Profile/ProfileMenu"
 import SiteSettings from "../../utils/SiteSettings"
-import { useRouter } from 'next/router'
-import AppContext from "../Context/AppContext";
 
 
 
@@ -18,26 +16,9 @@ import AppContext from "../Context/AppContext";
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);
-  const router = useRouter();
-
-  const { appState, setAppState } = useContext(AppContext);
 
   const { data: session, status } = useSession()
   const loading = status === "loading"
-
-
-  const openPage = (e, pageName) => {
-    e.preventDefault();
-     setActiveLink(pageName);
-     if(pageName == "requests"){
-        setAppState({...appState, selected:"requests"});
-        //router.push('/requests');
-     }
-     if(pageName == "home"){
-      setAppState({...appState, selected:"home"});
-      //router.push('/');
-   }
-  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -59,40 +40,12 @@ const Header = () => {
             </Link>
           </div>
           <ul className="hidden lg:flex col-start-4 col-end-8 text-black-500  items-center">
-            <Link
+            <LinkScroll
               activeClass="active"
-              href="#"
-              onClick={(e) => {
-                openPage(e, "home");
-              }}
-              className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "home"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 a")
-              }
-            >
-              
-              Home
-            </Link>
-            <Link
-              activeClass="active"
-              href="#"
-              onSetActive={() => {
-                setActiveLink("digest");
-              }}
-              className={
-                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "digest"
-                  ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 ")
-              }
-            >
-              Digest
-            </Link>
-            <Link
-              activeClass="active"
-              href="#"
+              to="about"
+              spy={true}
+              smooth={true}
+              duration={1000}
               onSetActive={() => {
                 setActiveLink("about");
               }}
@@ -100,27 +53,66 @@ const Header = () => {
                 "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
                 (activeLink === "about"
                   ? " text-orange-500 animation-active "
-                  : " text-black-500 hover:text-orange-500 ")
+                  : " text-black-500 hover:text-orange-500 a")
               }
             >
+              
               About
-            </Link>
-            <Link
+            </LinkScroll>
+            <LinkScroll
               activeClass="active"
-              href="#"
-              onClick={(e) => {
-                openPage(e,"requests");
-                
+              to="feature"
+              spy={true}
+              smooth={true}
+              duration={1000}
+              onSetActive={() => {
+                setActiveLink("feature");
               }}
               className={
                 "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
-                (activeLink === "requests"
+                (activeLink === "feature"
                   ? " text-orange-500 animation-active "
                   : " text-black-500 hover:text-orange-500 ")
               }
             >
-              Questions&nbsp;&amp;&nbsp;Requests
-            </Link>
+              Feature
+            </LinkScroll>
+            <LinkScroll
+              activeClass="active"
+              to="pricing"
+              spy={true}
+              smooth={true}
+              duration={1000}
+              onSetActive={() => {
+                setActiveLink("pricing");
+              }}
+              className={
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
+                (activeLink === "pricing"
+                  ? " text-orange-500 animation-active "
+                  : " text-black-500 hover:text-orange-500 ")
+              }
+            >
+              Pricing
+            </LinkScroll>
+            <LinkScroll
+              activeClass="active"
+              to="testimoni"
+              spy={true}
+              smooth={true}
+              duration={1000}
+              onSetActive={() => {
+                setActiveLink("testimoni");
+              }}
+              className={
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
+                (activeLink === "testimoni"
+                  ? " text-orange-500 animation-active "
+                  : " text-black-500 hover:text-orange-500 ")
+              }
+            >
+              Testimonial
+            </LinkScroll>
           </ul>
           <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
 

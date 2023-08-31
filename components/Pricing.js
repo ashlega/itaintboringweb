@@ -7,6 +7,7 @@ import ButtonOutline from "./misc/ButtonOutline.";
 import { motion } from "framer-motion";
 import getScrollAnimation from "../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
+import ScrollAnimationWrapperSimple from "./Layout/ScrollAnimationWrapperSimple";
 import SiteSettings from "../utils/SiteSettings"
 
 const Pricing = () => {
@@ -34,7 +35,7 @@ const Pricing = () => {
             </motion.p>
           </ScrollAnimationWrapper>
           <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12 px-6 sm:px-0 lg:px-6">
-            <ScrollAnimationWrapper className="flex justify-center">
+            <ScrollAnimationWrapperSimple className="flex justify-center">
               <motion.div
                 variants={scrollAnimation}
                 className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
@@ -77,8 +78,8 @@ const Pricing = () => {
                   <ButtonOutline>Select</ButtonOutline>
                 </div>
               </motion.div>
-            </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper className="flex justify-center">
+            </ScrollAnimationWrapperSimple>
+            <ScrollAnimationWrapperSimple className="flex justify-center">
               <motion.div
                 variants={scrollAnimation}
                 className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
@@ -118,13 +119,13 @@ const Pricing = () => {
               </ul>
               <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
                 <p className="text-2xl text-black-600 text-center mb-4 ">
-                  $135 USD per hour
+                  $140 USD per hour
                 </p>
                 <ButtonOutline>Select</ButtonOutline>
               </div>
               </motion.div>
-            </ScrollAnimationWrapper>
-            <ScrollAnimationWrapper className="flex justify-center">
+            </ScrollAnimationWrapperSimple>
+            <ScrollAnimationWrapperSimple className="flex justify-center">
               <motion.div
                 variants={scrollAnimation}
                 className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
@@ -172,7 +173,7 @@ const Pricing = () => {
                 <ButtonOutline>Select</ButtonOutline>
               </div>
               </motion.div>
-            </ScrollAnimationWrapper>
+            </ScrollAnimationWrapperSimple>
           </div>
         </div>
         {

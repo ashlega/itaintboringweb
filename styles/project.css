@@ -1,0 +1,93 @@
+.accessdenied {
+   margin-top: 12em;
+   font-weight: bold;
+   padding-bottom: 12em;
+   line-height: 2em;
+}
+
+.pageHeader{
+    margin-top: 7em;
+    
+    font-weight: bold;
+    padding-bottom: 2em;
+    
+    flex-wrap:wrap;
+}
+
+.pageHeader b{
+    font-size:170%;
+    padding-right: 1em;
+}
+
+.user_consent{
+    
+    font-size: 100%;
+
+}
+.user_consent h1{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1em;
+    margin-top: 4em;
+    font-size: 200%;
+    
+}
+
+.request_buttons{
+    padding-bottom:1em;
+    padding-top:0.2em;
+    margin-bottom:1em;
+
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.requestHeader{
+    margin-top: 4em;
+    font-size:2em;
+    font-weight: bold;
+    padding-bottom: 0.5em;
+}
+
+.request_form{
+    text-align: left;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+.request_form b{
+    width: 100%;
+}
+.request_form input{
+    padding: 4px;
+    width: 100%;
+    margin-bottom: 0.5em;
+}
+.request_form select{
+    width: 100%;
+    padding-top:2px;
+    padding-bottom:2px;
+    margin-bottom: 0.5em;
+}
+.request_form textarea{
+    padding: 4px;
+    width: 100%;
+    margin-bottom: 0.5em;
+    min-height: 7em;
+}
+
+.hidden_div
+{
+    display: none;
+}
+
+.react-toggle--checked .react-toggle-track
+{
+    background-color: #3b71ca !important;
+}
+
+.request-filter-label
+{
+    font-weight: bolder;
+}
+

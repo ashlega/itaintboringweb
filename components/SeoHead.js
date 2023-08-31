@@ -82,16 +82,15 @@ const SeoHead = (props) => {
           />
         </>
       )}
-      {/* Favicons */}
+      {/* Favicons 
       {favicons.map((linkProps) => (
         <link key={linkProps.href} {...linkProps} />
       ))}
+      */}
+      <link href="/favicon/faviconcat.png" rel="icon" type="image/png"  />
       {/* Windows 8 app icon */}
       <meta name='msapplication-TileColor' content='#F53838' />
-      <meta
-        name='msapplication-TileImage'
-        content='/favicon/ms-icon-144x144.png'
-      />
+      
       {/* Accent color on supported browser */}
       <meta name='theme-color' content='#F53838' />
     </Head>

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 
 
-const TWDropdown = (props : {title : string, actions: string[], onSelect : any}) => {
+const TWDropdown = (props : {title : string, actions: any[], onSelect : any}) => {
   //const { title = "test", actions, onselect } = props;
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const TWDropdown = (props : {title : string, actions: string[], onSelect : any})
                       href="#"
                       onClick={(e) => {e.preventDefault(); props.onSelect(val)}}
                       data-te-dropdown-item-ref
-                      >{val}</a>
+                      >{val.title}</a>
                   </li>
       ))}
     
