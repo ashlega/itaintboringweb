@@ -18,7 +18,6 @@ const ClientRequests = ({isVisible}) => {
   const [ isEditorMode, setIsEditorMode ] = useState(false);
   const [ dataLoaded, setDataLoaded ] = useState(false);
   const [ activeOnly, setActiveOnly ] = useState(true);
-  
   const [ selectedRequest, setSelectedRequest ] = useState(null);
 
   const { data: session } = useSession()
@@ -32,7 +31,8 @@ const ClientRequests = ({isVisible}) => {
     columns: ['Request #', 'Subject', 'Status', 'Action'],
     rows: [   
     ],
-    loading: false
+    loading: false,
+    perPage: 10
   });
 
   const openRequest = (id) =>
@@ -57,10 +57,24 @@ const ClientRequests = ({isVisible}) => {
     };
     init();
   }, []);
-
+/*
   useEffect( () => {
     if(selectedRequest)  alert(selectedRequest);
   }, [selectedRequest]);
+*/
+
+  useEffect( () => {
+    if(dataTable && requestListData) {
+      dataTable.update(requestListData, { loading: requestListData.loading, entries: requestListData.perPage});
+      document.querySelectorAll(".req-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          var selectedRequest = requestListData.rows.find((x) => x.request.id == btn.id)
+          setSelectedRequest(selectedRequest)
+          setIsEditorMode(true)
+        });
+      });
+    }
+  }, [requestListData])
 
   useEffect( () => {
 
@@ -116,7 +130,10 @@ const ClientRequests = ({isVisible}) => {
         //var reqListData = {columns: ['Request #', 'Subject', 'Status'], rows: []};
         var startEntries = dataTable?._options?.entries ?? 10; 
         console.log(startEntries);
-        dataTable.update({...requestListData, rows: []}, { loading: true});
+
+        //dataTable.update({...requestListData, rows: []}, { loading: true, perPage: startEntries });
+        setRequestListData({...requestListData, rows: [], loading: true, perPage: startEntries })
+
         getRequestList(activeOnly).then((data) =>
         {
           var requestList = [];
@@ -128,9 +145,7 @@ const ClientRequests = ({isVisible}) => {
               row.push(request.subject);
               row.push(request.status_name);
               row.push(
-
                  `
-                 
                 <button
                   id='${request.id}'
                   type="button"
@@ -148,22 +163,12 @@ const ClientRequests = ({isVisible}) => {
                 `
 
               )
+              row.request = request
               requestList.push(row);
               
             })
-            var reqListData = {columns: ['Request #', 'Subject', 'Status', 'Action'], rows: requestList};
+            var reqListData = {columns: ['Request #', 'Subject', 'Status', 'Action'], rows: requestList, loading: false, perPage: startEntries};
             setRequestListData(reqListData)
-            dataTable.update(reqListData, { loading: false, entries: startEntries});
-           
-            
-            document.querySelectorAll(".req-btn").forEach((btn) => {
-              btn.addEventListener("click", () => {
-                setSelectedRequest(btn.id)
-              });
-            });
-          
-            
-            
             setDataLoaded(true)
           }
         });
@@ -203,7 +208,11 @@ const ClientRequests = ({isVisible}) => {
       <AccessDenied />
     ) : ("")}
     {session && isEditorMode && isVisible ? (
-      <RequestEditor setIsEditorMode={setIsEditorMode} reloadRequests={reloadRequests}/>
+      <RequestEditor setIsEditorMode={setIsEditorMode} reloadRequests={reloadRequests} request={ selectedRequest ? 
+          {
+            isNew: false, 
+            current: selectedRequest.request
+          } : {isNew: true, current: null}}/>
       ) : ("")}
 
         <span className={isVisible && session && !isEditorMode ? "" : "hidden_div"}>
@@ -216,7 +225,7 @@ const ClientRequests = ({isVisible}) => {
               <div className="request_buttons ">
                         <button 
                           className="font-medium tracking-wide mx-2 py-1 px-2 sm:px-8 border border-orange-500 text-orange-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-orange-500 hover:text-white-500 transition-all hover:shadow-orange "
-                          onClick={() => setIsEditorMode(true)}
+                          onClick={() => {setSelectedRequest(null); setIsEditorMode(true);}}
                         >
                           New Request
                         </button>
