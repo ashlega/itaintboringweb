@@ -98,8 +98,15 @@ export default class SiteSettings {
     static REQUEST_LIST_URL = process.env.API_REQUEST_LIST_URL ?? ""
     static REQUEST_TYPES_URL = process.env.API_REQUEST_TYPES_URL ?? ""
     static CONTENT_URL = process.env.API_CONTENT_URL ?? ""
+    static COMMENT_LIST_URL = process.env.API_COMMENT_LIST_URL ?? ""
+    static COMMENT_ADD_URL = process.env.API_COMMENT_ADD_URL ?? ""
+
+
+    static SUPPORT_GENERIC_NICKNAME = process.env.SUPPORT_GENERIC_NICKNAME ?? "Support"
+    static CLIENT_GENERIC_NAME_COMMENTS = process.env.CLIENT_GENERIC_NAME_COMMENTS ?? "You"
 
     static REQUEST_LIST_TAG = "requestlisttag";
+    static COMMENT_LIST_TAG = "commentisttag";
     static USER_TAG = "userinfo";
     static CONTENT_TAG = "content";
   }

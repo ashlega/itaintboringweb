@@ -44,20 +44,21 @@
 
 .requestHeader{
     margin-top: 4em;
-    font-size:2em;
-    font-weight: bold;
+    color: black;
+    font-size: 1.3rem;
+    line-height: 1.75rem;
+    font-weight: 500;
     padding-bottom: 0.5em;
 }
 
 .request_form{
     text-align: left;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
+    border-radius: 0.5em;
+    /*border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;*/
 }
 
-.request_form b{
-    width: 100%;
-}
+
 .request_form input{
     padding: 4px;
     width: 100%;
@@ -91,3 +92,13 @@
     font-weight: bolder;
 }
 
+.request-comment{
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid black
+}
+
+.add-comment{
+    margin-left: 0px;
+    min-width:100px;
+}

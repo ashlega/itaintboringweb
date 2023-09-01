@@ -25,6 +25,7 @@
     "eslint-config-next": "13.4.13",
     "framer-motion": "6.0.0",
     "gridicons": "^3.4.2",
+    "memory-cache": "^0.2.0",
     "mini-css-extract-plugin": "^2.7.6",
     "next": "latest",
     "next-auth": "latest",

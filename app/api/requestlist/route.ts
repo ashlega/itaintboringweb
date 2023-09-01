@@ -17,7 +17,7 @@ export async function GET(request: Request)
     return NextResponse.json( { data: null }) 
   }
   else{
-    const response = await fetch(SiteSettings.REQUEST_LIST_URL+anySession?.user?.id+"&active_only="+activeOnly, { cache: 'force-cache', next: { tags: [SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id ?? "empty"] } })
+    const response = await fetch(SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly, { cache: 'force-cache', next: { tags: [SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id ?? "empty"] } })
     const content = await response.json()
     const result : any[] = []
     content.map((request : any) => 

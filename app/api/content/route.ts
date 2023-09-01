@@ -6,7 +6,7 @@ export async function GET(request: Request)
 {
   const { searchParams } = new URL(request.url)
   const name = searchParams.get('name')
-  const response = await fetch(SiteSettings.CONTENT_URL+name, { cache: 'force-cache', next: { tags: ["content" + name] } })
+  const response = await fetch(SiteSettings.CONTENT_URL+"&name="+name, { cache: 'force-cache', next: { tags: ["content" + name] } })
   const content = await response.json()
   return NextResponse.json( { data: content })
 }

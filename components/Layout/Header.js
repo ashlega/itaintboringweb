@@ -60,7 +60,7 @@ const Header = () => {
           </div>
           <ul className="hidden lg:flex col-start-4 col-end-8 text-black-500  items-center">
             <Link
-              activeClass="active"
+              
               href="#"
               onClick={(e) => {
                 openPage(e, "home");
@@ -76,7 +76,7 @@ const Header = () => {
               Home
             </Link>
             <Link
-              activeClass="active"
+              
               href="#"
               onSetActive={() => {
                 setActiveLink("digest");
@@ -91,7 +91,7 @@ const Header = () => {
               Digest
             </Link>
             <Link
-              activeClass="active"
+              
               href="#"
               onSetActive={() => {
                 setActiveLink("about");
@@ -106,7 +106,7 @@ const Header = () => {
               About
             </Link>
             <Link
-              activeClass="active"
+              
               href="#"
               onClick={(e) => {
                 openPage(e,"requests");

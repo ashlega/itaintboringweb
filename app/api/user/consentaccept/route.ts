@@ -12,7 +12,7 @@ export async function GET(request: Request)
 
   }
   else{
-    const response = await fetch(SiteSettings.CONSENT_ACCEPT_URL+session?.user?.email, { next: { tags: [session?.user?.email ?? "empty"] } })
+    const response = await fetch(SiteSettings.CONSENT_ACCEPT_URL+"&authid="+session?.user?.email, { next: { tags: [session?.user?.email ?? "empty"] } })
     const content = await response.json()
     return NextResponse.json( { data: content })
   }

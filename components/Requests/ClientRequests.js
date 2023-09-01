@@ -11,9 +11,12 @@ import "react-toggle/style.css"
 
 import GridiconExternal from "gridicons/dist/external";
 
+
+
 const ClientRequests = ({isVisible}) => {
 
   const [ dataTable, setDataTable ] = useState(null);
+  const [ dataTableElement, setDataTableElement ] = useState(null);
 
   const [ isEditorMode, setIsEditorMode ] = useState(false);
   const [ dataLoaded, setDataLoaded ] = useState(false);
@@ -50,8 +53,10 @@ const ClientRequests = ({isVisible}) => {
     const init = async () => {
       const { Datatable , Input, initTE } = await import("tw-elements");
       initTE({ Datatable , Input });
-      const dataTableElement = document.getElementById('datatable_request_list');
-      var dt = new Datatable(dataTableElement, requestListData, { loading: false, noFoundMessage: "No data found." });
+      const dte = document.getElementById('datatable_request_list');
+      setDataTableElement(dte);
+      dte.innerHTML = "";
+      var dt = new Datatable(dte, requestListData, { loading: false, noFoundMessage: "No data found." });
       dt.sort(requestListData.columns[0], "desc");
       setDataTable(dt);
     };
@@ -63,18 +68,55 @@ const ClientRequests = ({isVisible}) => {
   }, [selectedRequest]);
 */
 
+  const addDataTableActions = () => {
+    document.querySelectorAll(".req-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        var selectedRequest = requestListData.rows.find((x) => x.request.id == btn.id)
+        setSelectedRequest(selectedRequest)
+        setIsEditorMode(true)
+      });
+    });
+  }
+
   useEffect( () => {
     if(dataTable && requestListData) {
+      dataTableElement.addEventListener("render.te.datatable", addDataTableActions);
       dataTable.update(requestListData, { loading: requestListData.loading, entries: requestListData.perPage});
-      document.querySelectorAll(".req-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          var selectedRequest = requestListData.rows.find((x) => x.request.id == btn.id)
-          setSelectedRequest(selectedRequest)
-          setIsEditorMode(true)
-        });
-      });
     }
   }, [requestListData])
+
+  const createRequestRow = (request) => {
+    var row = [];
+    row.push(request.name);
+    row.push(request.subject);
+    row.push(request.status_name);
+    row.push(
+        `
+      <button
+        id='${request.id}'
+        type="button"
+        data-te-ripple-init
+        data-te-ripple-color="dark"
+        
+        class="req-btn inline-block rounded-full border border-primary p-1.5 mr-1 uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
+            <path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"/>
+        </svg>
+        
+      </button>
+      
+      `
+
+    )
+    row.request = request;
+    return row;
+  }
+
+  useEffect( () => {
+    //Scroll top top
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }, [isEditorMode])
 
   useEffect( () => {
 
@@ -129,7 +171,6 @@ const ClientRequests = ({isVisible}) => {
       //if(!dataLoaded){
         //var reqListData = {columns: ['Request #', 'Subject', 'Status'], rows: []};
         var startEntries = dataTable?._options?.entries ?? 10; 
-        console.log(startEntries);
 
         //dataTable.update({...requestListData, rows: []}, { loading: true, perPage: startEntries });
         setRequestListData({...requestListData, rows: [], loading: true, perPage: startEntries })
@@ -140,32 +181,7 @@ const ClientRequests = ({isVisible}) => {
           if(data?.data){
             data.data.map((request) =>
             {
-              var row = [];
-              row.push(request.name);
-              row.push(request.subject);
-              row.push(request.status_name);
-              row.push(
-                 `
-                <button
-                  id='${request.id}'
-                  type="button"
-                  
-                  data-te-ripple-init
-                  data-te-ripple-color="dark"
-                  data-te-number=${row.phone}
-                  class="req-btn inline-block rounded-full border border-primary p-1.5 mr-1 uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
-                     <path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"/>
-                  </svg>
-                  
-                </button>
-                
-                `
-
-              )
-              row.request = request
-              requestList.push(row);
-              
+              requestList.push(createRequestRow(request));
             })
             var reqListData = {columns: ['Request #', 'Subject', 'Status', 'Action'], rows: requestList, loading: false, perPage: startEntries};
             setRequestListData(reqListData)
@@ -197,8 +213,14 @@ const ClientRequests = ({isVisible}) => {
 
   
 
-  const reloadRequests = () =>{
-    setDataLoaded(false);
+  const reloadRequests = (addedRequest) =>{
+    if(addedRequest){
+      requestListData.rows.push(createRequestRow(addedRequest));
+      setRequestListData({...requestListData});
+    }
+    else{
+      setDataLoaded(false);
+    }
   }
 
   return (
@@ -207,13 +229,13 @@ const ClientRequests = ({isVisible}) => {
     {!session && isVisible ? (
       <AccessDenied />
     ) : ("")}
-    {session && isEditorMode && isVisible ? (
-      <RequestEditor setIsEditorMode={setIsEditorMode} reloadRequests={reloadRequests} request={ selectedRequest ? 
+       <span className={isVisible && session && isEditorMode ? "" : "hidden_div"}>
+        <RequestEditor setIsEditorMode={setIsEditorMode} reloadRequests={reloadRequests} request={ selectedRequest ? 
           {
             isNew: false, 
             current: selectedRequest.request
           } : {isNew: true, current: null}}/>
-      ) : ("")}
+      </span>
 
         <span className={isVisible && session && !isEditorMode ? "" : "hidden_div"}>
           <div className="mt-24 px-6 sm:px-8 lg:px-16 mx-auto pb-2 max-w-screen-xl text-left pageHeader flex">

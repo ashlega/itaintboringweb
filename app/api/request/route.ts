@@ -27,9 +27,21 @@ export async function POST(req: Request)
     
     revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
 
-    const content = await response.json()
+    const request = await response.json()
 
-    return NextResponse.json( content )
+    var result = {
+        subject: request.ita_subject,
+        name: request.ita_name,
+        id: request.ita_requestid,
+        details: request.ita_details,
+        request_type: request["_ita_requesttype_value"],
+        request_type_name: request["_ita_requesttype_value@OData.Community.Display.V1.FormattedValue"],
+        status_name: request["statuscode@OData.Community.Display.V1.FormattedValue"],
+        createdon: request["createdon"],
+        modifiedon: request["modifiedon"]
+    }
+
+    return NextResponse.json( result )
   }
   else return NextResponse.json( null )
 

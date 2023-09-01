@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Content from "../Content";
 import ButtonOutline from "../misc/ButtonOutline.";
+import { getRequestTypes } from "../../utils/requestTypeFunctions"
 
 
 import { signIn, signOut, useSession } from "next-auth/react"
@@ -22,7 +23,14 @@ const Layout = ({ children }) => {
 
   }
 
-  
+  useEffect( () => {
+    if(!session) return;
+    const init = async () => {
+      var rts = await getRequestTypes();
+    };
+    init();
+    
+  }, [session]);
 
   
 /*
