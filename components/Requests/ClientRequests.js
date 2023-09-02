@@ -38,10 +38,7 @@ const ClientRequests = ({isVisible}) => {
     perPage: 10
   });
 
-  const openRequest = (id) =>
-  {
-    alert(id);
-  }
+ 
 /*
   useEffect(() =>{
     if(!dataTable || !requestListData) return;
@@ -50,6 +47,7 @@ const ClientRequests = ({isVisible}) => {
   }, [requestListData, dataTable])
 */
   useEffect( () => {
+    //if(!isVisible) return;
     const init = async () => {
       const { Datatable , Input, initTE } = await import("tw-elements");
       initTE({ Datatable , Input });
@@ -134,45 +132,12 @@ const ClientRequests = ({isVisible}) => {
         return;
       }
 
-      /*
-      if(!dataTable){
-        const dataTableElement = document.getElementById('datatable_request_list');
-        var updatedReqListData = {
-          ...requestListData, 
-          rows: dataLoaded ? requestListData.rows : [],
-          loading: !dataLoaded
-        };
-
-        setRequestListData(updatedReqListData)
-        var dt = new Datatable(dataTableElement, updatedReqListData, { loading: updatedReqListData.loading, noFoundMessage: "No data found." });
-        
-        dt.sort(updatedReqListData.columns[0], "desc");
-        setDataTable(dt);
-        return;
-        //setDataLoaded(false);
-        //return;
-      }
-      */
 
       if(dataLoaded) return;
 
-      /*
-      var dt = dataTable;
-      if(!dt){
-        const dataTableElement = document.getElementById('datatable_request_list');
-        var dt = new Datatable(dataTableElement, requestListData, { loading: true, noFoundMessage: "No data found." });
-        setDataTable(dt);
-      }
-      else{
-        var reqListData = {columns: ['Request #', 'Subject', 'Status'], rows: []};
-        dt.update(reqListData, { loading: true });
-      }
-      */
-      //if(!dataLoaded){
-        //var reqListData = {columns: ['Request #', 'Subject', 'Status'], rows: []};
+      
         var startEntries = dataTable?._options?.entries ?? 10; 
 
-        //dataTable.update({...requestListData, rows: []}, { loading: true, perPage: startEntries });
         setRequestListData({...requestListData, rows: [], loading: true, perPage: startEntries })
 
         getRequestList(activeOnly).then((data) =>
@@ -222,7 +187,13 @@ const ClientRequests = ({isVisible}) => {
       setDataLoaded(false);
     }
   }
-
+/*
+request={ selectedRequest ? 
+          {
+            isNew: false, 
+            current: selectedRequest.request
+          } : {isNew: true, current: null}}
+*/
   return (
     <>
     

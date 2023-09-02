@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from "next-auth"
 import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import SiteSettings from "../../../utils/SiteSettings"
-import { revalidateTag } from 'next/cache'
+import { getCache } from "../../../utils/cache"
 
  
 export async function GET(request: Request) 
@@ -17,23 +17,32 @@ export async function GET(request: Request)
     return NextResponse.json( { data: null }) 
   }
   else{
-    const response = await fetch(SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly, { cache: 'force-cache', next: { tags: [SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id ?? "empty"] } })
-    const content = await response.json()
-    const result : any[] = []
-    content.map((request : any) => 
+    var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
+    var result : any[] = []
+    if(getCache().get(url)){
+      result = getCache().get(url)
+    }
+    else
     {
-      result.push({
-        subject: request.ita_subject,
-        name: request.ita_name,
-        id: request.ita_requestid,
-        details: request.ita_details,
-        request_type: request["_ita_requesttype_value"],
-        request_type_name: request["_ita_requesttype_value@OData.Community.Display.V1.FormattedValue"],
-        status_name: request["statuscode@OData.Community.Display.V1.FormattedValue"],
-        createdon: request["createdon"],
-        modifiedon: request["modifiedon"]
-      });
-    })
+      const response = await fetch(url, { cache: 'no-cache', next: { tags: [SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id ?? "empty"] } })
+      const content = await response.json()
+      
+      content.map((request : any) => 
+      {
+        result.push({
+          subject: request.ita_subject,
+          name: request.ita_name,
+          id: request.ita_requestid,
+          details: request.ita_details,
+          request_type: request["_ita_requesttype_value"],
+          request_type_name: request["_ita_requesttype_value@OData.Community.Display.V1.FormattedValue"],
+          status_name: request["statuscode@OData.Community.Display.V1.FormattedValue"],
+          createdon: request["createdon"],
+          modifiedon: request["modifiedon"]
+        });
+      })
+      getCache().set(url, result)
+    }
 
     return NextResponse.json( { data: result })
   }

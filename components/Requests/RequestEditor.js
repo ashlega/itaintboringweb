@@ -24,10 +24,12 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
 
   const [requestTypes, setRequestTypes] = useState([]);
   const [isProcessingData, setIsProcessingData] = useState(false);
+  const [commentsLoaded, setCommentsLoaded] = useState(false);
 
   const [ commentList, setCommentList ] = useState([]);
- 
+  //debugger
   const getDefaultRequestType = () => {
+    
     return requestTypes.length > 0 ? requestTypes[0].Id : null;
   }
 
@@ -63,21 +65,32 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
       });
 
       setCommentList([])
+      setCommentsLoaded(false)
+
       getCommentList(request?.current.id).then((response) =>
         {
           var comments = [];
+          setCommentsLoaded(true)
           if(response?.data){
             setCommentList(response.data)
           }
         });
-      }
+    }
+    else{
+      setData({
+        subject: "",
+        requestType:getDefaultRequestType(),
+        details: "",
+        comment_details: ""
+      });
+    }
   }, [request?.current?.id]);
 
 
 
   const onChange = (e) =>
    {
-    setData({...data,  [e.target.name] : e.target.value})
+     setData({...data,  [e.target.name] : e.target.value})
    }
 
   
@@ -176,7 +189,16 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
                     Back
                   </ButtonOnPage>
         </div>
-
+        <div className={"w-full flex pt-4 " + (commentsLoaded || isProcessingData ? "hidden_div" : "")}>
+          <div>
+             <strong>Loading&nbsp;comments...</strong>
+          </div>
+          <div className="w-full text-center">
+            <div
+              className="w-full ml-auto justify-right inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"></div>
+          </div>
+        </div>
         <ol className="border-l border-neutral-300 dark:border-neutral-500 ">
           {commentList.map( (comment) => (  
              

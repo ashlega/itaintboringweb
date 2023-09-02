@@ -30,7 +30,6 @@ export async function POST(req: Request)
       body: JSON.stringify({...data, userid: userId}),
     })
     
-    console.log("REVALIDATING COMMENT LIST")
 
     const tag = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+data.requestid;
     if(cache.get(tag)){

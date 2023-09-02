@@ -3,7 +3,9 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 //import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import SiteSettings from "../../../utils/SiteSettings"
-import { revalidateTag } from 'next/cache'
+import { getCache } from "../../../utils/cache"
+
+//import { revalidateTag } from 'next/cache'
  
 export async function POST(req: Request) 
 {
@@ -25,7 +27,8 @@ export async function POST(req: Request)
       body: JSON.stringify({...data, userid: anySession?.user?.id}),
     })
     
-    revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
+    getCache().del(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
+   // revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
 
     const request = await response.json()
 

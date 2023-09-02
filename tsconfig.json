@@ -32,7 +32,7 @@
     "**/*.tsx",
     "utils/SiteSettings.js",
     ".next/types/**/*.ts"
-, "components/Content.js", "pages/signin.js", "components/twcomponents/TWTable.js"  ],
+, "components/Content.js", "pages/signin.js", "components/twcomponents/TWTable.js", "utils/cache.ts"  ],
   "exclude": [
     "node_modules"
   ]

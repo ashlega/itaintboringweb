@@ -12,12 +12,11 @@ import ClientRequests from "../components/Requests/ClientRequests";
 export default function IndexPage() {
 
   const { appState, setAppState } = useContext(AppContext);
-
   return (
    <>
     <SeoHead title='Treecat Software Inc' />
     <LayoutVPN>
-      <ClientRequests isVisible={appState.selected == "requests" }/>
+      <ClientRequests isVisible={appState.selected == "requests"}/>
         {appState.selected == "home" ? (
         <>
           <Hero />

@@ -4,7 +4,7 @@ import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import SiteSettings from "../../../utils/SiteSettings"
 import { revalidateTag } from 'next/cache'
 
-var cache = require('memory-cache')
+import { getCache } from "../../../utils/cache"
 
 /*
 function getQueryVariable(query: string, name : string)
@@ -44,13 +44,11 @@ export async function GET(request: Request)
   else{
     const url = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
     var result : any[] = []
-    if(cache.get(url)){
-      result = cache.get(url)
+    if(getCache().get(url)){
+      result = getCache().get(url)
     }
     else {
-      console.log("FETCHING COMMENT LIST: " + url)
-
-      const response = await fetch(url, { cache: 'force-cache', next: { tags : [SiteSettings.COMMENT_LIST_TAG+userId+requestid ?? "empty"] }})
+      const response = await fetch(url, { cache: 'no-cache', next: { tags : [SiteSettings.COMMENT_LIST_TAG+userId+requestid ?? "empty"] }})
       const content = await response.json()
       
       content.map((comment : any) => 
@@ -65,7 +63,7 @@ export async function GET(request: Request)
           modifiedon: comment["modifiedon"]
         });
       })
-      cache.put(url, result)
+      getCache().set(url, result)
     }
   }
 

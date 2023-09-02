@@ -4,6 +4,8 @@ import FacebookProvider from "next-auth/providers/facebook"
 import GithubProvider from "next-auth/providers/github"
 import TwitterProvider from "next-auth/providers/twitter"
 import Auth0Provider from "next-auth/providers/auth0"
+import SiteSettings from "../../../utils/SiteSettings"
+import { getCache } from "../../../utils/cache"
 
 
 
@@ -80,12 +82,19 @@ export const authOptions: NextAuthOptions = {
   },
 }
 
-const getUserUrl : string = `https://prod-00.canadacentral.logic.azure.com:443/workflows/ed18c0b33637465db740269ad870e789/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=asGA7A2LunpnUqIh488FH8jFBg2cmYXAsM559SxjhUY&authid=`
-
 export async function getUser(email:string | null | undefined) {
-    const response = await fetch(getUserUrl+email, { next: { tags: [email ?? "empty"] } })
-    const data = await response.json()
-	return data;
+    const url = SiteSettings.USER_EXISTS_URL+"&authid="+email
+    //const response = await fetch(url, { next: { tags: [email ?? "empty"] } })
+    //const data = await response.json()
+    var content = getCache().get(url)
+    if(!content)
+    {
+      const response = await fetch(url, { cache: 'no-cache', next: { tags: [email ?? "empty"] } })
+      content = await response.json()
+      getCache().set(url, content)
+    }
+
+	  return content;
 }
 
 export default NextAuth(authOptions)
