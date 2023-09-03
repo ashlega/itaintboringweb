@@ -131,15 +131,26 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
   }
 
   return (
-    <div className="max-w-screen-xl mt-24 px-6 sm:px-8 lg:px-16 justify-center mx-auto ">
-      <h1 className="requestHeader">{request?.isNew ? ( 
-         "New Request"
-      ) : (
-        "Request # " + request?.current?.name
-      )}</h1>
+    <>
+    <div className="max-w-screen-xl mt-24 px-6 sm:px-8 lg:px-16 justify-left mx-auto flex">
+      <div className="requestHeader mr-2">
+        {request?.isNew ? ( 
+          "New Request"
+        ) : (
+          "Request # " + request?.current?.name
+        )}
+      </div>
+      <div className="w-full text-right requestStatus">
+        {request?.current ? (
+          "Status: " + request?.current?.status_name
+        ) : ("")}
+      </div>
+    </div>
+    <div className="max-w-screen-xl px-6 sm:px-8 lg:px-16 justify-center mx-auto "> 
       
-
-      <div className="w-full pt-2 px-4  bg-white-300 request_form justify-center ">
+      <div
+  class="block w-full rounded-lg bg-white p-6 request_form shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+ 
         <p className="text-black-600 mb-1 font-medium text-base">Subject:</p>
         <input type="text" name="subject" onChange={onChange} value={data.subject} readOnly={request?.current}></input>
         <p className="text-black-600 mb-1 mt-1 font-medium text-base">Request Type:</p>
@@ -157,7 +168,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
 
      
       {request?.isNew ? ( 
-      <div className="w-full px-6 sm:px-8 lg:px-16 bg-white-300 justify-center text-center request_buttons flex">
+      <div className="w-full mt-6 px-6 sm:px-8 lg:px-16 bg-white-500 justify-center text-center request_buttons flex">
                   <ButtonOnPage 
                     onClick={submitNewRequest}
                     isEnabled={!isProcessingData && data.details != "" && data.subject != "" }
@@ -175,7 +186,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
         
         <textarea className="w-full request-comment mt-2"  onChange={onChange} value={data.comment_details}  name="comment_details"  placeholder="Start typing here to add a new comment"></textarea>
 
-        <div className="w-full  justify-left text-left mb-4 ">
+        <div className="w-full mt-2 justify-left text-left mb-4 ">
                   <ButtonOnPage 
                     addClass="add-comment"
                     onClick={submitNewComment}
@@ -184,19 +195,22 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
                     Add
                   </ButtonOnPage>
                   <ButtonOnPage 
+                    addClass="add-comment"
                     onClick={() => setIsEditorMode(false)}
                   >
                     Back
                   </ButtonOnPage>
         </div>
-        <div className={"w-full flex pt-4 " + (commentsLoaded || isProcessingData ? "hidden_div" : "")}>
-          <div>
-             <strong>Loading&nbsp;comments...</strong>
-          </div>
-          <div className="w-full text-center">
+        <div className={"w-full flex pt-4 flex " + (commentsLoaded && !isProcessingData ? "hidden_div" : "")}>
+          <div className="mr-4 mt-1">Loading&nbsp;comments...</div>
+          <div >
             <div
-              className="w-full ml-auto justify-right inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-              role="status"></div>
+              class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status">
+              <span
+                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                >Loading...</span>
+            </div>
           </div>
         </div>
         <ol className="border-l border-neutral-300 dark:border-neutral-500 ">
@@ -226,6 +240,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
         )}
 
     </div>
+    </>
   );
 };
 //<h4 class="mb-1.5 text-xl font-semibold">Title of section 1</h4>

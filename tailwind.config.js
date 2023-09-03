@@ -28,6 +28,11 @@ module.exports = {
         100: "#FFECEC",
         500: "#F53855",
       },
+      blue: {
+        100: "#ECECFF",
+        500: "rgba(59, 113, 202,1)",
+      },
+      
       green: {
         500: "#2FAB73",
       },
