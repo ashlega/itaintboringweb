@@ -19,17 +19,16 @@
     padding-right: 1em;
 }
 
-.user_consent{
+.user-consent{
     
     font-size: 100%;
 
 }
-.user_consent h1{
+.user-consent h1{
     text-align: center;
     font-weight: bold;
     margin-bottom: 1em;
-    margin-top: 4em;
-    font-size: 200%;
+    font-size: 150%;
     
 }
 

@@ -23,6 +23,7 @@ const  Content = ({name, className, setContentLoaded, defaultContent = null}) =>
       <div
         className={className}
       >
+        
         <h1 >{contentData?.Title}</h1>
         <span dangerouslySetInnerHTML={{ __html: contentData?.Content }} ></span>
 

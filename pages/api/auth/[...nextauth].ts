@@ -83,6 +83,7 @@ export const authOptions: NextAuthOptions = {
 }
 
 export async function getUser(email:string | null | undefined) {
+  
     const url = SiteSettings.USER_EXISTS_URL+"&authid="+email
     //const response = await fetch(url, { next: { tags: [email ?? "empty"] } })
     //const data = await response.json()

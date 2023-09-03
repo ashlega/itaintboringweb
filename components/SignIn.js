@@ -15,7 +15,7 @@ const  SignIn = ({ providers }) => {
   }, []);
 
     return (
-      <div className="w-full pt-2 px-6 sm:px-8 lg:px-16 bg-white-300 justify-center text-center user_consent">
+      <div className="w-full mt-24 pt-6 px-6 sm:px-8 lg:px-16 bg-white-300 justify-center text-center user-consent">
         <h1 >You can sign in with:</h1>
         {Object.values(providers).map((provider) => {
           return (

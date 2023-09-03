@@ -3,7 +3,7 @@
 //redis example
 //https://makerkit.dev/blog/tutorials/nextjs-redis
 
-var cache = require('memory-cache')
+var cache = require('./mem-cache')
 
 interface DataCache
 {
@@ -26,7 +26,7 @@ export function getCache(
       },
 
       del : (key : any) : void => {
-          cache.del(key);
+        cache.put(key, null, 1);
       }
     }
     return response;

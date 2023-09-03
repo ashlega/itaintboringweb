@@ -22,7 +22,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
   
 */
 
-  const [requestTypes, setRequestTypes] = useState([]);
+  //const [requestTypes, setRequestTypes] = useState([]);
   const [isProcessingData, setIsProcessingData] = useState(false);
   const [commentsLoaded, setCommentsLoaded] = useState(false);
 
@@ -30,7 +30,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
   //debugger
   const getDefaultRequestType = () => {
     
-    return requestTypes.length > 0 ? requestTypes[0].Id : null;
+    return getRequestTypes().length > 0 ? getRequestTypes()[0].Id : null;
   }
 
   const [data, setData] = useState({
@@ -39,11 +39,11 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
     details: request?.current?.details,
     comment_details: ""
   });
-
+/*
   useEffect( () => {
     const init = async () => {
-      const { Input, initTE } = await import("tw-elements");
-      initTE({ Input });
+      //const { Input, initTE } = await import("tw-elements");
+      //initTE({ Input });
 
       var rts = await getRequestTypes();
       setRequestTypes(rts);
@@ -52,6 +52,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
     init();
     
   }, []);
+  */
 
 
   useEffect( () => {
@@ -156,7 +157,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
         <p className="text-black-600 mb-1 mt-1 font-medium text-base">Request Type:</p>
         <select name="requestType" onChange={onChange} disabled={request?.current}  >
 
-          {requestTypes?.map((tp, index) => (
+          {getRequestTypes()?.map((tp, index) => (
               <option value={tp.Id} selected={request?.current?.request_type == tp.Id ? "selected" : ""}>{tp.Name}</option>
           )) }
         
