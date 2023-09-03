@@ -27,7 +27,10 @@ export async function POST(req: Request)
       body: JSON.stringify({...data, userid: anySession?.user?.id}),
     })
     
-    getCache().del(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
+    //console.log("LIST CACHE del " + SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true")
+
+    getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
+    getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=false");
    // revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
 
     const request = await response.json()

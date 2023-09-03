@@ -6,7 +6,7 @@ import SiteSettings from "../../../utils/SiteSettings"
 import { revalidateTag } from 'next/cache'
 
 
-var cache = require('memory-cache')
+import { getCache } from "../../../utils/cache"
  
 export async function POST(req: Request) 
 {
@@ -32,8 +32,8 @@ export async function POST(req: Request)
     
 
     const tag = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+data.requestid;
-    if(cache.get(tag)){
-      result = cache.del(tag)
+    if(getCache().get(tag)){
+      getCache().del(tag)
     }
 
     //revalidateTag(SiteSettings.COMMENT_LIST_TAG+anySession?.user?.id+data.requestid ?? "empty");

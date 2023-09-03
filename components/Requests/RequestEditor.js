@@ -23,6 +23,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
 */
 
   //const [requestTypes, setRequestTypes] = useState([]);
+  const [version, setVersion] = useState(1);
   const [isProcessingData, setIsProcessingData] = useState(false);
   const [commentsLoaded, setCommentsLoaded] = useState(false);
 
@@ -85,7 +86,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
         comment_details: ""
       });
     }
-  }, [request?.current?.id]);
+  },[request?.current?.id, version]);
 
 
 
@@ -116,6 +117,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
     if(isProcessingData) return;
 
     setIsProcessingData(true);
+    setVersion(version + 1);
     addNewComment(request.current.id, data.comment_details).then((response) =>
     {
       //if(reloadRequests) reloadRequests(response);
