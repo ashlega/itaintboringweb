@@ -6,6 +6,7 @@ const getRequestListApi = `/api/requestlist`
 export async function addNewRequest(subject, type, details) {
     const response = await fetch(addRequestApi,{
         method: 'POST',
+        cache: 'no-store',
         headers: {
         'Content-Type': 'application/json'
         },
@@ -21,7 +22,7 @@ export async function addNewRequest(subject, type, details) {
 }
 
 export async function getRequestList(activeOnly = false) {
-    const response = await fetch(getRequestListApi+"?active_only="+activeOnly);
+    const response = await fetch(getRequestListApi+"?active_only="+activeOnly, {cache: 'no-store'});
     const data = await response.json()
 	return data;
 }

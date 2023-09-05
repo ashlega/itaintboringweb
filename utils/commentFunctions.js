@@ -6,6 +6,7 @@ const getCommentListApi = `/api/commentlist`
 export async function addNewComment(requestid, details) {
     const response = await fetch(addCommentApi,{
         method: 'POST',
+        cache: "no-store",
         headers: {
         'Content-Type': 'application/json'
         },
@@ -19,7 +20,7 @@ export async function addNewComment(requestid, details) {
 }
 
 export async function getCommentList(requestid) {
-    const response = await fetch(getCommentListApi+"?requestid="+requestid, { cache: 'force-cache'});
+    const response = await fetch(getCommentListApi+"?requestid="+requestid, { cache: 'no-store'});
     const data = await response.json()
 	return data;
 }

@@ -8,11 +8,11 @@ export async function GET(request: Request)
   const { searchParams } = new URL(request.url)
   const name = searchParams.get('name')
   const url = SiteSettings.CONTENT_URL+"&name="+name
-  var content = getCache().get(url)
+  var content = await getCache().get(url)
   if(!content){
     const response = await fetch(url, { cache: 'no-cache', next: { tags: ["content" + name] } })
     content = await response.json()
-    getCache().set(url, content)
+    await getCache().set(url, content)
   }
   return NextResponse.json( { data: content })
 }

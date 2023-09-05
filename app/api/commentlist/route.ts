@@ -6,6 +6,8 @@ import { revalidateTag } from 'next/cache'
 
 import { getCache } from "../../../utils/cache"
 
+export const revalidate = 0
+
 /*
 function getQueryVariable(query: string, name : string)
 {
@@ -44,10 +46,13 @@ export async function GET(request: Request)
   else{
     const url = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
     var result : any[] = []
-    if(getCache().get(url)){
-      result = getCache().get(url)
+    //console.log("Cache key: " + url)
+    if(await getCache().get(url)){
+      //console.log("RETURNING COMMENT LIST CACHE "+url)
+      result = await getCache().get(url)
     }
     else {
+      //console.log("RETURNING COMMENT LIST  "+url)
       const response = await fetch(url, { cache: 'no-cache', next: { tags : [SiteSettings.COMMENT_LIST_TAG+userId+requestid ?? "empty"] }})
       const content = await response.json()
       
@@ -63,7 +68,7 @@ export async function GET(request: Request)
           modifiedon: comment["modifiedon"]
         });
       })
-      getCache().set(url, result)
+      await getCache().set(url, result)
     }
   }
 

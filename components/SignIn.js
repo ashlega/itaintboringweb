@@ -3,16 +3,20 @@ import { getContent} from "../utils/contentFunctions"
 
 import React, { useState, useEffect } from "react";
 
-import { signIn, getSession, csrfToken } from "next-auth/react";
+import { signIn, getSession, csrfToken, useSession } from "next-auth/react";
 
 const  SignIn = ({ providers }) => {
   
   const [ callbackUrl, setCallbackUrl ] = useState();
+  const {data: session, update: sessionUpdate, status} = useSession()
 
   useEffect(() => {
     const queryParameters = new URLSearchParams(window.location.search);
     setCallbackUrl (queryParameters.get("callbackUrl"));
-  }, []);
+    if(session?.user?.id && queryParameters.get("callbackUrl")){
+      window.location = queryParameters.get("callbackUrl");
+    }
+  });
 
     return (
       <div className="w-full mt-24 pt-6 px-6 sm:px-8 lg:px-16 bg-white-300 justify-center text-center user-consent">

@@ -87,12 +87,12 @@ export async function getUser(email:string | null | undefined) {
     const url = SiteSettings.USER_EXISTS_URL+"&authid="+email
     //const response = await fetch(url, { next: { tags: [email ?? "empty"] } })
     //const data = await response.json()
-    var content = getCache().get(url)
+    var content = await getCache().get(url)
     if(!content)
     {
       const response = await fetch(url, { cache: 'no-cache', next: { tags: [email ?? "empty"] } })
       content = await response.json()
-      getCache().set(url, content)
+      await getCache().set(url, content)
     }
 
 	  return content;

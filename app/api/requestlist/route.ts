@@ -4,7 +4,9 @@ import { authOptions } from "../../../pages/api/auth/[...nextauth]"
 import SiteSettings from "../../../utils/SiteSettings"
 import { getCache } from "../../../utils/cache"
 
- 
+
+export const revalidate = 0
+
 export async function GET(request: Request) 
 {
   const session = await getServerSession(authOptions);
@@ -20,8 +22,8 @@ export async function GET(request: Request)
     var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
     var result : any[] = []
     //console.log("LIST CACHE " + url)
-    if(getCache().get(url)){
-      result = getCache().get(url)
+    if(await getCache().get(url)){
+      result = await getCache().get(url)
     }
     else
     {
@@ -42,7 +44,7 @@ export async function GET(request: Request)
           modifiedon: request["modifiedon"]
         });
       })
-      getCache().set(url, result)
+      await getCache().set(url, result)
     }
 
     return NextResponse.json( { data: result })

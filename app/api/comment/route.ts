@@ -32,9 +32,11 @@ export async function POST(req: Request)
     
 
     const tag = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+data.requestid;
-    if(getCache().get(tag)){
-      getCache().del(tag)
+    if(await getCache().get(tag)){
+      //console.log("COMMENT LIST CACHE FOUND "+tag)
+      await getCache().del(tag)
     }
+    //else console.log("COMMENT LIST CACHE NOT FOUND")
 
     //revalidateTag(SiteSettings.COMMENT_LIST_TAG+anySession?.user?.id+data.requestid ?? "empty");
 

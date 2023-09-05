@@ -8,12 +8,12 @@ export async function GET(request: Request)
 {
   const session = await getServerSession(authOptions);
   const url = SiteSettings.USER_EXISTS_URL+"&authid="+session?.user?.email
-  var content = getCache().get(url)
+  var content = await getCache().get(url)
   if(!content)
   {
     const response = await fetch(url, { cache: 'no-cache', next: { tags: [session?.user?.email ?? "empty"] } })
     content = await response.json()
-    getCache().set(url, content)
+    await getCache().set(url, content)
   }
   return NextResponse.json( { data: content })
 }

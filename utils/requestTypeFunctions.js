@@ -7,7 +7,7 @@ const getRequestTypeApi = `/api/requesttype`
 
 export async function internalGetRequestTypes() {
     if(requestTypes) return requestTypes;
-    var fetchResult = await fetch(getRequestTypeApi);
+    var fetchResult = await fetch(getRequestTypeApi, {cache: 'no-store'});
     var response = await fetchResult.json();
     requestTypes = response.data;
     return requestTypes;

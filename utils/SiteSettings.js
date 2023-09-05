@@ -109,4 +109,10 @@ export default class SiteSettings {
     static COMMENT_LIST_TAG = "commentisttag";
     static USER_TAG = "userinfo";
     static CONTENT_TAG = "content";
+
+    static CACHE_PREFIX = process.env.CACHE_PREFIX;
+    static REDDIS_URL = process.env.REDIS_URL;
+    static REDDIS_CONNECTION_PARAM = process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined;
+
+    
   }

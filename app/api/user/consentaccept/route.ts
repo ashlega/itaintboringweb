@@ -15,7 +15,7 @@ export async function GET(request: Request)
     const content = await response.json()
 
     const url = SiteSettings.USER_EXISTS_URL+"&authid="+session?.user?.email
-    getCache().del(url)
+    await getCache().del(url)
 
     return NextResponse.json( { data: content })
   }
