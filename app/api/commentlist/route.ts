@@ -36,24 +36,23 @@ export async function GET(request: Request)
   
   const requestid = searchParams.get('requestid')
   
+  var cache = getCache();
   
-  //var userId = "123";
   var userId = anySession?.user?.id;
   if(!userId)
   {
     return NextResponse.json( { data: null }) 
   }
   else{
-    const url = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
+    
+    const cacheKey = cache.getRequestCommentListCacheKey(session, requestid);
     var result : any[] = []
-    //console.log("Cache key: " + url)
-    if(await getCache().get(url)){
-      //console.log("RETURNING COMMENT LIST CACHE "+url)
-      result = await getCache().get(url)
+    if(await cache.get(cacheKey)){
+      result = await cache.get(cacheKey)
     }
     else {
-      //console.log("RETURNING COMMENT LIST  "+url)
-      const response = await fetch(url, { cache: 'no-cache', next: { tags : [SiteSettings.COMMENT_LIST_TAG+userId+requestid ?? "empty"] }})
+      const url = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
+      const response = await fetch(url, { cache: 'no-cache' })
       const content = await response.json()
       
       content.map((comment : any) => 
@@ -68,7 +67,7 @@ export async function GET(request: Request)
           modifiedon: comment["modifiedon"]
         });
       })
-      await getCache().set(url, result)
+      await cache.set(cacheKey, result)
     }
   }
 

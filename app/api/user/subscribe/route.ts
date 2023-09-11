@@ -7,17 +7,21 @@ import { getCache } from "../../../../utils/cache"
 export async function GET(request: Request) 
 {
   const session = await getServerSession(authOptions);
-  if(!session){
+  
+  if(!session || !session?.user?.email){
     return NextResponse.json({ error: 'Please make sure you have logged in before attempting this action' }, { status: 401 })
   }
   else{
-    var url = SiteSettings.SUBSCRIBE_URL+"&authid="+session?.user?.email
+    var cache = getCache();
+
+    var url = SiteSettings.SUBSCRIBE_URL+"&email="+session?.user?.email
     const response = await fetch(url, { cache: 'no-cache' })
     const content = await response.json()
 
-    const userUrl = SiteSettings.USER_EXISTS_URL+"&authid="+session?.user?.email+"&fullName="+session?.user?.name
-    //console.log("Clearing cache: " + userUrl)
-    await getCache().del(userUrl)
+    if(session?.user?.email){
+      var cacheKey = cache.getUserCacheKey(session?.user?.email);
+      await cache.del(cacheKey)
+    }
 
     return NextResponse.json( { data: content })
   }

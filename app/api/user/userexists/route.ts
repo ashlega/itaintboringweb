@@ -6,22 +6,22 @@ import { getCache } from "../../../../utils/cache"
  
 export async function GET(request: Request) 
 {
-  var url = SiteSettings.USER_EXISTS_URL+"&authid="
+  var cache = getCache();
+  var url = SiteSettings.USER_EXISTS_URL+"&email="
   const { searchParams } = new URL(request.url)
   const email = searchParams.get('email')
   var fullName = searchParams.get('fullName')
   if(!fullName) fullName = ""
   url = url + email
   url += "&fullName="+fullName
-  var content = await getCache().get(url)
+
+  var cacheKey = cache.getUserCacheKey(email);
+  var content = await cache.get(cacheKey)
   if(!content)
   {
     const response = await fetch(url, { cache: 'no-cache' })
     content = await response.json()
-    await getCache().set(url, content)
-  }
-  else {
-    //console.log("Cached user")
+    await cache.set(cacheKey, content)
   }
   return NextResponse.json( { data: content })
 }

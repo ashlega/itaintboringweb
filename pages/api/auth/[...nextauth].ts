@@ -79,6 +79,7 @@ export const authOptions: NextAuthOptions = {
         newSession.user.id = content.data.Id;
         newSession.user.subscriptionStatus = content.data.SubscriptionStatus;
         newSession.user.subscriptionStatusName = content.data.SubscriptionStatusName;
+        newSession.user.cachePrefix = content.data.CachePrefix;
         //console.log(newSession.user.subscriptionStatusName);
       }
       return newSession;
@@ -87,18 +88,6 @@ export const authOptions: NextAuthOptions = {
 }
 
 export async function getUser(email:string | null | undefined, fullName:string | null | undefined) {
-  /*
-    const url = SiteSettings.USER_EXISTS_URL+"&authid="+email
-    //const response = await fetch(url, { next: { tags: [email ?? "empty"] } })
-    //const data = await response.json()
-    var content = await getCache().get(url)
-    if(!content)
-    {
-      const response = await fetch(url, { cache: 'no-cache', next: { tags: [email ?? "empty"] } })
-      content = await response.json()
-      await getCache().set(url, content)
-    }
-    */
     var result = await checkUserExists(email, fullName)
 	  return result;
 }

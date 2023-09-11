@@ -6,6 +6,7 @@ import { getCache } from "../../../../utils/cache"
  
 export async function GET(request: Request) 
 {
+  var cache = getCache();
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
 
@@ -14,9 +15,9 @@ export async function GET(request: Request)
   const content = await response.json()
 
   const session = await getServerSession(authOptions);
-  if(session){
-    const userUrl = SiteSettings.USER_EXISTS_URL+"&authid="+session?.user?.email+"&fullName="+session?.user?.name
-    await getCache().del(userUrl)
+  if(session && session?.user?.email){
+    var cacheKey = cache.getUserCacheKey(session?.user?.email);
+    await cache.del(cacheKey)
   }
   return NextResponse.json( { data: content })
 }

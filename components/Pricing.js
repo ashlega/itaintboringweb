@@ -190,6 +190,8 @@ const Pricing = ({expandContactForm=false}) => {
           </div>
         </div>
         <div className="flex flex-col w-full my-16" id="testimoni">
+          {
+          /*
           <ScrollAnimationWrapper>
             <motion.h3
               variants={scrollAnimation}
@@ -209,12 +211,16 @@ const Pricing = ({expandContactForm=false}) => {
               <News />
             </motion.div>
           </ScrollAnimationWrapper>
+          */
+          }
           <ScrollAnimationWrapper className="relative w-full mt-16">
             <motion.div variants={scrollAnimation} custom={{duration: 3}}>
               <Contact  isOpenInitially={expandContactForm}/>
             </motion.div>
           </ScrollAnimationWrapper>
         </div>
+        
+        
       </div>
     </div>
   );

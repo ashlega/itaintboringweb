@@ -9,6 +9,7 @@ import { getCache } from "../../../utils/cache"
  
 export async function POST(req: Request) 
 {
+  var cache = getCache();
   const session = await getServerSession(authOptions);
 
   const data = await req.json()
@@ -27,13 +28,12 @@ export async function POST(req: Request)
       body: JSON.stringify({...data, userid: anySession?.user?.id}),
     })
     
-    //console.log("LIST CACHE del " + SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true")
     if(anySession?.user?.id){
-      console.log("Clear request cache: " + SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
-      await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
-      await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=false");
+      var cacheKey = cache.getActiveRequestListCacheKey(session);
+      await cache.del(cacheKey);
+      cacheKey = cache.getInActiveRequestListCacheKey(session);
+      await cache.del(cacheKey);
     }
-   // revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
 
     const request = await response.json()
 

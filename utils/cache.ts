@@ -1,6 +1,7 @@
 //import {createRedisInstance} from './redis'
 import { createClient } from 'redis';
 import SiteSettings from '../utils/SiteSettings';
+import { Session } from "next-auth"
 
 
 //redis example
@@ -52,11 +53,19 @@ interface DataCache
   get(key : any) : Promise<any>;
   del(key : any) : Promise<void>;
   getClient() : any;
+
+  getCurrentUserCacheKey(session : Session | null) : string;
+  getUserCacheKey(userid : string | null) : string;
+  getRequestCommentListCacheKey(session : Session | null, requestid : string | null) : string;
+  getContentCacheKey(contentid : string | null) : string;
+  getActiveRequestListCacheKey(session : Session | null) : string 
+  getInActiveRequestListCacheKey(session : Session | null) : string 
 }
 
 export function getCache(
     
   ) : DataCache {
+
      
     var response : DataCache = {
 
@@ -99,6 +108,36 @@ export function getCache(
           resolve();
         });
         //cache.put(key, null, 1);
+      },
+
+      getUserCacheKey: (userid : string | null) : string =>
+      {
+        return "user_"+userid;
+      },
+
+      getCurrentUserCacheKey: (session : Session | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.id;
+      },
+      getRequestCommentListCacheKey: (session : Session | null, requestid : string | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_commentlist_" + requestid;
+      },
+      getActiveRequestListCacheKey: (session : Session | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_active_requestlist";
+      },
+      getInActiveRequestListCacheKey: (session : Session | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_inactive_requestlist";
+      },
+      getContentCacheKey: (contentid : string | null) : string =>
+      {
+        return "content_" + contentid;
       }
     }
     return response;

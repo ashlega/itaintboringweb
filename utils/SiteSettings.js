@@ -9,7 +9,7 @@ export default class SiteSettings {
     static topHeader  = "Power Platform is better with";
     static companyName  = "Treecat Software Inc";
     static shortCompanyName  = "Treecat";
-    static shortPitch  = "We provide targetted consulting and training services to the Canadian and US clients out of our Ottawa location";
+    static shortPitch  = "Looking for some help with your Power Platform implementation? Our targetted consulting and training services might be just what you need!";
     
     static servicesHeader = "Here is what we can do for you"
     static servicesSubHeader = "Feel free to reach out to us to know more - drop us a note and we'll do our best to get back to you ASAP!"
@@ -38,7 +38,7 @@ export default class SiteSettings {
 
     static highlightsList  = [
       {
-        description: "5",
+        description: "2+",
         title: "Team Members",
         iconComponent:  GridiconUser,
         icon: "/assets/Icon/heroicons_sm-user.svg",
@@ -50,7 +50,7 @@ export default class SiteSettings {
         icon: "/assets/Icon/gridicons_location.svg",
       },
       {
-        description: "Power Platform Architects, MVP-s, Developers",
+        description: "Solutioning, Architecture, Development, and Training performed by our consultants and MVP-s",
         title: "Skills and Certifications",
         iconComponent: GridiconComputer,
         icon: "/assets/Icon/bx_bxs-server.svg",
@@ -120,14 +120,15 @@ export default class SiteSettings {
     static SUPPORT_GENERIC_NICKNAME = process.env.SUPPORT_GENERIC_NICKNAME ?? "Support"
     static CLIENT_GENERIC_NAME_COMMENTS = process.env.CLIENT_GENERIC_NAME_COMMENTS ?? "You"
 
-    static REQUEST_LIST_TAG = "requestlisttag";
-    static COMMENT_LIST_TAG = "commentisttag";
-    static USER_TAG = "userinfo";
-    static CONTENT_TAG = "content";
+    //static REQUEST_LIST_TAG = "requestlisttag";
+    //static COMMENT_LIST_TAG = "commentisttag";
+    //static USER_TAG = "userinfo";
+    //static CONTENT_TAG = "content";
 
-    static CACHE_PREFIX = process.env.CACHE_PREFIX;
+    
     static REDDIS_URL = process.env.REDIS_URL;
     static REDDIS_CONNECTION_PARAM = process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined;
 
-    
+    static CACHE_PREFIX = process.env.CACHE_PREFIX;
+    static ADMIN_KEY = process.env.ADMIN_KEY ?? "testadminkey"
   }

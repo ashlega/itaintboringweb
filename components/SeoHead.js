@@ -98,7 +98,8 @@ const SeoHead = (props) => {
 };
 
 // Favicons, other icons, and manifest definition
-const favicons = [
+const favicons = [];
+/*
   {
     rel: 'apple-touch-icon',
     sizes: '57x57',
@@ -182,5 +183,6 @@ const favicons = [
     href: '/site.webmanifest',
   },
 ];
+*/
 
 export default SeoHead;

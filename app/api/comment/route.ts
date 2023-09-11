@@ -11,6 +11,7 @@ import { getCache } from "../../../utils/cache"
 export async function POST(req: Request) 
 {
   const session = await getServerSession(authOptions);
+  var cache = getCache();
 
   const data = await req.json()
 
@@ -31,14 +32,10 @@ export async function POST(req: Request)
     })
     
 
-    const tag = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+data.requestid;
-    if(await getCache().get(tag)){
-      //console.log("COMMENT LIST CACHE FOUND "+tag)
-      await getCache().del(tag)
+    const cacheKey = cache.getRequestCommentListCacheKey(session, data.requestid);
+    if(await cache.get(cacheKey)){
+      await cache.del(cacheKey)
     }
-    //else console.log("COMMENT LIST CACHE NOT FOUND")
-
-    //revalidateTag(SiteSettings.COMMENT_LIST_TAG+anySession?.user?.id+data.requestid ?? "empty");
 
     const comment = await response.json()
 

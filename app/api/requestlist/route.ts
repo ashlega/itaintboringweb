@@ -9,6 +9,7 @@ export const revalidate = 0
 
 export async function GET(request: Request) 
 {
+  var cache = getCache();
   const session = await getServerSession(authOptions);
   const { searchParams } = new URL(request.url)
   const activeOnly = searchParams.get('active_only')
@@ -20,15 +21,17 @@ export async function GET(request: Request)
   }
   else{
     var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
+    var cacheKey = "";
+    if(activeOnly == "true") cacheKey =cache.getActiveRequestListCacheKey(session);
+    else cacheKey =cache.getInActiveRequestListCacheKey(session);
 
     var result : any[] = []
-    console.log("LIST CACHE " + url)
-    if(await getCache().get(url)){
-      result = await getCache().get(url)
+    if(await cache.get(cacheKey)){
+      result = await cache.get(cacheKey)
     }
     else
     {
-      const response = await fetch(url, { cache: 'no-cache', next: { tags: [SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id ?? "empty"] } })
+      const response = await fetch(url, { cache: 'no-cache'})
       const content = await response.json()
       
       content.map((request : any) => 
@@ -45,7 +48,7 @@ export async function GET(request: Request)
           modifiedon: request["modifiedon"]
         });
       })
-      await getCache().set(url, result)
+      await cache.set(cacheKey, result)
     }
 
     return NextResponse.json( { data: result })
