@@ -12,7 +12,12 @@ export default class SiteSettings {
     static shortPitch  = "We provide targetted consulting and training services to the Canadian and US clients out of our Ottawa location";
     
     static servicesHeader = "Here is what we can do for you"
-    static servicesSubHeader = "Feel free to reach out to us to know more - we are a small company, and we don't have a contact center, but we'll get back to you quickly to address your questions"
+    static servicesSubHeader = "Feel free to reach out to us to know more - drop us a note and we'll do our best to get back to you ASAP!"
+    
+    static servicesHeaderAbout = "Who are we?"
+    static servicesSubHeaderAbout = "We are Treecat! Please feel free to reach out to us to know more - it seems we've been working on the projects a little too hard, and we may have forgotten to set up a contact center, but just drop us a note and we'll do our best to get back to you ASAP!"
+    static servicesListHeaderAbout = "Here is what we do"
+    
     static pricingHeader = "Our Offers"
     static pricingSubHeader = "We have prepared a few sample offers just to give you an idea of what's possible"
     
@@ -21,6 +26,15 @@ export default class SiteSettings {
 
     static SubscribeHeader = "Subscribe Now!"
     static SubscribeSubHeader = "We can send Power Platform weekly news right to your inbox every week! You don't need to do a thing... well, other than to make sure those emails don't go to your junk folder!"
+
+    //SEO
+    static Title = "Treecat Software Inc"
+    static Author = "Alex Shlega"
+    static SiteName = "Treecat Softwre Inc"
+    static Description = "Treecat Software Inc - Power Platform is better with Treecat!"
+
+    static defaultAlt = "Treecat Software Inc"
+
 
     static highlightsList  = [
       {
@@ -100,7 +114,8 @@ export default class SiteSettings {
     static CONTENT_URL = process.env.API_CONTENT_URL ?? ""
     static COMMENT_LIST_URL = process.env.API_COMMENT_LIST_URL ?? ""
     static COMMENT_ADD_URL = process.env.API_COMMENT_ADD_URL ?? ""
-
+    static SUBSCRIBE_URL = process.env.API_SUBSCRIBE_URL ?? ""
+    static UNSUBSCRIBE_URL = process.env.API_UNSUBSCRIBE_URL ?? ""
 
     static SUPPORT_GENERIC_NICKNAME = process.env.SUPPORT_GENERIC_NICKNAME ?? "Support"
     static CLIENT_GENERIC_NAME_COMMENTS = process.env.CLIENT_GENERIC_NAME_COMMENTS ?? "You"

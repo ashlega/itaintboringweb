@@ -11,8 +11,8 @@ export async function GET(request: Request)
     return NextResponse.json({ error: 'Please make sure you have logged in before attempting this action' }, { status: 401 })
   }
   else{
-    var url = SiteSettings.CONSENT_ACCEPT_URL+"&authid="+session?.user?.email+"&fullName="+session?.user?.name
-    const response = await fetch(url, { cache: 'no-cache' } )
+    var url = SiteSettings.SUBSCRIBE_URL+"&authid="+session?.user?.email
+    const response = await fetch(url, { cache: 'no-cache' })
     const content = await response.json()
 
     const userUrl = SiteSettings.USER_EXISTS_URL+"&authid="+session?.user?.email+"&fullName="+session?.user?.name

@@ -2,7 +2,7 @@
 import Feature from "../components/Feature";
 import Pricing from "../components/Pricing";
 import Hero from "../components/Hero";
-import LayoutVPN from "../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import SeoHead from "../components/SeoHead";
 import SignIn from "../components/SignIn";
 import { providers, signIn, getSession, csrfToken, getProviders } from "next-auth/react";
@@ -13,9 +13,9 @@ export default function SigninPage({ providers }) {
   return (
    <>
     <SeoHead title='Treecat Software Inc: Sign In' />
-    <LayoutVPN>
+    <Layout>
       <SignIn providers={providers}/>
-    </LayoutVPN>
+    </Layout>
     </>
   )
 }

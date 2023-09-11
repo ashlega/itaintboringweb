@@ -7,12 +7,6 @@ import { signIn, signOut, useSession } from "next-auth/react"
 import ProfileMenu from "../Profile/ProfileMenu"
 import SiteSettings from "../../utils/SiteSettings"
 
-
-
-
-
-//import LogoVPN from "../../public/assets/Logo.svg";
-
 const Header = () => {
   const [activeLink, setActiveLink] = useState(null);
   const [scrollActive, setScrollActive] = useState(false);

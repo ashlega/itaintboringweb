@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect } from "react";
 const addRequestApi = `/api/request`
 const getRequestListApi = `/api/requestlist`
 
-export async function addNewRequest(subject, type, details) {
+export async function addNewRequest(subject, type, details, name, email) {
     const response = await fetch(addRequestApi,{
         method: 'POST',
         cache: 'no-store',
@@ -14,7 +14,9 @@ export async function addNewRequest(subject, type, details) {
             details: details,
             subject: subject,
             type: type,
-            userid: null
+            userid: null,
+            name: name,
+            email: email
         }),
     });
     const data = await response.json()

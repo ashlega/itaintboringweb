@@ -6,6 +6,7 @@ import TwitterProvider from "next-auth/providers/twitter"
 import Auth0Provider from "next-auth/providers/auth0"
 import SiteSettings from "../../../utils/SiteSettings"
 import { getCache } from "../../../utils/cache"
+import { checkUserExists } from "../../../utils/userFunctions"
 
 
 
@@ -74,16 +75,19 @@ export const authOptions: NextAuthOptions = {
     async session ({ session, user }) {
       var newSession : any = session;
       if (newSession?.user && !newSession?.user?.id) {
-        const content = await getUser(session.user?.email)
-        newSession.user.id = content.Id;
+        const content = await getUser(session.user?.email, session.user?.name)
+        newSession.user.id = content.data.Id;
+        newSession.user.subscriptionStatus = content.data.SubscriptionStatus;
+        newSession.user.subscriptionStatusName = content.data.SubscriptionStatusName;
+        //console.log(newSession.user.subscriptionStatusName);
       }
       return newSession;
     },
   },
 }
 
-export async function getUser(email:string | null | undefined) {
-  
+export async function getUser(email:string | null | undefined, fullName:string | null | undefined) {
+  /*
     const url = SiteSettings.USER_EXISTS_URL+"&authid="+email
     //const response = await fetch(url, { next: { tags: [email ?? "empty"] } })
     //const data = await response.json()
@@ -94,8 +98,9 @@ export async function getUser(email:string | null | undefined) {
       content = await response.json()
       await getCache().set(url, content)
     }
-
-	  return content;
+    */
+    var result = await checkUserExists(email, fullName)
+	  return result;
 }
 
 export default NextAuth(authOptions)

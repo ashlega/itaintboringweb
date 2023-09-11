@@ -20,8 +20,9 @@ export async function GET(request: Request)
   }
   else{
     var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
+
     var result : any[] = []
-    //console.log("LIST CACHE " + url)
+    console.log("LIST CACHE " + url)
     if(await getCache().get(url)){
       result = await getCache().get(url)
     }

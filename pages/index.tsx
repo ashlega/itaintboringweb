@@ -1,13 +1,16 @@
 //import Layout from "../components/layout"
 import Feature from "../components/Feature";
+import About from "../components/About";
 import Pricing from "../components/Pricing";
 import Hero from "../components/Hero";
-import LayoutVPN from "../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import SeoHead from "../components/SeoHead";
 import React, { useContext } from 'react';
 import AppContext from "../components/Context/AppContext";
 import { useSession } from "next-auth/react"
 import AccessDenied from "../components/access-denied"
+
+
 
 import ClientRequests from "../components/Requests/ClientRequests";
 
@@ -19,7 +22,7 @@ export default function IndexPage() {
   return (
    <>
     <SeoHead title='Treecat Software Inc' />
-    <LayoutVPN>
+    <Layout>
       <>
         {(!session && appState.selected == "requests") ? (
           <AccessDenied />
@@ -27,6 +30,13 @@ export default function IndexPage() {
         
         {session ? (
           <ClientRequests isVisible={appState.selected == "requests"}/>
+        ) : ("")}
+
+        {appState.selected == "about" ? (
+        <>
+          <About />
+         
+        </>
         ) : ("")}
 
         {appState.selected == "home" ? (
@@ -37,7 +47,7 @@ export default function IndexPage() {
         </>
         ) : ("")}
       </>
-    </LayoutVPN>
+    </Layout>
   </>
   )
 }

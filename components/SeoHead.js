@@ -1,21 +1,21 @@
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+import SiteSettings from "../utils/SiteSettings"
 
 
 // Default value for some meta data
 const defaultMeta = {
-  title: 'LaslesVPN',
-  siteName: 'LaslesVPN',
-  description:
-    'Landing page VPN LaslesVPN Best VPN For Privacy, Country and Cheapest',
+  title: SiteSettings.Title,
+  siteName: SiteSettings.SiteName,
+  description: SiteSettings.Description,
   // change base url of your web (without '/' at the end)
-  url: 'https://next-landing-vpn.vercel.app',
+  //url: ,
   type: 'website',
   robots: 'follow, index',
   // change with url of your image (recommended dimension = 1.91:1)
   // used in twitter, facebook, etc. card when link copied in tweet/status 
-  image: 'https://next-landing-vpn.vercel.app/assets/card-image.png',
-  author: 'Lorem Ipsum'
+  //image: ,
+  author: SiteSettings.Author
 };
 
 /**

@@ -1,21 +1,28 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext} from "react";
 import Image from "next/image";
 import ButtonPrimary from "./misc/ButtonPrimary";
 import {motion} from "framer-motion";
 import getScrollAnimation from "../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
 import SiteSettings from "../utils/SiteSettings"
+import AppContext from "./Context/AppContext";
 
 
 const Hero = ({
   listUser = SiteSettings.highlightsList,
 }) => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
+  const { appState, setAppState } = useContext(AppContext);
+
+  const openContactForm = () =>
+  {
+    setAppState({...appState, isContactFormOpen: true});
+  }
 
   return (
     <div
       className="max-w-screen-xl mt-24 px-8 xl:px-16 mx-auto"
-      id="about"
+      id="about1"
     >
       <ScrollAnimationWrapper>
           <motion.div
@@ -28,13 +35,15 @@ const Hero = ({
               <p className="text-black-500 mt-4 mb-6">
                 {SiteSettings.shortPitch}
               </p>
-              <ButtonPrimary>Get Started</ButtonPrimary>
+              <ButtonPrimary
+                onClick={openContactForm}
+              >Get Started</ButtonPrimary>
             </div>
             <div className="flex w-full">
               <motion.div className="h-full w-full" variants={scrollAnimation}>
                 <Image
                   src="/assets/Illustration1.png"
-                  alt="VPN Illustrasi"
+                  alt={SiteSettings.defaultAlt}
                   quality={100}
                   width={612}
                   height={383}

@@ -152,7 +152,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
     <div className="max-w-screen-xl px-6 sm:px-8 lg:px-16 justify-center mx-auto "> 
       
       <div
-  class="block w-full rounded-lg bg-white p-6 request_form shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+  className="block w-full rounded-lg bg-white p-6 request_form shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
  
         <p className="text-black-600 mb-1 font-medium text-base">Subject:</p>
         <input type="text" name="subject" onChange={onChange} value={data.subject} readOnly={request?.current}></input>
@@ -208,10 +208,10 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
           <div className="mr-4 mt-1">Loading&nbsp;comments...</div>
           <div >
             <div
-              class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
               role="status">
               <span
-                class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
                 >Loading...</span>
             </div>
           </div>

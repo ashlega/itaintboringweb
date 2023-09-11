@@ -15,7 +15,7 @@ export async function POST(req: Request)
 
   const anySession : any = session;
 
-  if(anySession?.user?.id)
+  if(anySession?.user?.id || data.email)
   {
 
     const response = await fetch(SiteSettings.REQUEST_ADD_URL, {
@@ -28,9 +28,11 @@ export async function POST(req: Request)
     })
     
     //console.log("LIST CACHE del " + SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true")
-
-    await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
-    await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=false");
+    if(anySession?.user?.id){
+      console.log("Clear request cache: " + SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
+      await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=true");
+      await getCache().del(SiteSettings.REQUEST_LIST_URL+"&userid="+anySession?.user?.id+"&active_only=false");
+    }
    // revalidateTag(SiteSettings.REQUEST_LIST_TAG+anySession?.user?.id);
 
     const request = await response.json()

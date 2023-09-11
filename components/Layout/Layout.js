@@ -58,7 +58,7 @@ const Layout = ({ children }) => {
       <>
         <Header />
         <div
-          class="block m-16 mt-40  rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          className="block m-16 mt-40  rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
           <Content name='NEW_USER_CONSENT' setContentLoaded={setConsentContentLoaded} className="1bg-gradient-to-b user-consent from-white-500 to-white-300 px-4 sm:px-8 lg:px-16 w-full"/>
         
 

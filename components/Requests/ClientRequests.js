@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import SiteSettings from "../../utils/SiteSettings"
 import TWTable from "../twcomponents/TWTable"
@@ -7,6 +7,7 @@ import { getRequestList } from "../../utils/requestFunctions"
 import { useSession } from "next-auth/react"
 import AccessDenied from "../access-denied"
 import Toggle from "react-toggle"
+import AppContext from "../Context/AppContext";
 import "react-toggle/style.css"
 
 import GridiconExternal from "gridicons/dist/external";
@@ -15,6 +16,7 @@ import GridiconExternal from "gridicons/dist/external";
 
 const ClientRequests = ({isVisible}) => {
 
+  const { appState, setAppState } = useContext(AppContext);
   const [ dataTable, setDataTable ] = useState(null);
   const [ dataTableElement, setDataTableElement ] = useState(null);
 
@@ -22,6 +24,8 @@ const ClientRequests = ({isVisible}) => {
   const [ dataLoaded, setDataLoaded ] = useState(false);
   const [ activeOnly, setActiveOnly ] = useState(true);
   const [ selectedRequest, setSelectedRequest ] = useState(null);
+
+  
 
   const { data: session } = useSession()
   
@@ -86,7 +90,9 @@ const ClientRequests = ({isVisible}) => {
 
       if(!isVisible && isEditorMode) {
         setIsEditorMode(false);
+        
       }
+
 
       if(!isVisible || isEditorMode) {
         //if(dataTable) setDataTable(null);
@@ -94,11 +100,12 @@ const ClientRequests = ({isVisible}) => {
       }
 
 
-      if(dataLoaded) return;
+      if(dataLoaded && !appState.reloadRequestList) return;
 
       
         var startEntries = dataTable?._options?.entries ?? 10; 
 
+        setAppState({...appState, reloadRequestList: false});
         setRequestListData({...requestListData, rows: [], loading: true, perPage: startEntries })
 
         getRequestList(activeOnly).then((data) =>
@@ -114,7 +121,7 @@ const ClientRequests = ({isVisible}) => {
             setDataLoaded(true)
           }
         });
-  }, [session, isVisible, dataTable, isEditorMode, activeOnly]);
+  }, [session, isVisible, dataTable, isEditorMode, activeOnly, appState.reloadRequestList]);
 
   
 
