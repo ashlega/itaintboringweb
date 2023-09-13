@@ -80,7 +80,7 @@ const Pricing = ({expandContactForm=false}) => {
                 </ul>
                 <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
                   <p className="text-2xl text-black-600 text-center mb-4 ">
-                    $155 USD per hour
+                    $135 USD per hour
                   </p>
                   <ButtonOutline
                   onClick={openContactForm}
@@ -128,7 +128,7 @@ const Pricing = ({expandContactForm=false}) => {
               </ul>
               <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
                 <p className="text-2xl text-black-600 text-center mb-4 ">
-                  $140 USD per hour
+                  $125 USD per hour
                 </p>
                 <ButtonOutline
                 onClick={openContactForm}
