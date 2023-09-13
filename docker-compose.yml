@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+
+  nextjs_treecat:
+    build: ./
+    restart: always
+    container_name: nextjs_treecat
+    volumes:
+      - ./:/usr/app
+      - ./.env.production:/usr/app/.env.local
+      - ./.next:/usr/app/.next
+      - /usr/app/node_modules
+#    ports:
+#      - 3000:3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs_treecat.entrypoints=https"
+      - "traefik.http.routers.nextjs_treecat.rule=Host(`treecatsoftware.com`) || Host(`www.treecatsoftware.com`)"
+      - "traefik.http.services.nextjs_treecat.loadbalancer.server.port=3000"
+      - "traefik.http.routers.nextjs_treecat.tls=true"
+      - "traefik.http.routers.nextjs_treecat.tls.certresolver=letsEncrypt"
+    environment:
+      NODE_ENV: dev
+    networks:
+      - proxynew
+
+networks:
+  #inner:
+  proxynew:
+   external:
+    name: proxynew

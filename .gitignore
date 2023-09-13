@@ -12,6 +12,8 @@ lerna-debug.log*
 
 .eslintcache
 
+*.production
+
 *.tsbuildinfo
 next-env.d.ts
 
