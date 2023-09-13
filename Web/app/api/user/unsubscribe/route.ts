@@ -15,8 +15,9 @@ export async function GET(request: Request)
   const content = await response.json()
 
   const session = await getServerSession(authOptions);
-  if(session && session?.user?.email){
-    var cacheKey = cache.getUserCacheKey(session?.user?.email);
+  var anySession : any = session
+  if(session?.user?.email){
+    var cacheKey = cache.getUserCacheKey(anySession?.user?.email, anySession?.user?.provider);
     await cache.del(cacheKey)
   }
   return NextResponse.json( { data: content })

@@ -18,8 +18,9 @@ export async function GET(request: Request)
     const response = await fetch(url, { cache: 'no-cache' })
     const content = await response.json()
 
+    var anySession : any = session
     if(session?.user?.email){
-      var cacheKey = cache.getUserCacheKey(session?.user?.email);
+      var cacheKey = cache.getUserCacheKey(anySession?.user?.email, anySession?.user?.provider);
       await cache.del(cacheKey)
     }
 

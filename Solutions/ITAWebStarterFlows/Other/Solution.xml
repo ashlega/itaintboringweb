@@ -86,7 +86,11 @@
       <RootComponent type="29" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" behavior="0" />
       <RootComponent type="29" id="{6cb6c167-ea4d-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{752ee1d2-e94d-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{82307ed8-6652-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{a151e6da-2952-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{b046c2f2-6c52-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{b048c4ee-3548-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" behavior="0" />
       <RootComponent type="29" id="{d59c88bf-bc48-ee11-be6f-000d3ae86f97}" behavior="0" />
     </RootComponents>
@@ -108,8 +112,20 @@
         <Dependent type="29" displayName="ITA Client Subscribe" id="{752ee1d2-e94d-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA User Cache Prefix Updated" id="{b046c2f2-6c52-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Comment Added Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
         <Dependent type="29" displayName="ITA Get Request Comments" id="{b048c4ee-3548-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="29" displayName="ITA Comment Added Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
@@ -120,12 +136,24 @@
         <Dependent type="29" displayName="ITA Get Content By Name" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" />
       </MissingDependency>
       <MissingDependency>
+        <Required type="1" schemaName="ita_itarequesttype" displayName="ITA Request Type" solution="Active" />
+        <Dependent type="29" displayName="ITA Get Request Types" id="{a151e6da-2952-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
         <Dependent type="29" displayName="ITA Get Request List" id="{5104b08b-f944-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
         <Dependent type="29" displayName="ITA Create Request" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="EnvironmentVariableDefinition" displayName="ita_WebStarterCacheKey" solution="Active" id.schemaname="ita_WebStarterCacheKey" />
+        <Dependent type="29" displayName="ITA Reset Web Portal Cache" id="{82307ed8-6652-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="EnvironmentVariableDefinition" displayName="ita_WebStarterPortalRoot" solution="Active" id.schemaname="ita_WebStarterPortalRoot" />
+        <Dependent type="29" displayName="ITA Reset Web Portal Cache" id="{82307ed8-6652-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

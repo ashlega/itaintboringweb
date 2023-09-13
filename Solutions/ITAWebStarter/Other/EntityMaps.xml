@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityMaps xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityMap>
+    <EntitySource>ita_request</EntitySource>
+    <EntityTarget>ita_itacomment</EntityTarget>
+    <AttributeMaps>
+      <AttributeMap>
+        <AttributeSource>ita_itaauthenticationid</AttributeSource>
+        <AttributeTarget>ita_authenticationid</AttributeTarget>
+      </AttributeMap>
+    </AttributeMaps>
+  </EntityMap>
+</EntityMaps>

@@ -1,0 +1,98 @@
+{
+  "properties": {
+    "connectionReferences": {},
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "ITA Web Starter Cache Key (ita_WebStarterCacheKey)": {
+          "defaultValue": "differentadminkey",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ita_WebStarterCacheKey"
+          }
+        },
+        "ITA Web Starter Portal Root (ita_WebStarterPortalRoot)": {
+          "defaultValue": "https://localhost:3000",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ita_WebStarterPortalRoot"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "5e22fc9c-df2d-498d-8c46-b8ee98d67d17"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "CacheKey",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Enter cache key",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "HTTP": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "0226aa4f-32ea-4c62-b079-adf0cb19df23"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@{parameters('ITA Web Starter Portal Root (ita_WebStarterPortalRoot)')}/api/cache/deletecachekey?admin_key=@{parameters('ITA Web Starter Cache Key (ita_WebStarterCacheKey)')}&cache_key=@{triggerBody()['text']}"
+          }
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "HTTP": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ed63c97f-b4d0-43a9-93fa-8599cd3c291e"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "result": "OK"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

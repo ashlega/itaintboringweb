@@ -85,7 +85,8 @@
               "entityName": "ita_itacomments",
               "item/ita_AuthenticationId@odata.bind": "ita_itaauthenticationids(@{triggerBody()?['userid']})",
               "item/ita_details": "@triggerBody()?['details']",
-              "item/ita_RequestId@odata.bind": "ita_requests(@{triggerBody()?['requestid']})"
+              "item/ita_RequestId@odata.bind": "ita_requests(@{triggerBody()?['requestid']})",
+              "item/statuscode": 556780002
             },
             "authentication": "@parameters('$authentication')"
           }

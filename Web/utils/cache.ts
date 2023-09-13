@@ -54,8 +54,7 @@ interface DataCache
   del(key : any) : Promise<void>;
   getClient() : any;
 
-  getCurrentUserCacheKey(session : Session | null) : string;
-  getUserCacheKey(userid : string | null) : string;
+  getUserCacheKey(email : string | null, provider: string | null | undefined) : string;
   getRequestCommentListCacheKey(session : Session | null, requestid : string | null) : string;
   getContentCacheKey(contentid : string | null) : string;
   getActiveRequestListCacheKey(session : Session | null) : string 
@@ -110,16 +109,11 @@ export function getCache(
         //cache.put(key, null, 1);
       },
 
-      getUserCacheKey: (userid : string | null) : string =>
+      getUserCacheKey: (email : string | null, provider: string | null | undefined) : string =>
       {
-        return "user_"+userid;
+        return "user_"+email+"_provider_"+provider;
       },
 
-      getCurrentUserCacheKey: (session : Session | null) : string =>
-      {
-        var anySession : any = session;
-        return anySession?.user?.id;
-      },
       getRequestCommentListCacheKey: (session : Session | null, requestid : string | null) : string =>
       {
         var anySession : any = session;

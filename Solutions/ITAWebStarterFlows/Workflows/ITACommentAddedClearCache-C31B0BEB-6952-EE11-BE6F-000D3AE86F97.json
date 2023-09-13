@@ -1,0 +1,96 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "3eb0a2c3-75aa-4c69-b599-873267e5e778"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 4,
+              "subscriptionRequest/entityname": "ita_itacomment",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "_ita_authenticationid_value ne null and statuscode eq 1"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {
+            "Get_Authentication_Id": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d24c65da-d52b-43fe-b8a8-89dfcf0b5faf"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "82307ed8-6652-ee11-be6f-000d3ae86f97"
+            },
+            "body": {
+              "text": "@{outputs('Get_Authentication_Id')?['body/ita_cacheprefix']}@{triggerOutputs()?['body/_ita_authenticationid_value']}_commentlist_@{triggerOutputs()?['body/_ita_requestid_value']}"
+            },
+            "retryPolicy": {
+              "type": "none"
+            }
+          }
+        },
+        "Get_Authentication_Id": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "afa310a9-a414-4e5a-b86a-e3e2ce7880bf"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_itaauthenticationids",
+              "recordId": "@triggerOutputs()?['body/_ita_authenticationid_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

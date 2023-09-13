@@ -11,11 +11,13 @@ export async function GET(request: Request)
   const { searchParams } = new URL(request.url)
   const email = searchParams.get('email')
   var fullName = searchParams.get('fullName')
+  var provider = searchParams.get('provider')
+  
   if(!fullName) fullName = ""
   url = url + email
   url += "&fullName="+fullName
 
-  var cacheKey = cache.getUserCacheKey(email);
+  var cacheKey = cache.getUserCacheKey(email, provider);
   var content = await cache.get(cacheKey)
   if(!content)
   {

@@ -785,7 +785,15 @@
             <statuses>
               <status value="1" state="0">
                 <labels>
-                  <label description="New" languagecode="1033" />
+                  <label description="New " languagecode="1033" />
+                </labels>
+                <Descriptions>
+                  <Description description="" languagecode="1033" />
+                </Descriptions>
+              </status>
+              <status value="556780002" state="0">
+                <labels>
+                  <label description="New From Web" languagecode="1033" />
                 </labels>
                 <Descriptions>
                   <Description description="" languagecode="1033" />
