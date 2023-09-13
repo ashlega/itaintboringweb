@@ -1,0 +1,81 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cd1ca3cf-c336-4efa-bb45-24faccfa4d40"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "method": "GET"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f358cda-57ff-49ca-b04a-644c9c4d3a2a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_requests",
+              "$select": "ita_name, ita_subject, ita_details, statuscode, ita_RequestType, _ita_requesttype_value, createdon, modifiedon",
+              "$filter": "_ita_itaauthenticationid_value eq '@{triggerOutputs()['queries']['userid']}' and (statecode eq 0 @{if(equals(triggerOutputs()['queries']['active_only'], 'false'), ' or statecode eq 1', '')})"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('List_rows')?['body/value']"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

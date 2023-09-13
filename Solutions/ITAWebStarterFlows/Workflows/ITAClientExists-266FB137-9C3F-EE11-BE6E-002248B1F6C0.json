@@ -1,0 +1,149 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "8e53e7b4-371b-491b-97ee-e7defefd2880"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "method": "GET"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ba3de041-310b-4e28-b67d-8bec6a3748e9"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_itaauthenticationids",
+              "$filter": "ita_name eq '@{triggerOutputs()['queries']['email']}' "
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "Condition": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "37ef8669-c662-407a-b1c7-85a4fb84b8a4"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "Id": "@{if(empty(first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid']), null, if(equals(first(outputs('List_rows')?['body/value'])?['ita_termsaccepted'], true), first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid'], null))}",
+              "SubscriptionStatus": "@{if(empty(first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid']), null, if(equals(first(outputs('List_rows')?['body/value'])?['ita_termsaccepted'], true), first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid'], null))}",
+              "SubscriptionStatusName": "@{first(outputs('List_rows')?['body/value'])?['ita_subscriptionstatus@OData.Community.Display.V1.FormattedValue']}",
+              "CachePrefix": "@{first(outputs('List_rows')?['body/value'])?['ita_cacheprefix']}"
+            }
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Add_a_new_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "f0aa15b5-9b14-4b0f-95f0-42fe57dbc2c1"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ita_itaauthenticationids",
+                  "item/ita_fullname": "@if(empty(triggerOutputs()['queries']?['fullName']), null, triggerOutputs()['queries']?['fullName'])",
+                  "item/ita_name": "@triggerOutputs()['queries']['email']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Update_a_row": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "fc6342a1-041a-4149-8348-d07db074730a"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_commondataserviceforapps",
+                    "operationId": "UpdateRecord",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                  },
+                  "parameters": {
+                    "entityName": "ita_itaauthenticationids",
+                    "recordId": "@first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid']",
+                    "item/ita_fullname": "@if(empty(triggerOutputs()['queries']?['fullName']), null, triggerOutputs()['queries']?['fullName'])",
+                    "item/ita_name": "@triggerOutputs()['queries']['email']"
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@empty(first(outputs('List_rows')?['body/value'])?['ita_itaauthenticationidid'])",
+              true
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "94816bdd-6928-4513-80c8-08acfac8218d"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,98 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c1a5a09f-8a74-43f0-aafd-0c66626f727b"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "details": {
+                  "type": "string",
+                  "required": false
+                },
+                "requestid": {
+                  "type": "string",
+                  "required": false
+                },
+                "userid": {
+                  "type": "string",
+                  "required": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "Response": {
+          "runAfter": {
+            "Add_a_new_row": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "37ef8669-c662-407a-b1c7-85a4fb84b8a4"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('Add_a_new_row')?['body']"
+          }
+        },
+        "Add_a_new_row": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "19429abf-2e97-45a5-b6c8-aa71227aedfd"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_itacomments",
+              "item/ita_AuthenticationId@odata.bind": "ita_itaauthenticationids(@{triggerBody()?['userid']})",
+              "item/ita_details": "@triggerBody()?['details']",
+              "item/ita_RequestId@odata.bind": "ita_requests(@{triggerBody()?['requestid']})"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

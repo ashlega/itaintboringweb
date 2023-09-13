@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{37bedccf-429a-4a09-a5cc-702ed7485955}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
+        <row name="result" id="ita_itacommentid">
+          <cell name="createdon" width="125" />
+          <cell name="ita_name" width="123" />
+          <cell name="statuscode" width="119" />
+          <cell name="ita_details" width="300" />
+          <cell name="ita_authenticationid" width="139" />
+          <cell name="createdby" width="104" />
+          <cell name="ita_requestid" width="132" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ita_itacomment">
+          <attribute name="ita_itacommentid" />
+          <attribute name="ita_name" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ita_authenticationid" />
+          <attribute name="createdby" />
+          <attribute name="ita_details" />
+          <attribute name="ita_requestid" />
+          <attribute name="statuscode" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active ITA Comments" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{01488188-fb35-4c2a-9c6f-153584ebfd88}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
+        <row name="result" id="ita_requestid">
+          <cell name="ita_name" width="92" />
+          <cell name="ita_requesttype" width="117" />
+          <cell name="ita_subject" width="277" />
+          <cell name="ita_client" width="148" />
+          <cell name="ita_clientemail" width="112" />
+          <cell name="ita_itaauthenticationid" width="165" />
+          <cell name="statuscode" width="119" />
+          <cell name="createdon" width="125" />
+          <cell name="ita_followupby" width="121" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ita_request">
+          <attribute name="ita_requestid" />
+          <attribute name="ita_name" />
+          <attribute name="createdon" />
+          <order attribute="ita_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ita_client" />
+          <attribute name="ita_subject" />
+          <attribute name="statuscode" />
+          <attribute name="ita_followupby" />
+          <attribute name="ita_requesttype" />
+          <attribute name="ita_itaauthenticationid" />
+          <attribute name="ita_clientemail" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Requests" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

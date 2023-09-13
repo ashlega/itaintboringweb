@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{5feb0a00-6228-4931-9e3b-2327f6649668}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
+        <row name="result" id="ita_itacontentid">
+          <cell name="ita_name" width="127" />
+          <cell name="ita_title" width="277" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ita_itacontent">
+          <attribute name="ita_itacontentid" />
+          <attribute name="ita_name" />
+          <attribute name="createdon" />
+          <order attribute="ita_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ita_title" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active ITA Contents" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

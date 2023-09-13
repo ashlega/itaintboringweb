@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.23084.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SolutionManifest>
+    <UniqueName>ITAWebStarterFlows</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="ITAWebStarterFlows" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.2</Version>
+    <Managed>2</Managed>
+    <Publisher>
+      <UniqueName>itaintboring</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="ItAintBoring" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description description="ItAintBoring" languagecode="1033" />
+      </Descriptions>
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl>http://www.itaintboring.com</SupportingWebsiteUrl>
+      <CustomizationPrefix>ita</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>55678</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="29" id="{266fb137-9c3f-ee11-be6e-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{45367f26-7542-ee11-be6e-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{5104b08b-f944-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{6cb6c167-ea4d-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{752ee1d2-e94d-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{b048c4ee-3548-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{d59c88bf-bc48-ee11-be6f-000d3ae86f97}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Client Exists" id="{266fb137-9c3f-ee11-be6e-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Accept User Consent" id="{45367f26-7542-ee11-be6e-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Client UnSubscribe" id="{6cb6c167-ea4d-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Client Subscribe" id="{752ee1d2-e94d-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="29" displayName="ITA Get Request Comments" id="{b048c4ee-3548-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="29" displayName="ITA Create Comment" id="{d59c88bf-bc48-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itacontent" displayName="ITA Content" solution="Active" />
+        <Dependent type="29" displayName="ITA Get Content By Name" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Get Request List" id="{5104b08b-f944-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Create Request" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>
