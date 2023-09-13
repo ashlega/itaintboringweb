@@ -3,13 +3,13 @@ version: "3"
 services:
 
   nextjs_treecat:
-    build: ./
+    build: ./Web/
     restart: always
     container_name: nextjs_treecat
     volumes:
-      - ./:/usr/app
-      - ./.env.production:/usr/app/.env.local
-      - ./.next:/usr/app/.next
+      - ./Web/:/usr/app
+      - ./Web/.env.production:/usr/app/.env.local
+      - ./Web/.next:/usr/app/.next
       - /usr/app/node_modules
 #    ports:
 #      - 3000:3000
