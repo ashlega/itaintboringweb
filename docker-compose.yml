@@ -8,8 +8,8 @@ services:
     container_name: nextjs_treecat
     volumes:
       - ./Web:/usr/app
-#      - ./Web/.next:/usr/app/.next
-#      - /usr/app/node_modules
+      - ./Web/.next:/usr/app/.next
+      - ./Web/node_modules:/usr/app/node_modules
 #    ports:
 #      - 3000:3000
     labels:
