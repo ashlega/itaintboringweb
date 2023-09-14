@@ -21,7 +21,7 @@ WORKDIR /usr/app
 
 # Installing dependencies
 COPY package*.json /usr/app/
-RUN npm install
+#RUN npm install
 
 # Install PM2 globally
 # RUN npm install --global pm2
@@ -39,7 +39,7 @@ COPY ./start.sh /usr/local/bin/start.sh
 RUN ["chmod", "+x", "/usr/local/bin/start.sh"]
 
 # Install dependencies
-#RUN npm install 
+RUN npm install 
 
 # Build app
 # RUN npm run build --debug
