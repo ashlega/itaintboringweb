@@ -10,5 +10,9 @@ if [ "$env" == "production" ]; then
     npm run start
 else
     npm run dev
-fi
+#    while [ true ]
+#    do
+#      sleep 60
+#    done
 
+fi
