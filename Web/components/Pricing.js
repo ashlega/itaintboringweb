@@ -13,6 +13,9 @@ import Subscribe from "./Actions/Subscribe.js"
 import Contact from "./Actions/Contact.js"
 import AppContext from "./Context/AppContext";
 
+
+
+
 const Pricing = ({expandContactForm=false}) => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
   const { appState, setAppState } = useContext(AppContext);
@@ -42,151 +45,52 @@ const Pricing = ({expandContactForm=false}) => {
             </motion.p>
           </ScrollAnimationWrapper>
           <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-12 py-8 lg:py-12 px-6 sm:px-0 lg:px-6">
-            <ScrollAnimationWrapperSimple className="flex justify-center">
-              <motion.div
-                variants={scrollAnimation}
-                className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
-                whileHover={{
-                  scale : 1.1,
-                  transition: {
-                    duration: .2
-                  }
-                }}
-              >
-                <div className="p-4 lg:p-0 mt-6 lg:mt-16">
-                  <Image
-                    src="/assets/Free.png"
-                    width={145}
-                    height={165}
-                    alt="Per Hour Consulting"
-                  />
-                </div>
-                <p className="text-lg text-black-600 font-medium capitalize my-2 sm:my-7">
-                  Per Hour
-                </p>
-                <ul className="flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow">
-                  <li className="relative check custom-list my-2">
-                    No long-term commitment from you 
-                  </li>
-                  <li className="relative check custom-list my-2">
-                    Reduced availability from us
-                  </li>
-                  <li className="relative check custom-list my-2">
-                    Works great for when you need help occasionally
-                  </li>
-                  <li className="relative check custom-list my-2">
-                    40 hours minimum, 10 hours increments after that
-                  </li>
-                </ul>
-                <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
-                  <p className="text-2xl text-black-600 text-center mb-4 ">
-                    $135 USD per hour
-                  </p>
-                  <ButtonOutline
-                  onClick={openContactForm}
-                  >Request</ButtonOutline>
-                </div>
-              </motion.div>
-            </ScrollAnimationWrapperSimple>
-            <ScrollAnimationWrapperSimple className="flex justify-center">
-              <motion.div
-                variants={scrollAnimation}
-                className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
-                whileHover={{
-                  scale : 1.1,
-                  transition: {
-                    duration: .2
-                  }
-                }}
-              >
-              <div className="p-4 lg:p-0 mt-6 lg:mt-16">
-                <Image
-                  src="/assets/Standard.png"
-                  width={145}
-                  height={165}
-                  alt="Standard Plan"
-                />
-              </div>
-              <p className="text-lg text-black-600 font-medium capitalize my-2 sm:my-7">
-                Long term{" "}
-              </p>
-              <ul className="flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow">
-                <li className="relative check custom-list my-2">
-                  Works great for when you can anticipate at least 400 hours of work
-                </li>
-                <li className="relative check custom-list my-2">
-                  Increased availability from us
-                </li>
-                <li className="relative check custom-list my-2">
-                  400 hours min in total to spend 6 months or less with the burn rate of at least 50 hours per month
-                </li>
-                <li className="relative check custom-list my-2">
-                  80 hours increments after the initial 400 hours 
-                </li>
-                
-                
-              </ul>
-              <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
-                <p className="text-2xl text-black-600 text-center mb-4 ">
-                  $125 USD per hour
-                </p>
-                <ButtonOutline
-                onClick={openContactForm}
-                >Request</ButtonOutline>
-              </div>
-              </motion.div>
-            </ScrollAnimationWrapperSimple>
-            <ScrollAnimationWrapperSimple className="flex justify-center">
-              <motion.div
-                variants={scrollAnimation}
-                className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
-                whileHover={{
-                  scale : 1.1,
-                  transition: {
-                    duration: .2
-                  }
-                }}
-              >
-              <div className="p-4 lg:p-0 mt-6 lg:mt-16">
-                <Image
-                  src="/assets/Premium.png"
-                  width={145}
-                  height={165}
-                  alt="Premium Plan"
-                />
-              </div>
-              <p className="text-lg text-black-600 font-medium capitalize my-2 sm:my-7">
-                Scope & Duration Based{" "}
-              </p>
-              <ul className="flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow">
-                <li className="relative check custom-list my-2">
-                  Let's discuss your project or training requirements
-                </li>
-                <li className="relative check custom-list my-2">
-                  And come up with the duration / estimate
-                </li>
-                <li className="relative check custom-list my-2">
-                  From there, let's see whether we can make you an offer
-                </li>
-                <li className="relative check custom-list my-2">
-                  So we could sign a contract
-                </li>
-                <li className="relative check custom-list my-2">
-                  And complete the work
-                </li>
-                
-              </ul>
-              <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
-                <p className="text-2xl text-black-600 text-center mb-4 ">
-                  Scope&Duration based pricing
-                </p>
+            {SiteSettings.offers.map((offer, index) => (
+                <ScrollAnimationWrapperSimple className="flex justify-center" key={offer.title}>
+                  <motion.div
+                    variants={scrollAnimation}
+                    className="flex flex-col justify-center items-center border-2 border-gray-500 rounded-xl py-4 px-6 lg:px-12 xl:px-20"
+                    whileHover={{
+                      scale : 1.1,
+                      transition: {
+                        duration: .2
+                      }
+                    }}
+                  >
+                    <div className="p-4 lg:p-0 mt-6 lg:mt-16">
+                      <Image
+                        src={offer.icon}
+                        width={145}
+                        height={165}
+                        alt={offer.title}
+                      />
+                    </div>
+                    <p className="text-lg text-black-600 font-medium capitalize my-2 sm:my-7">
+                      {offer.title}
+                    </p>
+                    <ul className="flex flex-col list-inside pl-6 xl:pl-0 items-start justify-start text-left text-black-500 flex-grow">
+                      {offer.items.map((item) => (
+                        <li className="relative check custom-list my-2" key={item}>
+                          {item}
+                        </li>
+                      ))}
+                    
+                    </ul>
+                    <div className="flex flex-col w-full justify-center mb-8 flex-none mt-12">
+                      <p className="text-2xl text-black-600 text-center mb-4 ">
+                        {offer.terms}
+                      </p>
+                      <ButtonOutline
+                      onClick={openContactForm}
+                      >Request</ButtonOutline>
+                    </div>
+                  </motion.div>
+                </ScrollAnimationWrapperSimple>
+                )                
 
-                <ButtonOutline
-                onClick={openContactForm}
-                >Request</ButtonOutline>
-              </div>
-              </motion.div>
-            </ScrollAnimationWrapperSimple>
+            )}
+            
+            
           </div>
         </div>
         <div className="flex flex-col w-full my-16" id="testimoni">

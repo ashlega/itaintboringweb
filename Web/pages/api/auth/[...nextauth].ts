@@ -80,7 +80,6 @@ export const authOptions: NextAuthOptions = {
         newSession.user.subscriptionStatus = content.data.SubscriptionStatus;
         newSession.user.subscriptionStatusName = content.data.SubscriptionStatusName;
         newSession.user.cachePrefix = content.data.CachePrefix;
-        //console.log(newSession.user.subscriptionStatusName);
       }
       return newSession;
     },

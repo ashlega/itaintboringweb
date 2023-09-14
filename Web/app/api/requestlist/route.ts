@@ -5,8 +5,6 @@ import SiteSettings from "../../../utils/SiteSettings"
 import { getCache } from "../../../utils/cache"
 
 
-export const revalidate = 0
-
 export async function GET(request: Request) 
 {
   var cache = getCache();
@@ -17,7 +15,7 @@ export async function GET(request: Request)
   const anySession : any = session;
   if(!anySession?.user?.id)
   {
-    return NextResponse.json( { data: null }) 
+    return NextResponse.json( { data: [] }) 
   }
   else{
     var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;

@@ -1,5 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import SiteSettings from "../../utils/SiteSettings"
+
 const Footer = () => {
   return (
     <div className="bg-white-300 pt-44 pb-24">
@@ -9,11 +11,12 @@ const Footer = () => {
            
             <img src="../../assets/lightning.svg" className="ml-1 mt-1 h-4 w-4 break-after-avoid mr-1" fill="red"/>
             <p className=" w-full mb-4 justify-left font-medium">
-            Treecat&nbsp;Software&nbsp;Inc&nbsp;-&nbsp;boosting your power
+            {SiteSettings.footerSlogan}
+            
             </p>
           </div>
           
-          <p className="text-gray-400">©{new Date().getFullYear()} - Treecat Software Inc</p>
+          <p className="text-gray-400">©{new Date().getFullYear()} - {SiteSettings.companyName}</p>
         </div>
         <div className=" row-span-2 sm:col-span-2 sm:col-start-7 sm:col-end-9 flex flex-col">
           <p className="text-black-600 mb-4 font-medium text-lg footer-title">Power Platform</p>
