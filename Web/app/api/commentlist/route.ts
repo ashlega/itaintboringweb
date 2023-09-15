@@ -51,7 +51,7 @@ export async function GET(request: Request)
       result = await cache.get(cacheKey)
     }
     else {
-      const url = SiteSettings.COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
+      const url = process.env.API_COMMENT_LIST_URL+"&userid=" + userId+"&requestid="+requestid;
       const response = await fetch(url, { cache: 'no-cache' })
       const content = await response.json()
       

@@ -16,10 +16,10 @@ export async function POST(req: Request)
 
   const anySession : any = session;
 
-  if(anySession?.user?.id || data.email)
+  if((anySession?.user?.id || data.email) && process.env.API_REQUEST_ADD_URL)
   {
 
-    const response = await fetch(SiteSettings.REQUEST_ADD_URL, {
+    const response = await fetch(process.env.API_REQUEST_ADD_URL, {
     
       method: 'POST',
       headers: {

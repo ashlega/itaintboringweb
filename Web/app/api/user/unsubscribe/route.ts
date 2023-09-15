@@ -10,7 +10,7 @@ export async function GET(request: Request)
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
 
-  var url = SiteSettings.UNSUBSCRIBE_URL+"&id="+id
+  var url = process.env.API_UNSUBSCRIBE_URL+"&id="+id
   const response = await fetch(url, { cache: 'no-cache' })
   const content = await response.json()
 

@@ -9,7 +9,7 @@ import { Session } from "next-auth"
 
 //var cache = require('./mem-cache')
 
-var client = createClient(SiteSettings.REDDIS_CONNECTION_PARAM);
+var client = createClient(process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined);
 
 client.on('error', (err : any) => {
   /*console.log('client error', err)*/
@@ -28,7 +28,7 @@ client.on('end', () => {
   /*console.log('client disconnected')*/
 });
 client.connect();
-
+/*
 async function  getClientInternal()  
 {
   if(!client || !client.isOpen)
@@ -44,7 +44,7 @@ async function  getClientInternal()
   }
   return client;
 };
-
+*/
 
 interface DataCache
 {
@@ -76,7 +76,7 @@ export function getCache(
         //var client = getClient();
         //if(!client.isOpen) await client.connect();
         //if(!client.isOpen) await client.connect();
-        await client.set(SiteSettings.CACHE_PREFIX + key, JSON.stringify(value), {EX: exTime});
+        await client.set(process.env.CACHE_PREFIX + key, JSON.stringify(value), {EX: exTime});
         //await client.disconnect();
         return new Promise<void>((resolve, reject) => {
           resolve();
@@ -88,7 +88,7 @@ export function getCache(
         //var client = getClient();
         //if(!client.isOpen) c
         //if(!client.isOpen) await client.connect();
-        var result = await client.get(SiteSettings.CACHE_PREFIX + key);
+        var result = await client.get(process.env.CACHE_PREFIX + key);
         //await client.disconnect();
         result = result ? JSON.parse(result) : null;
         
@@ -101,7 +101,7 @@ export function getCache(
       del : async (key : any) : Promise<void> => {
         //var client = await getClient();
         //if(!client.isOpen) await client.connect();
-        await client.del(SiteSettings.CACHE_PREFIX + key)
+        await client.del(process.env.CACHE_PREFIX + key)
         //await client.disconnect();
         return new Promise<void>((resolve, reject) => {
           resolve();

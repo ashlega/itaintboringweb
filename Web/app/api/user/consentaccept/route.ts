@@ -12,7 +12,7 @@ export async function GET(request: Request)
     return NextResponse.json({ error: 'Please make sure you have logged in before attempting this action' }, { status: 401 })
   }
   else{
-    var url = SiteSettings.CONSENT_ACCEPT_URL+"&email="+session?.user?.email+"&fullName="+session?.user?.name
+    var url = process.env.API_CONSENT_ACCEPT_URL+"&email="+session?.user?.email+"&fullName="+session?.user?.name
     const response = await fetch(url, { cache: 'no-cache' } )
     const content = await response.json()
     var anySession : any = session

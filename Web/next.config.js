@@ -1,8 +1,10 @@
+/*
 const dotEnv = require('dotenv');
 const result = dotEnv.config({ path: '.env' })
 const resultLocal = dotEnv.config({ path: '.env.local' })
 const resultTest = dotEnv.config({ path: '.env.test' })
 const resultProd = dotEnv.config({ path: '.env.production' })
+*/
 
 /** @type {import("next").NextConfig} */
 
@@ -12,7 +14,7 @@ const resultProd = dotEnv.config({ path: '.env.production' })
 
 var nextConfig = {
   reactStrictMode: true,
-  env: {...result.parsed, ...resultTest.parsed, ...resultProd.parsed, ...resultLocal.parsed}
+  //env: {...result.parsed, ...resultTest.parsed, ...resultProd.parsed, ...resultLocal.parsed}
   /*headers: async () => [
     {
       source: '/api/commentlist',

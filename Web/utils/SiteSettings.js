@@ -1,67 +1,153 @@
+import dynamic from "next/dynamic"
+
 import GridiconAddImage from "gridicons/dist/add-image";
 import GridiconLocation from "gridicons/dist/location";
 import GridiconUser from "gridicons/dist/user";
 import GridiconComputer from "gridicons/dist/computer";
 
 
+//import SiteSettings as SiteSettingsLocal from "./SiteSettings.Local.js"
+
+var SiteSettingsLocal = null
+
+
+
+//import SiteSettingsLocal from "./SiteSettings.Local.js"
+//const SiteSettingsLocal = undefined
+
 export default class SiteSettings {
-    static iconComponentFill = process.env.ICON_COMPONENT_FILL;
-    static title  = process.env.SITE_TITLE;
-    static topHeader  = process.env.TOP_HEADER;
-    static companyName  = process.env.COMPANY_NAME;
-    static shortCompanyName  = process.env.SHORT_COMPANY_NAME;
-    static shortPitch  = process.env.SHORT_PITCH;
 
-    static servicesHeader = process.env.SERVICES_HEADER
-    static servicesSubHeader = process.env.SERVICES_SUB_HEADER
-    static servicesHeaderAbout = process.env.SERVICES_HEADER_ABOUT
-    static servicesSubHeaderAbout = process.env.SERVICES_SUB_HEADER_ABOUT
-    static servicesListHeaderAbout = process.env.SERVICES_LIST_HEADER_ABOUT
-    
-    static pricingHeader = process.env.PRICIG_HEADER
-    static pricingSubHeader = process.env.PRICIG_SUB_HEADER
-    
-    static NewsHeader = process.env.NEWS_HEADER
-    static NewsSubHeader = process.env.NEWS_SUB_HEADER
+    static SUPPORT_GENERIC_NICKNAME = SiteSettingsLocal ? SiteSettingsLocal.SUPPORT_GENERIC_NICKNAME : "It Aint Boring" 
+    static CLIENT_GENERIC_NAME_COMMENTS = SiteSettingsLocal ? SiteSettingsLocal.CLIENT_GENERIC_NAME_COMMENTS : "You"
 
-    static SubscribeHeader = process.env.SUBSCRIBE_HEADER
-    static SubscribeSubHeader = process.env.SUBSCRIBE_SUB_HEADER
+    static iconComponentFill = SiteSettingsLocal ? SiteSettingsLocal.iconComponentFill : "red"
+    static title  = SiteSettingsLocal ? SiteSettingsLocal.title : "It Aint Boring"
+    static topHeader  = SiteSettingsLocal ? SiteSettingsLocal.topHeader : "Let us talk Power Platform"
+    static companyName  = SiteSettingsLocal ? SiteSettingsLocal.companyName : "It Aint Boring"
+    static shortCompanyName  = SiteSettingsLocal ? SiteSettingsLocal.shortCompanyName : "ItAintBoring"
+    static shortPitch  = SiteSettingsLocal ? SiteSettingsLocal.shortPitch : "All the non-boring stuff about Power Platform and more!"
+
+    static servicesHeader = SiteSettingsLocal ? SiteSettingsLocal.servicesHeader : "Here is what you can find here"
+    static servicesSubHeader = SiteSettingsLocal ? SiteSettingsLocal.servicesSubHeader : "Feel free to reach out to know more - drop me a note and I'll do my best to get back to you ASAP!"
+    static servicesHeaderAbout = SiteSettingsLocal ? SiteSettingsLocal.servicesHeaderAbout : "What is ItAintBoring?"
+    static servicesSubHeaderAbout = SiteSettingsLocal ? SiteSettingsLocal.servicesSubHeaderAbout : "It's a blog by Alex Shlega!"
+    static servicesListHeaderAbout = SiteSettingsLocal ? SiteSettingsLocal.servicesListHeaderAbout : "Here is what we do"
+    
+    static pricingHeader = SiteSettingsLocal ? SiteSettingsLocal.pricingHeader : "Our Activities"
+    static pricingSubHeader = SiteSettingsLocal ? SiteSettingsLocal.pricingSubHeader : "We have prepared a few sample offers just to give you an idea of what's possible"
+    
+    static NewsHeader = SiteSettingsLocal ? SiteSettingsLocal.NewsHeader : "Power Platform News and Events"  
+    static NewsSubHeader = SiteSettingsLocal ? SiteSettingsLocal.NewsSubHeader : "For better or worse, Power Platform is always evolving. We hope you will find our Power Platform news digest useful"
+
+    static SubscribeHeader = SiteSettingsLocal ? SiteSettingsLocal.SubscribeHeader : "Subscribe Now!"
+    static SubscribeSubHeader = SiteSettingsLocal ? SiteSettingsLocal.SubscribeSubHeader : "We can send Power Platform weekly news right to your inbox every week! You don't need to do a thing... well, other than to make sure those emails don't go to your junk folder!"
 
     //SEO
-    static Title = process.env.SEO_TITLE
-    static Author = process.env.SEO_AUTHOR
-    static SiteName = process.env.SEO_SITE_NAME
-    static Description = process.env.SEO_DESCRIPTION
+    static Title = SiteSettingsLocal ? SiteSettingsLocal.Title : "It Aint Boring"
+    static Author = SiteSettingsLocal ? SiteSettingsLocal.Author : "Alex Shlega"
+    static SiteName = SiteSettingsLocal ? SiteSettingsLocal.SiteName : "It Aint Boring"
+    static Description = SiteSettingsLocal ? SiteSettingsLocal.Description : "Let's talk Power Platform!"
 
-    static defaultAlt = process.env.DEFAULT_ALT
+    static defaultAlt = SiteSettingsLocal ? SiteSettingsLocal.defaultAlt : "It Aint Boring"  
 
-    static footerSlogan=process.env.FOOTER_SLOGAN
+    static footerSlogan=SiteSettingsLocal ? SiteSettingsLocal.footerSlogan : "It Aint Boring - where some cool Power Platform stuff lives"
 
-    static highlightsList  = JSON.parse(process.env.HIGHLIGHTS_LIST)
-    static listNews = JSON.parse(process.env.NEWS_LIST) 
-    static servicesList = JSON.parse(process.env.SERVICES_LIST)
-    static offers = JSON.parse(process.env.OFFERS)
-
-    //Flow Urls
-    static USER_EXISTS_URL = process.env.API_USER_EXISTS_URL ?? ""
-    static CONSENT_ACCEPT_URL = process.env.API_CONSENT_ACCEPT_URL ?? ""
-    static REQUEST_ADD_URL = process.env.API_REQUEST_ADD_URL ?? ""
-    static REQUEST_LIST_URL = process.env.API_REQUEST_LIST_URL ?? ""
-    static REQUEST_TYPES_URL = process.env.API_REQUEST_TYPES_URL ?? ""
-    static CONTENT_URL = process.env.API_CONTENT_URL ?? ""
-    static COMMENT_LIST_URL = process.env.API_COMMENT_LIST_URL ?? ""
-    static COMMENT_ADD_URL = process.env.API_COMMENT_ADD_URL ?? ""
-    static SUBSCRIBE_URL = process.env.API_SUBSCRIBE_URL ?? ""
-    static UNSUBSCRIBE_URL = process.env.API_UNSUBSCRIBE_URL ?? ""
-
-    static SUPPORT_GENERIC_NICKNAME = process.env.SUPPORT_GENERIC_NICKNAME ?? "Support"
-    static CLIENT_GENERIC_NAME_COMMENTS = process.env.CLIENT_GENERIC_NAME_COMMENTS ?? "You"
+    static highlightsList  =SiteSettingsLocal ? SiteSettingsLocal.highlightsList :  [
+      {
+        description: "1000",
+        title: "Users",
+        iconComponent:  "GridiconUser",
+        icon: "/assets/Icon/heroicons_sm-user.svg"
+      },
+      {
+        description: "1000",
+        title: "Posts",
+        iconComponent: "GridiconLocation",
+        icon: "/assets/Icon/gridicons_location.svg"
+      },
+      {
+        description: "Power Platform, D365",
+        title: "Topics",
+        iconComponent: "GridiconComputer",
+        icon: "/assets/Icon/bx_bxs-server.svg"
+      }];
     
-    static REDDIS_URL = process.env.REDIS_URL;
-    static REDDIS_CONNECTION_PARAM = process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined;
+    static listNews = SiteSettingsLocal ? SiteSettingsLocal.listNews :  [
+      {
+        title: "August 13, 2023",
+        image: "/assets/people-3.png",
+        city: "Warsaw",
+        country: "Poland",
+        rating: "4.5",
+        details:
+          "New Power Automate Licensing, New Power Automate Licensing, New Power Automate Licensing"
+      },
+      {
+        title: "August 13, 2023",
+        image: "/assets/people-3.png",
+        city: "Warsaw",
+        country: "Poland",
+        rating: "4.5",
+        details:
+          "New Power Automate Licensing, New Power Automate Licensing, New Power Automate Licensing"
+      },
+      {
+        title: "August 13, 2023",
+        image: "/assets/people-3.png",
+        city: "Warsaw",
+        country: "Poland",
+        rating: "4.5",
+        details:
+          "New Power Automate Licensing, New Power Automate Licensing, New Power Automate Licensing"
+      },
+      {
+        title: "August 13, 2023",
+        image: "/assets/people-3.png",
+        city: "Warsaw",
+        country: "Poland",
+        rating: "4.5",
+        details:
+          "New Power Automate Licensing, New Power Automate Licensing, New Power Automate Licensing"
+      }
+    ];
+    static servicesList = SiteSettingsLocal ? SiteSettingsLocal.servicesList :  [
+      "Power Apps and Power Automate Blogging",
+      "Power Apps and Power Automate Discssions"
+    ]
+    static offers = SiteSettingsLocal ? SiteSettingsLocal.offers : [
+      {
+        icon: "/assets/Free.png",
+        title:"First",
+        items:[
+         "Best material only",
+         "High qality samples",
+         "Not some boring stuff"
+        ],
+        terms:"Free"
+      },
+      {
+        icon: "/assets/Standard.png",
+        title:"Second",
+        items:[
+         "Best material only",
+         "High qality samples",
+         "Not some boring stuff"
+        ],
+        terms:"Free"
+      },
+      {
+        icon: "/assets/Premium.png",
+        title:"Third",
+        items:[
+         "Best material only",
+         "High qality samples",
+         "Not some boring stuff"
+        ],
+        terms:"Free"
+      }
+   ]
+};
 
-    static CACHE_PREFIX = process.env.CACHE_PREFIX;
-    static ADMIN_KEY = process.env.ADMIN_KEY ?? "devkey"
-  }
+
   
   

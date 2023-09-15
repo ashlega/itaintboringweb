@@ -8,7 +8,7 @@ export async function GET(request: Request)
   var cache = getCache();
   const { searchParams } = new URL(request.url)
   const name = searchParams.get('name')
-  const url = SiteSettings.CONTENT_URL+"&name="+name
+  const url = process.env.API_CONTENT_URL+"&name="+name
   
   var content = await cache.get(cache.getContentCacheKey(name))
   if(!content){

@@ -10,7 +10,7 @@ export async function GET(request: Request)
   const cache_key = searchParams.get('cache_key')
   var cache = getCache();
 
-  if(admin_key != SiteSettings.ADMIN_KEY){
+  if(admin_key != process.env.ADMIN_KEY){
     return NextResponse.json({ error: 'Incorrect admin key' }, { status: 401 })
   }
   await cache.del(cache_key)

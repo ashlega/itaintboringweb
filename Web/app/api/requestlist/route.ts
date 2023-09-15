@@ -18,7 +18,7 @@ export async function GET(request: Request)
     return NextResponse.json( { data: [] }) 
   }
   else{
-    var url = SiteSettings.REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
+    var url = process.env.API_REQUEST_LIST_URL+"&userid=" + anySession?.user?.id+"&active_only="+activeOnly;
     var cacheKey = "";
     if(activeOnly == "true") cacheKey =cache.getActiveRequestListCacheKey(session);
     else cacheKey =cache.getInActiveRequestListCacheKey(session);

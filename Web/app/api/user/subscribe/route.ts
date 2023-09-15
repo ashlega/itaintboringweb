@@ -14,7 +14,7 @@ export async function GET(request: Request)
   else{
     var cache = getCache();
 
-    var url = SiteSettings.SUBSCRIBE_URL+"&email="+session?.user?.email
+    var url = process.env.API_SUBSCRIBE_URL+"&email="+session?.user?.email
     const response = await fetch(url, { cache: 'no-cache' })
     const content = await response.json()
 

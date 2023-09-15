@@ -7,12 +7,12 @@ import { getCache } from "../../../../utils/cache"
 export async function GET(request: Request) 
 {
   var cache = getCache();
-  var url = SiteSettings.USER_EXISTS_URL+"&email="
+  var url = process.env.API_USER_EXISTS_URL+"&email="
   const { searchParams } = new URL(request.url)
   const email = searchParams.get('email')
   var fullName = searchParams.get('fullName')
   var provider = searchParams.get('provider')
-  
+
   if(!fullName) fullName = ""
   url = url + email
   url += "&fullName="+fullName

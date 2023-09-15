@@ -22,7 +22,7 @@ export async function POST(req: Request)
   if(userId)
   {
 
-    const response = await fetch(SiteSettings.COMMENT_ADD_URL, {
+    const response = await fetch(process.env.API_COMMENT_ADD_URL ?? "", {
     
       method: 'POST',
       headers: {
