@@ -59,6 +59,7 @@ interface DataCache
   getContentCacheKey(contentid : string | null) : string;
   getActiveRequestListCacheKey(session : Session | null) : string 
   getInActiveRequestListCacheKey(session : Session | null) : string 
+  getFileListKey(objectId : string | null, objectType : string | null) : string
 }
 
 export function getCache(
@@ -132,6 +133,10 @@ export function getCache(
       getContentCacheKey: (contentid : string | null) : string =>
       {
         return "content_" + contentid;
+      },
+      getFileListKey: (objectId : string | null, objectType : string | null) : string =>
+      {
+        return `${objectId}${objectType}`;
       }
     }
     return response;

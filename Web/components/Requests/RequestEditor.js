@@ -4,6 +4,7 @@ import SiteSettings from "../../utils/SiteSettings"
 import { getRequestTypes } from "../../utils/requestTypeFunctions"
 import { addNewRequest } from "../../utils/requestFunctions"
 import  ButtonOnPage  from "../../components/misc/ButtonOnPage"
+import  LinkedFiles  from "../../components/Content/LinkedFiles"
 import { getCommentList, addNewComment } from "../../utils/commentFunctions"
 
 
@@ -26,6 +27,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
   const [version, setVersion] = useState(1);
   const [isProcessingData, setIsProcessingData] = useState(false);
   const [commentsLoaded, setCommentsLoaded] = useState(false);
+  const [filesLoaded, setFilesLoaded] = useState(false);
 
   const [ commentList, setCommentList ] = useState([]);
   //debugger
@@ -167,6 +169,16 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
         
         <p className="text-black-600 mb-1 mt-1  font-medium text-base">Details:</p>
         <textarea onChange={onChange} name="details" value={data.details} readOnly={request?.current}></textarea>
+        {request?.current?.id ? (
+        <LinkedFiles 
+          objectId={request?.current.id} 
+          objectType="request" 
+          title="Links & Attachments" 
+          setContentLoaded={setFilesLoaded}
+          className="linked-attachments"
+          />
+        ):("")}
+      
       </div>
 
      
@@ -174,6 +186,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
       <div className="w-full mt-6 px-6 sm:px-8 lg:px-16 bg-white-500 justify-center text-center request_buttons flex">
                   <ButtonOnPage 
                     onClick={submitNewRequest}
+                    
                     isEnabled={!isProcessingData && data.details != "" && data.subject != "" }
                   >
                     Submit
@@ -187,6 +200,7 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
       ) : (
       <>
         
+
         <textarea className="w-full request-comment mt-2"  onChange={onChange} value={data.comment_details}  name="comment_details"  placeholder="Start typing here to add a new comment"></textarea>
 
         <div className="w-full mt-2 justify-left text-left mb-4 ">

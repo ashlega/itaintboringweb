@@ -1,5 +1,5 @@
 
-import { getContent} from "../utils/contentFunctions"
+import { getContent} from "../../utils/contentFunctions"
 
 import React, { useState, useEffect,  useContext   } from "react";
 import { signIn, signOut, useSession } from "next-auth/react"

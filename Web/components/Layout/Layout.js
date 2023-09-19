@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import Content from "../Content";
+import Content from "../Content/Content";
 import ButtonOutline from "../misc/ButtonOutline.";
 import { getRequestTypes } from "../../utils/requestTypeFunctions"
 
