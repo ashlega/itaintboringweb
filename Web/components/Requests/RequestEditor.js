@@ -8,6 +8,7 @@ import  LinkedFiles  from "../../components/Content/LinkedFiles"
 import { getCommentList, addNewComment } from "../../utils/commentFunctions"
 
 
+
 const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
      isNew : true,
      current: null
