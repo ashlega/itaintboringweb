@@ -16,6 +16,8 @@
     <AppModuleComponent type="1" schemaName="ita_itaauthenticationprovider" />
     <AppModuleComponent type="1" schemaName="ita_itacomment" />
     <AppModuleComponent type="1" schemaName="ita_itacontent" />
+    <AppModuleComponent type="1" schemaName="ita_itafile" />
+    <AppModuleComponent type="1" schemaName="ita_itafiletorequest" />
     <AppModuleComponent type="1" schemaName="ita_itarequesttype" />
     <AppModuleComponent type="1" schemaName="ita_request" />
     <AppModuleComponent type="62" schemaName="ita_ITABusinessTools" />
@@ -25,6 +27,6 @@
     <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
   </AppModuleRoleMaps>
   <LocalizedNames>
-    <LocalizedName description="ITA Business Tools" languagecode="1033" />
+    <LocalizedName description="ITA Web Starter" languagecode="1033" />
   </LocalizedNames>
 </AppModule>

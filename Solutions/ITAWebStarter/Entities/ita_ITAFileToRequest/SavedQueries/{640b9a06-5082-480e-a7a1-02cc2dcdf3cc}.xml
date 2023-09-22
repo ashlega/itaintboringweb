@@ -6,32 +6,32 @@
     <isquickfindquery>0</isquickfindquery>
     <isprivate>0</isprivate>
     <isdefault>1</isdefault>
-    <savedqueryid>{e0d43814-b512-6025-adc1-8df1a6e22722}</savedqueryid>
+    <savedqueryid>{640b9a06-5082-480e-a7a1-02cc2dcdf3cc}</savedqueryid>
     <layoutxml>
-      <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
-        <row name="result" id="ita_itarequesttypeid">
+      <grid name="ita_itafiletorequests" jump="ita_name" select="1" icon="1" preview="1">
+        <row name="ita_itafiletorequest" id="ita_itafiletorequestid">
           <cell name="ita_name" width="300" />
           <cell name="createdon" width="125" />
         </row>
       </grid>
     </layoutxml>
-    <querytype>1048576</querytype>
+    <querytype>2</querytype>
     <fetchxml>
       <fetch version="1.0" mapping="logical">
-        <entity name="ita_itarequesttype">
-          <attribute name="ita_itarequesttypeid" />
+        <entity name="ita_itafiletorequest">
+          <attribute name="ita_itafiletorequestid" />
           <attribute name="ita_name" />
           <attribute name="createdon" />
           <order attribute="ita_name" descending="false" />
-          <filter type="or" isquickfindfields="1">
-            <condition attribute="ita_name" operator="like" value="{0}" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
           </filter>
         </entity>
       </fetch>
     </fetchxml>
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
-      <LocalizedName description="ITA Request Types Copilot View" languagecode="1033" />
+      <LocalizedName description="ITA File To Request Associated View" languagecode="1033" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

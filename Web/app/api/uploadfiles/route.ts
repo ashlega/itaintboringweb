@@ -29,7 +29,7 @@ export async function POST(req: Request)
   for (const fileData of data.files) {
     
       var ind = fileData.content.indexOf(",");
-      const response = await fetch(process.env.API_FILE_UPLOAD_URL, {
+      const response = await fetch(process.env.API_FILE_UPLOAD_URL ?? "", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +46,7 @@ export async function POST(req: Request)
       console.log("Uploaded " + fileData.name);
     }
     
-  const cacheKey = cache.getFileListKey(objectId, objectType);
+  const cacheKey = cache.getFileListKey(session, objectId, objectType);
   await cache.del(cacheKey)
 
   return  NextResponse.json( { result: "ok" } );

@@ -15,7 +15,7 @@ export async function GET(request: Request)
 
   const url = process.env.API_FILE_LIST_URL+"&objectid="+objectId+"&objecttype="+objectType+"&userid="+anySession?.user?.id
   
-  const cacheKey = cache.getFileListKey(objectId, objectType);
+  const cacheKey = cache.getFileListKey(session, objectId, objectType);
   var result = await cache.get(cacheKey)
   if(!result){
     const response = await fetch(url, { cache: 'no-cache' })
@@ -27,7 +27,8 @@ export async function GET(request: Request)
           files.push({
             Title: file.ita_name,
             Id: file.ita_itafileid,
-            Url: file.ita_externallink ?? ("/api/downloadfile?fileId="+file.ita_itafileid+"&objectId="+objectId+"&objectType="+objectType),
+            DownloadUrl: file.ita_externallink ? null : ("/api/downloadfile?fileId="+file.ita_itafileid+"&objectId="+objectId+"&objectType="+objectType),
+            ExternalUrl: file.ita_externallink,
             Description: file.ita_externaldescription
           })
         });

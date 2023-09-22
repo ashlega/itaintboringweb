@@ -5,33 +5,33 @@
     <CanBeDeleted>0</CanBeDeleted>
     <isquickfindquery>0</isquickfindquery>
     <isprivate>0</isprivate>
-    <isdefault>1</isdefault>
-    <savedqueryid>{ba3b71b7-b48d-b71c-a1eb-477460ddc286}</savedqueryid>
+    <isdefault>0</isdefault>
+    <savedqueryid>{4951d336-a61c-4422-9e63-dee92c5591f4}</savedqueryid>
     <layoutxml>
       <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
-        <row name="result" id="ita_itaauthenticationidid">
+        <row name="result" id="ita_itafiletorequestid">
           <cell name="ita_name" width="300" />
           <cell name="createdon" width="125" />
         </row>
       </grid>
     </layoutxml>
-    <querytype>1048576</querytype>
+    <querytype>0</querytype>
     <fetchxml>
       <fetch version="1.0" mapping="logical">
-        <entity name="ita_itaauthenticationid">
-          <attribute name="ita_itaauthenticationidid" />
+        <entity name="ita_itafiletorequest">
+          <attribute name="ita_itafiletorequestid" />
           <attribute name="ita_name" />
           <attribute name="createdon" />
           <order attribute="ita_name" descending="false" />
-          <filter type="or" isquickfindfields="1">
-            <condition attribute="ita_name" operator="like" value="{0}" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
           </filter>
         </entity>
       </fetch>
     </fetchxml>
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
-      <LocalizedName description="ITA Authentication Ids Copilot View" languagecode="1033" />
+      <LocalizedName description="Inactive ITA File To Requests" languagecode="1033" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

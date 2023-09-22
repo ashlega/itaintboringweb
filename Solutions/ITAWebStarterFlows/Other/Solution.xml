@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23084.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23091.160" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ITAWebStarterFlows</UniqueName>
     <LocalizedNames>
@@ -81,9 +81,12 @@
     </Publisher>
     <RootComponents>
       <RootComponent type="29" id="{266fb137-9c3f-ee11-be6e-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{33ffed7a-b358-ee11-be6f-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{3a9d20d7-6a56-ee11-be6f-002248b1f6c0}" behavior="0" />
       <RootComponent type="29" id="{45367f26-7542-ee11-be6e-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{5104b08b-f944-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{63939bc0-5f59-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{6cb6c167-ea4d-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{752ee1d2-e94d-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{82307ed8-6652-ee11-be6f-000d3ae86f97}" behavior="0" />
@@ -93,6 +96,7 @@
       <RootComponent type="29" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" behavior="0" />
       <RootComponent type="29" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" behavior="0" />
       <RootComponent type="29" id="{d59c88bf-bc48-ee11-be6f-000d3ae86f97}" behavior="0" />
+      <RootComponent type="29" id="{e1930db2-f156-ee11-be6f-002248b1f6c0}" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
@@ -102,6 +106,10 @@
       <MissingDependency>
         <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
         <Dependent type="29" displayName="ITA Accept User Consent" id="{45367f26-7542-ee11-be6e-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="29" displayName="ITA Linked Files Clear Cache 1" id="{63939bc0-5f59-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
@@ -117,7 +125,7 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
-        <Dependent type="29" displayName="ITA Comment Added Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
+        <Dependent type="29" displayName="ITA Comment List Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
@@ -125,7 +133,7 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
-        <Dependent type="29" displayName="ITA Comment Added Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
+        <Dependent type="29" displayName="ITA Comment List Clear Cache" id="{c31b0beb-6952-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
@@ -136,8 +144,32 @@
         <Dependent type="29" displayName="ITA Get Content By Name" id="{cf37f364-b83f-ee11-be6e-002248b1f6c0}" />
       </MissingDependency>
       <MissingDependency>
+        <Required type="1" schemaName="ita_itafile" displayName="ITA File" solution="Active" />
+        <Dependent type="29" displayName="ITA Upload Linked File" id="{33ffed7a-b358-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itafile" displayName="ITA File" solution="Active" />
+        <Dependent type="29" displayName="ITA Get Linked Files" id="{3a9d20d7-6a56-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itafile" displayName="ITA File" solution="Active" />
+        <Dependent type="29" displayName="ITA Download Linked File" id="{e1930db2-f156-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itafiletorequest" displayName="ITA File To Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Upload Linked File" id="{33ffed7a-b358-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itafiletorequest" displayName="ITA File To Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Linked Files Clear Cache 1" id="{63939bc0-5f59-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="1" schemaName="ita_itarequesttype" displayName="ITA Request Type" solution="Active" />
         <Dependent type="29" displayName="ITA Get Request Types" id="{a151e6da-2952-ee11-be6f-000d3ae86f97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Upload Linked File" id="{33ffed7a-b358-ee11-be6f-002248b1f6c0}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
@@ -146,6 +178,10 @@
       <MissingDependency>
         <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
         <Dependent type="29" displayName="ITA Create Request" id="{61d62d69-3344-ee11-be6f-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Linked Files Clear Cache 1" id="{63939bc0-5f59-ee11-be6f-000d3ae86f97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="EnvironmentVariableDefinition" displayName="ita_WebStarterCacheKey" solution="Active" id.schemaname="ita_WebStarterCacheKey" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23084.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23091.160" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ITAWebStarter</UniqueName>
     <LocalizedNames>
@@ -84,6 +84,8 @@
       <RootComponent type="1" schemaName="ita_itaauthenticationprovider" behavior="0" />
       <RootComponent type="1" schemaName="ita_itacomment" behavior="0" />
       <RootComponent type="1" schemaName="ita_itacontent" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itafile" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itafiletorequest" behavior="0" />
       <RootComponent type="1" schemaName="ita_itarequesttype" behavior="0" />
       <RootComponent type="1" schemaName="ita_request" behavior="0" />
       <RootComponent type="62" schemaName="ita_ITABusinessTools" behavior="0" />
@@ -93,7 +95,7 @@
     <MissingDependencies>
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
-        <Dependent type="80" schemaName="ita_ITABusinessTools" displayName="ITA Business Tools" />
+        <Dependent type="80" schemaName="ita_ITABusinessTools" displayName="ITA Web Starter" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

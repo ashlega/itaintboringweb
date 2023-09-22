@@ -1,0 +1,119 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "ddce2adf-c529-43ab-aa18-546a04a47719"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 7,
+              "subscriptionRequest/entityname": "ita_itafiletorequest",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/name": "5931453f-5759-ee11-be6f-000d3ae86f97"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Run_a_Child_Flow": {
+          "runAfter": {
+            "Get_Athentication": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d24c65da-d52b-43fe-b8a8-89dfcf0b5faf"
+          },
+          "type": "Workflow",
+          "inputs": {
+            "host": {
+              "workflowReferenceName": "82307ed8-6652-ee11-be6f-000d3ae86f97"
+            },
+            "body": {
+              "text": "@{outputs('Get_Athentication')?['body/ita_cacheprefix']}_@{outputs('Get_Request')?['body/ita_requestid']}_request"
+            },
+            "retryPolicy": {
+              "type": "none"
+            }
+          }
+        },
+        "Get_Request": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "afa310a9-a414-4e5a-b86a-e3e2ce7880bf"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem"
+            },
+            "parameters": {
+              "entityName": "ita_requests",
+              "recordId": "@triggerOutputs()?['body/_ita_request_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Athentication": {
+          "runAfter": {
+            "Get_Request": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2ccce0b-7981-43b4-8865-cb8d09958e98"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem"
+            },
+            "parameters": {
+              "entityName": "ita_itaauthenticationids",
+              "recordId": "@outputs('Get_Request')?['body/_ita_itaauthenticationid_value']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

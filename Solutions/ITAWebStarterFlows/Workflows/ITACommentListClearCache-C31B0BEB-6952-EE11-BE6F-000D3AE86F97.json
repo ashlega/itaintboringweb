@@ -37,7 +37,7 @@
               "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
             },
             "parameters": {
-              "subscriptionRequest/message": 4,
+              "subscriptionRequest/message": 7,
               "subscriptionRequest/entityname": "ita_itacomment",
               "subscriptionRequest/scope": 4,
               "subscriptionRequest/filterexpression": "_ita_authenticationid_value ne null and statuscode eq 1"

@@ -6,32 +6,29 @@
     <isquickfindquery>0</isquickfindquery>
     <isprivate>0</isprivate>
     <isdefault>1</isdefault>
-    <savedqueryid>{f07e4e80-4565-360e-8632-ce1ec5c14965}</savedqueryid>
+    <savedqueryid>{2dd1ef93-b388-4ae0-a97f-954dd857aaa8}</savedqueryid>
     <layoutxml>
       <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
-        <row name="result" id="ita_itaauthenticationproviderid">
+        <row name="result" id="ita_itafileid">
           <cell name="ita_name" width="300" />
           <cell name="createdon" width="125" />
         </row>
       </grid>
     </layoutxml>
-    <querytype>1048576</querytype>
+    <querytype>1</querytype>
     <fetchxml>
       <fetch version="1.0" mapping="logical">
-        <entity name="ita_itaauthenticationprovider">
-          <attribute name="ita_itaauthenticationproviderid" />
+        <entity name="ita_itafile">
+          <attribute name="ita_itafileid" />
           <attribute name="ita_name" />
           <attribute name="createdon" />
           <order attribute="ita_name" descending="false" />
-          <filter type="or" isquickfindfields="1">
-            <condition attribute="ita_name" operator="like" value="{0}" />
-          </filter>
         </entity>
       </fetch>
     </fetchxml>
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
-      <LocalizedName description="ITA Authentication Providers Copilot View" languagecode="1033" />
+      <LocalizedName description="ITA File Advanced Find View" languagecode="1033" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

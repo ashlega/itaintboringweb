@@ -4,8 +4,11 @@
   <EntityRelationship Name="business_unit_ita_itaauthenticationprovider" />
   <EntityRelationship Name="business_unit_ita_itacomment" />
   <EntityRelationship Name="business_unit_ita_itacontent" />
+  <EntityRelationship Name="business_unit_ita_itafile" />
+  <EntityRelationship Name="business_unit_ita_itafiletorequest" />
   <EntityRelationship Name="business_unit_ita_itarequesttype" />
   <EntityRelationship Name="business_unit_ita_request" />
+  <EntityRelationship Name="FileAttachment_ita_ITAFile_ita_ContentFile" />
   <EntityRelationship Name="ita_account_ita_itaauthenticationid_889" />
   <EntityRelationship Name="ita_account_ita_request_803" />
   <EntityRelationship Name="ita_contact_ita_itaauthenticationid_889" />
@@ -13,6 +16,9 @@
   <EntityRelationship Name="ita_ita_itaauthenticationid_AuthenticationPro" />
   <EntityRelationship Name="ita_ita_itacomment_AuthenticationId_ita_itaau" />
   <EntityRelationship Name="ita_ita_itacomment_RequestId_ita_request" />
+  <EntityRelationship Name="ita_ita_itafile_ITAAuthenticationId_ita_itaau" />
+  <EntityRelationship Name="ita_ita_itafiletorequest_File_ita_itafile" />
+  <EntityRelationship Name="ita_ita_itafiletorequest_Request_ita_request" />
   <EntityRelationship Name="ita_ita_request_ITAAuthenticationId_ita_itaau" />
   <EntityRelationship Name="ita_ita_request_RequestType_ita_itarequesttyp" />
   <EntityRelationship Name="lk_ita_itaauthenticationid_createdby" />
@@ -23,6 +29,10 @@
   <EntityRelationship Name="lk_ita_itacomment_modifiedby" />
   <EntityRelationship Name="lk_ita_itacontent_createdby" />
   <EntityRelationship Name="lk_ita_itacontent_modifiedby" />
+  <EntityRelationship Name="lk_ita_itafile_createdby" />
+  <EntityRelationship Name="lk_ita_itafile_modifiedby" />
+  <EntityRelationship Name="lk_ita_itafiletorequest_createdby" />
+  <EntityRelationship Name="lk_ita_itafiletorequest_modifiedby" />
   <EntityRelationship Name="lk_ita_itarequesttype_createdby" />
   <EntityRelationship Name="lk_ita_itarequesttype_modifiedby" />
   <EntityRelationship Name="lk_ita_request_createdby" />
@@ -31,18 +41,24 @@
   <EntityRelationship Name="owner_ita_itaauthenticationprovider" />
   <EntityRelationship Name="owner_ita_itacomment" />
   <EntityRelationship Name="owner_ita_itacontent" />
+  <EntityRelationship Name="owner_ita_itafile" />
+  <EntityRelationship Name="owner_ita_itafiletorequest" />
   <EntityRelationship Name="owner_ita_itarequesttype" />
   <EntityRelationship Name="owner_ita_request" />
   <EntityRelationship Name="team_ita_itaauthenticationid" />
   <EntityRelationship Name="team_ita_itaauthenticationprovider" />
   <EntityRelationship Name="team_ita_itacomment" />
   <EntityRelationship Name="team_ita_itacontent" />
+  <EntityRelationship Name="team_ita_itafile" />
+  <EntityRelationship Name="team_ita_itafiletorequest" />
   <EntityRelationship Name="team_ita_itarequesttype" />
   <EntityRelationship Name="team_ita_request" />
   <EntityRelationship Name="user_ita_itaauthenticationid" />
   <EntityRelationship Name="user_ita_itaauthenticationprovider" />
   <EntityRelationship Name="user_ita_itacomment" />
   <EntityRelationship Name="user_ita_itacontent" />
+  <EntityRelationship Name="user_ita_itafile" />
+  <EntityRelationship Name="user_ita_itafiletorequest" />
   <EntityRelationship Name="user_ita_itarequesttype" />
   <EntityRelationship Name="user_ita_request" />
 </EntityRelationships>

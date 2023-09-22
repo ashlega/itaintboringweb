@@ -192,6 +192,55 @@
             </column>
           </columns>
         </tab>
+        <tab name="tab_3" id="237b18a3-e96f-42ed-8d5a-9953cdb27750" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Files" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_3_section_1" id="55df4884-c523-46f0-9b02-85a0893acdb9" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{e474e520-9029-4a29-a467-69d880ea70cc}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{00f01438-3c5f-4fde-838d-ffefe4862300}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1694994496969" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_2" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>ita_itafiletorequest</TargetEntityType>
+                            <ViewId>{734FCB3C-2C23-4F82-87DB-04F49BE87B36}</ViewId>
+                            <ViewIds>{734FCB3C-2C23-4F82-87DB-04F49BE87B36}</ViewIds>
+                            <RelationshipName>ita_ita_itafiletorequest_Request_ita_request</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
       </tabs>
       <header id="{1a31e847-bab3-4c03-8ddf-d645b04c8117}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
         <rows>
