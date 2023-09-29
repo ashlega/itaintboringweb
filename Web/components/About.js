@@ -12,7 +12,7 @@ const About = () => {
 
   return (
     <div
-      className="max-w-screen-xl mt-32 px-12 xl:px-16 mx-auto"
+      className="max-w-screen-xl mt-32 px-8 xl:px-16 mx-auto"
       id="about"
     >
 

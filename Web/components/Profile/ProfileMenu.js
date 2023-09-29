@@ -37,7 +37,8 @@ const ProfileMenu = () => {
     const onSelect = (action) => {
        if(action.id == 1){
         //signOut();
-        setAppState({...appState, selected:"requests"});
+        //setAppState({...appState, selected:"requests"});
+        router.push("/requests");
        }
        else if(action.id == 2){
         signOut({ callbackUrl: '/' })
