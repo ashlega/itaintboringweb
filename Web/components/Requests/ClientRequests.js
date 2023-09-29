@@ -32,10 +32,13 @@ const ClientRequests = ({isVisible}) => {
 
   //const requestTypes = getRequestTypes();
 //debugger;
-
+  const colums = [{label: '', field: '', width: 60, sort: false},
+                  {label: 'Request&nbsp;#', field: 'name'},
+                  {label: 'Subject', field: 'subject'}, 
+                  {label: 'Status', field: 'status_name'}]
   
   const [ requestListData, setRequestListData ] = useState({
-    columns: ['Request #', 'Subject', 'Status', 'Action'],
+    columns: colums,
     rows: [   
     ],
     loading: false,
@@ -65,7 +68,7 @@ const ClientRequests = ({isVisible}) => {
       setDataTableElement(dte);
       dte.innerHTML = "";
       var dt = new Datatable(dte, requestListData, { loading: false, noFoundMessage: "No data found." });
-      dt.sort(requestListData.columns[0], "desc");
+      dt.sort(requestListData.columns[1], "desc");
       setDataTable(dt);
     };
     init();
@@ -116,7 +119,7 @@ const ClientRequests = ({isVisible}) => {
             {
               requestList.push(createRequestRow(request));
             })
-            var reqListData = {columns: ['Request #', 'Subject', 'Status', 'Action'], rows: requestList, loading: false, perPage: startEntries};
+            var reqListData = {columns: colums, rows: requestList, loading: false, perPage: startEntries};
             setRequestListData(reqListData)
             setDataLoaded(true)
           }
@@ -140,27 +143,29 @@ const ClientRequests = ({isVisible}) => {
 
   const createRequestRow = (request) => {
     var row = [];
+    row.push(
+      `
+    <button
+      id='${request.id}'
+      type="button"
+      data-te-ripple-init
+      data-te-ripple-color="dark"
+      
+      class="req-btn inline-block rounded-full border border-primary p-1.5 mr-1 uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
+          <path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"/>
+      </svg>
+      
+    </button>
+    
+    `
+
+    );
+
     row.push(request.name);
     row.push(request.subject);
     row.push(request.status_name);
-    row.push(
-        `
-      <button
-        id='${request.id}'
-        type="button"
-        data-te-ripple-init
-        data-te-ripple-color="dark"
-        
-        class="req-btn inline-block rounded-full border border-primary p-1.5 mr-1 uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
-            <path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"/>
-        </svg>
-        
-      </button>
-      
-      `
-
-    )
+    
     row.request = request;
     return row;
   }

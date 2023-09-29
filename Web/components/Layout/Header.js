@@ -26,19 +26,19 @@ const Header = () => {
     e.preventDefault();
     setActiveLink(pageName);
     if(pageName == "requests"){
-        setAppState({...appState, selected:"requests", isContactFormOpen : false});
-        //router.push('/requests');
+        setAppState({...appState, /*selected:"requests", */ isContactFormOpen : false});
+        router.push('/requests');
     }
     if(pageName == "home"){
-      setAppState({...appState, selected:"home", isContactFormOpen : false});
-      //router.push('/');
+      setAppState({...appState, /*selected:"home",*/ isContactFormOpen : false});
+      router.push('/');
     }
     if(pageName == "about"){
-      setAppState({...appState, selected:"about", isContactFormOpen : false});
-      //router.push('/');
+      setAppState({...appState, /*selected:"about",*/ isContactFormOpen : false});
+      router.push('/about');
     }
     if(pageName == "digest"){
-      setAppState({...appState, selected:"digest", isContactFormOpen : false});
+      //setAppState({...appState, selected:"digest", isContactFormOpen : false});
       //router.push('/');
     }
     document.body.scrollTop = 0; // For Safari

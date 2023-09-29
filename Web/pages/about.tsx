@@ -14,19 +14,17 @@ import AccessDenied from "../components/access-denied"
 
 import ClientRequests from "../components/Requests/ClientRequests";
 
-export default function IndexPage() {
+export default function AboutPage() {
 
   const { data: session } = useSession()
 
   const { appState, setAppState } = useContext(AppContext);
   return (
    <>
-    <SeoHead title='Treecat Software Inc' />
+    <SeoHead title='About Treecat Software Inc' />
     <Layout>
       <>
-          <Hero />
-          <Feature />
-          <Pricing />
+        <About />
       </>
     </Layout>
   </>

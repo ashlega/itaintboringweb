@@ -16,7 +16,7 @@ import ClientRequests from "../components/Requests/ClientRequests";
 
 export default function IndexPage() {
 
-  const { data: session } = useSession()
+  const { data : session, status: loading } = useSession()
 
   const { appState, setAppState } = useContext(AppContext);
   return (
@@ -24,9 +24,19 @@ export default function IndexPage() {
     <SeoHead title='Treecat Software Inc' />
     <Layout>
       <>
-          <Hero />
-          <Feature />
-          <Pricing />
+       {loading != "loading" ? (
+        <>
+        {!session ? (
+          <>
+          <AccessDenied />
+          </>
+        ) : 
+        (
+          <ClientRequests isVisible={true} />
+        )
+        }
+        </>
+       ) : null }
       </>
     </Layout>
   </>

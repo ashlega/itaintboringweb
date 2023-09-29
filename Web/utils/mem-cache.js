@@ -1,18 +1,19 @@
 'use strict';
 
-function Cache () {
+function MemCache () {
   var _cache = Object.create(null);
   var _hitCount = 0;
   var _missCount = 0;
   var _size = 0;
   var _debug = false;
 
-  this.put = function(key, value, time, timeoutCallback) {
+  this.set = function(key, value, options) {
+    var time = options?.EX ? options?.EX * 1000 : 60*60*24*1000;
     if (_debug) {
-      console.log('caching: %s = %j (@%s)', key, value, time);
+      console.log('caching: %s = %j (@%s)', key, value, options ? options.EX : "");
     }
 
-    if (typeof time !== 'undefined' && (typeof time !== 'number' || isNaN(time) || time <= 0)) {
+    if (typeof options !== 'undefined' && (typeof time !== 'number' || isNaN(time) || time <= 0)) {
       throw new Error('Cache timeout must be a positive number');
     } else if (typeof timeoutCallback !== 'undefined' && typeof timeoutCallback !== 'function') {
       throw new Error('Cache timeout callback must be a function');
@@ -182,5 +183,5 @@ function Cache () {
   };
 }
 
-module.exports = new Cache();
-module.exports.Cache = Cache;
+module.exports = new MemCache();
+module.exports.MemCache = MemCache;

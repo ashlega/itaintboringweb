@@ -1,5 +1,6 @@
 //import {createRedisInstance} from './redis'
 import { createClient } from 'redis';
+import { MemCache } from './mem-cache';
 import SiteSettings from '../utils/SiteSettings';
 import { Session } from "next-auth"
 
@@ -9,25 +10,34 @@ import { Session } from "next-auth"
 
 //var cache = require('./mem-cache')
 
-var client = createClient(process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined);
+var client : any = null;
 
-client.on('error', (err : any) => {
-  /*console.log('client error', err)*/
+if(process.env.REDIS_URL)
+{
+  client = createClient(process.env.REDIS_URL ? { url : process.env.REDIS_URL } : undefined);
+
+  client.on('error', (err : any) => {
+    /*console.log('client error', err)*/
+  }
+  );
+  client.on('connect', () => {
+    /*console.log('client is connected')*/
+  });
+  client.on('reconnecting', () => {
+    /*console.log('client is reconnecting')*/
+  });
+  client.on('ready', () => {
+    /*console.log('client is ready')*/
+  });
+  client.on('end', () => {
+    /*console.log('client disconnected')*/
+  });
+  client.connect();
 }
-);
-client.on('connect', () => {
-  /*console.log('client is connected')*/
-});
-client.on('reconnecting', () => {
-  /*console.log('client is reconnecting')*/
-});
-client.on('ready', () => {
-  /*console.log('client is ready')*/
-});
-client.on('end', () => {
-  /*console.log('client disconnected')*/
-});
-client.connect();
+
+else{
+  client = new MemCache();
+}
 /*
 async function  getClientInternal()  
 {
