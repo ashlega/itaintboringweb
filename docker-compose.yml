@@ -2,6 +2,24 @@ version: "3"
 
 services:
 
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass redis123_
+    volumes:
+      - /path/to/local/dаta:/root/redis
+      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PASSWORD=rediscanada123_
+#      - REDIS_PORT: 6379
+#      - REDIS_DATABASES=2
+    networks:
+      - proxynew
+
+
   nextjs_treecat:
     build: ./Web/
     restart: always
@@ -26,8 +44,9 @@ services:
     networks:
       - proxynew
 
+
 networks:
-  #inner:
   proxynew:
+   enable_ipv6: true
    external:
     name: proxynew
