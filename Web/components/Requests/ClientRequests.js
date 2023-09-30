@@ -29,13 +29,20 @@ const ClientRequests = ({isVisible}) => {
 
   const { data: session } = useSession()
   
+  const formatCell = (cell, value) => {
+    //if(activeOnly )
+    if(!activeOnly)
+      if(value.row[3].value != "Active" ){
+        cell.classList.add("inactive_request");
+      }
+  };
 
   //const requestTypes = getRequestTypes();
 //debugger;
-  const colums = [{label: '', field: '', width: 60, sort: false},
-                  {label: 'Request&nbsp;#', field: 'name'},
-                  {label: 'Subject', field: 'subject'}, 
-                  {label: 'Status', field: 'status_name'}]
+  const colums = [{label: '', field: 'EmptyField', width: 60, sort: false, format: formatCell},
+                  {label: 'Request&nbsp;#', field: 'name', format: formatCell},
+                  {label: 'Subject', field: 'subject', format: formatCell}, 
+                  {label: 'Status', field: 'status_name', format: formatCell}]
   
   const [ requestListData, setRequestListData ] = useState({
     columns: colums,
@@ -45,6 +52,16 @@ const ClientRequests = ({isVisible}) => {
     perPage: 10
   });
 
+  class RequestRow {
+    constructor(value, row) {
+      this.value = value;
+      this.row = row;
+    }
+    toString()
+    {
+      return this.value;
+    }
+  }
  
 /*
   useEffect(() =>{
@@ -67,7 +84,7 @@ const ClientRequests = ({isVisible}) => {
       const dte = document.getElementById('datatable_request_list');
       setDataTableElement(dte);
       dte.innerHTML = "";
-      var dt = new Datatable(dte, requestListData, { loading: false, noFoundMessage: "No data found." });
+      var dt = new Datatable(dte, requestListData, { pagination:true, loading: false, noFoundMessage: "No data found." });
       dt.sort(requestListData.columns[1], "desc");
       setDataTable(dt);
     };
@@ -77,7 +94,7 @@ const ClientRequests = ({isVisible}) => {
   useEffect( () => {
     if(dataTable && requestListData) {
       dataTableElement.addEventListener("render.te.datatable", addDataTableActions);
-      dataTable.update(requestListData, { loading: requestListData.loading, entries: requestListData.perPage});
+      dataTable.update(requestListData, { pagination:true, loading: requestListData.loading, entries: requestListData.perPage, sortOrder : "desc"});
     }
   }, [requestListData])
 
@@ -144,6 +161,7 @@ const ClientRequests = ({isVisible}) => {
   const createRequestRow = (request) => {
     var row = [];
     row.push(
+      new RequestRow(
       `
     <button
       id='${request.id}'
@@ -152,19 +170,20 @@ const ClientRequests = ({isVisible}) => {
       data-te-ripple-color="dark"
       
       class="req-btn inline-block rounded-full border border-primary p-1.5 mr-1 uppercase leading-normal shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
+      <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5" stroke="#3B71CA" class="w-4 h-4">
           <path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"/>
       </svg>
       
     </button>
     
-    `
+    `,
+    row)
 
     );
 
-    row.push(request.name);
-    row.push(request.subject);
-    row.push(request.status_name);
+    row.push(new RequestRow(request.name, row));
+    row.push(new RequestRow(request.subject, row));
+    row.push(new RequestRow(request.status_name, row));
     
     row.request = request;
     return row;
@@ -241,7 +260,6 @@ request={ selectedRequest ?
             
               <div 
                     id="datatable_request_list"
-                    
                     data-te-fixed-header="false"></div>
             
             </div>
