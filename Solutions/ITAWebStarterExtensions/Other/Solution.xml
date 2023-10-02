@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ImportExportXml version="9.2.23092.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
-    <UniqueName>ITAWebStarter</UniqueName>
+    <UniqueName>ITAWebStarterExtensions</UniqueName>
     <LocalizedNames>
-      <LocalizedName description="ITAWebStarter" languagecode="1033" />
+      <LocalizedName description="ITA Web Starter Extensions" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.1</Version>
+    <Version>1.0.0.0</Version>
     <Managed>2</Managed>
     <Publisher>
       <UniqueName>itaintboring</UniqueName>
@@ -80,22 +80,16 @@
       </Addresses>
     </Publisher>
     <RootComponents>
-      <RootComponent type="1" schemaName="ita_itaauthenticationid" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itaauthenticationprovider" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itacomment" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itacontent" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itafile" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itafiletorequest" behavior="0" />
-      <RootComponent type="1" schemaName="ita_itarequesttype" behavior="0" />
-      <RootComponent type="1" schemaName="ita_request" behavior="0" />
-      <RootComponent type="62" schemaName="ita_ITABusinessTools" behavior="0" />
-      <RootComponent type="80" schemaName="ita_ITABusinessTools" behavior="0" />
-      <RootComponent type="9" schemaName="ita_subscriptionstatus" behavior="0" />
+      <RootComponent type="300" schemaName="ita_itawebstartermessenger_7efaf" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
-        <Dependent type="80" schemaName="ita_ITABusinessTools" displayName="ITA Web Starter" />
+        <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

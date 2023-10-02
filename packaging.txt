@@ -12,6 +12,10 @@ pac solution export --path ./Solutions --name ITAWebStarter --managed
 pac solution export --path ./Solutions --name ITAWebStarter 
 pac solution export --path ./Solutions --name ITAWebStarterFlows --managed
 pac solution export --path ./Solutions --name ITAWebStarterFlows 
+pac solution export --path ./Solutions --name ITAWebStarterExtensions --managed
+pac solution export --path ./Solutions --name ITAWebStarterExtensions 
+
 
 pac solution unpack --zipfile .\Solutions\ITAWebStarter.zip --folder .\Solutions\ITAWebStarter --packagetype Both
 pac solution unpack --zipfile .\Solutions\ITAWebStarterFlows.zip --folder .\Solutions\ITAWebStarterFlows --packagetype Both
+pac solution unpack --zipfile .\Solutions\ITAWebStarterExtensions.zip --folder .\Solutions\ITAWebStarterExtensions --packagetype Both
