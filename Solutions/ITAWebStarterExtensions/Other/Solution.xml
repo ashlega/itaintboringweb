@@ -84,6 +84,10 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
+        <Required type="1" schemaName="ita_itaauthenticationid" displayName="ITA Authentication Id" solution="Active" />
+        <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
+      </MissingDependency>
+      <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
         <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
       </MissingDependency>
