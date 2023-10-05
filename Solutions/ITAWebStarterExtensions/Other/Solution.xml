@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23092.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23093.196" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ITAWebStarterExtensions</UniqueName>
     <LocalizedNames>
@@ -80,6 +80,8 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="29" id="{6136e98a-2161-ee11-8df0-002248b1f6c0}" behavior="0" />
+      <RootComponent type="29" id="{df4d1c7c-2461-ee11-8df0-002248b1f6c0}" behavior="0" />
       <RootComponent type="300" schemaName="ita_itawebstartermessenger_7efaf" behavior="0" />
     </RootComponents>
     <MissingDependencies>
@@ -89,11 +91,39 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Comment" id="{6136e98a-2161-ee11-8df0-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_itacomment" displayName="ITA Comment" solution="Active" />
+        <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_queueitem" displayName="ITA Queue Item" solution="Active" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Comment" id="{6136e98a-2161-ee11-8df0-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_queueitem" displayName="ITA Queue Item" solution="Active" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Request" id="{df4d1c7c-2461-ee11-8df0-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_queueitem" displayName="ITA Queue Item" solution="Active" />
         <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
       </MissingDependency>
       <MissingDependency>
         <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Request" id="{df4d1c7c-2461-ee11-8df0-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="ita_request" displayName="ITA Request" solution="Active" />
         <Dependent type="300" schemaName="ita_itawebstartermessenger_7efaf" displayName="ITA Web Starter Request Handler" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="ita_sharedcommondataserviceforapps_2f8c2" solution="Active" id.connectionreferencelogicalname="ita_sharedcommondataserviceforapps_2f8c2" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Comment" id="{6136e98a-2161-ee11-8df0-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="ita_sharedcommondataserviceforapps_2f8c2" solution="Active" id.connectionreferencelogicalname="ita_sharedcommondataserviceforapps_2f8c2" />
+        <Dependent type="29" displayName="ITA Web Starter Notification: New Request" id="{df4d1c7c-2461-ee11-8df0-002248b1f6c0}" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

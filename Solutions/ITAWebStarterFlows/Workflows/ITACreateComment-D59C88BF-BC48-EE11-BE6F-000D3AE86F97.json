@@ -48,7 +48,8 @@
                   "required": false
                 }
               }
-            }
+            },
+            "triggerAuthenticationType": "All"
           }
         }
       },
@@ -86,6 +87,7 @@
               "item/ita_AuthenticationId@odata.bind": "ita_itaauthenticationids(@{triggerBody()?['userid']})",
               "item/ita_details": "@triggerBody()?['details']",
               "item/ita_RequestId@odata.bind": "ita_requests(@{triggerBody()?['requestid']})",
+              "item/ita_origin": 556780000,
               "item/statuscode": 556780002
             },
             "authentication": "@parameters('$authentication')"

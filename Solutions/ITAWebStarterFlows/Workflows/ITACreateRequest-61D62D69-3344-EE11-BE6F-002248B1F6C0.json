@@ -64,7 +64,8 @@
                   "required": false
                 }
               }
-            }
+            },
+            "triggerAuthenticationType": "All"
           }
         }
       },
@@ -101,6 +102,7 @@
               "entityName": "ita_requests",
               "item/ita_clientemail": "@triggerBody()?['email']",
               "item/ita_details": "@triggerBody()?['details']",
+              "item/ita_origin": 556780000,
               "item/ita_subject": "@triggerBody()?['subject']"
             },
             "authentication": "@parameters('$authentication')"

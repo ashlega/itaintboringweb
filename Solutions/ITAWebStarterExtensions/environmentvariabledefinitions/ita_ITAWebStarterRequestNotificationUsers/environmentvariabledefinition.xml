@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="ita_ITAWebStarterRequestNotificationUsers">
+  <defaultvalue>["info@treecatsoftware.com"]</defaultvalue>
+  <description default="List of users to notify of new requests">
+    <label description="List of users to notify of new requests" languagecode="1033" />
+  </description>
+  <displayname default="ITA Web Starter Request Notification Users">
+    <label description="ITA Web Starter Request Notification Users" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

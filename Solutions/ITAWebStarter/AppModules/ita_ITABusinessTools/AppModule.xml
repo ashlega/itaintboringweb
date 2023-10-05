@@ -19,6 +19,8 @@
     <AppModuleComponent type="1" schemaName="ita_itafile" />
     <AppModuleComponent type="1" schemaName="ita_itafiletorequest" />
     <AppModuleComponent type="1" schemaName="ita_itarequesttype" />
+    <AppModuleComponent type="1" schemaName="ita_queue" />
+    <AppModuleComponent type="1" schemaName="ita_queueitem" />
     <AppModuleComponent type="1" schemaName="ita_request" />
     <AppModuleComponent type="62" schemaName="ita_ITABusinessTools" />
   </AppModuleComponents>

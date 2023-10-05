@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23092.170" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23093.196" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ITAWebStarter</UniqueName>
     <LocalizedNames>
@@ -87,9 +87,13 @@
       <RootComponent type="1" schemaName="ita_itafile" behavior="0" />
       <RootComponent type="1" schemaName="ita_itafiletorequest" behavior="0" />
       <RootComponent type="1" schemaName="ita_itarequesttype" behavior="0" />
+      <RootComponent type="1" schemaName="ita_queue" behavior="0" />
+      <RootComponent type="1" schemaName="ita_queueitem" behavior="0" />
       <RootComponent type="1" schemaName="ita_request" behavior="0" />
+      <RootComponent type="29" id="{7cb9200e-ed62-ee11-8df0-002248b1f6c0}" behavior="0" />
       <RootComponent type="62" schemaName="ita_ITABusinessTools" behavior="0" />
       <RootComponent type="80" schemaName="ita_ITABusinessTools" behavior="0" />
+      <RootComponent type="9" schemaName="ita_itawebstarteroriging" behavior="0" />
       <RootComponent type="9" schemaName="ita_subscriptionstatus" behavior="0" />
     </RootComponents>
     <MissingDependencies>
