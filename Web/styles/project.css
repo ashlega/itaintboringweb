@@ -153,6 +153,9 @@ input[type='file'] {
 
     position: relative;
     margin-top:-60px;
+    margin-bottom: 5px;
+    
+    
 }
 
 .appointment-scheduler-container .border{
@@ -162,24 +165,56 @@ input[type='file'] {
 
 
 .appointment-scheduler-container div{
-    z-index:5 !important;
+    z-index:15 !important;
 }
 
 .appointment-time-list{
-    margin-top: 0px;
+    margin-top: 1px;
+    min-width: 250px;
+    max-width: 350px;
     vertical-align: top;
     height:100px;
+    
 }
 
 .appointment-time-option
 {
     width: 80px;
-    height: 50px;
-    line-height:50px;
-    padding: 0px;
+    
     margin:1px;
-    background-color: grey;
-    border: black solid 1px;
 
+    padding: 8px;
+    padding-top:10px;
+    padding-bottom:10px;
+    
+    opacity: 0.85;
+    
+    background-color: #eeeeee;
+    border: black solid 1px;
+    font-weight:bold;
     text-align: center;
+}
+
+.appointment-time-option:hover
+{
+    background-color:rgb(245, 56, 85);
+    color: white;
+}
+
+.selected-appointment-date{
+    font-weight:bold;
+}
+
+.no-appointment-options{
+    font-weight:normal;
+    background-color: #eeeeee;
+    opacity: 0.8;
+    border: black solid 1px;
+    font-weight:normal;
+    text-align: center;
+    padding: 5px;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-wrap:wrap;
+    
 }

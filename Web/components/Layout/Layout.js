@@ -10,7 +10,6 @@ import { signIn, signOut, useSession } from "next-auth/react"
 
 
 const Layout = ({ children }) => {
-
   const {data: session, update: sessionUpdate, status} = useSession()
 
   const [ consentContentLoaded, setConsentContentLoaded ] = useState(false);
@@ -81,6 +80,8 @@ const Layout = ({ children }) => {
 
         </div>
         <Footer />
+
+        
       </>
     );
   }
@@ -88,7 +89,6 @@ const Layout = ({ children }) => {
     return (
       <>
         <Header />
-        
         {children}
         <Footer />
       </>

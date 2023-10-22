@@ -4,32 +4,60 @@ import DatePicker from 'react-datepicker'
 import { useSession } from "next-auth/react"
 import "react-toggle/style.css"
 import "react-datepicker/dist/react-datepicker.css";
+import Link from "next/link";
 
 
 
 
-const AppointmentScheduler = ({prefix}) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+const AppointmentScheduler = ({
+   prefix, 
+   onGetAvailableTimes, 
+   onBookTime = null,
+   initialDate,
+   noAvailabilityMessage = "There is no availability for this date, please <br/>pick one of the higlighted dates from the calendar."
+}) => {
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+  const [timeOptions, setTimeOptions] = useState([]);
 
-  const timeOptions = [
-    {label: "10:00", value: 10},
-    {label: "11:00", value: 11},
-    {label: "12:00", value: 12},
-    {label: "13:00", value: 13},
-    {label: "14:00", value: 10},
-    {label: "15:00", value: 11},
-    {label: "16:00", value: 12},
-    {label: "17:00", value: 13},
-    {label: "18:00", value: 11},
-    {label: "19:00", value: 12},
-    {label: "20:00", value: 13},
+  const [isProcessingData, setIsProcessingData] = useState(false);
+  const [timesLoaded, setTimesLoaded] = useState(true);
 
-  ];
+  
+  var monthTimeOptions = [];
 
+  const getMonthId = (activeDate) => {
+    return activeDate.getMonth().toString() + "_" + activeDate.getYear().toString();
+  }
 
+  const activeDateWatch = async (picker, prevActiveDate, prevActiveMonth) => {
+    if(picker._activeDate != prevActiveDate){
+      setTimesLoaded(false);
+      if(prevActiveMonth != getMonthId(picker._activeDate)){
+        monthTimeOptions = await onGetAvailableTimes(picker._activeDate);
+      }
+      setSelectedDate(picker._activeDate)
+      setTimeOptions(monthTimeOptions == null ? [] : monthTimeOptions.filter((val) => val.Date.getYear() == picker._activeDate.getYear() 
+                                           && val.Date.getMonth() == picker._activeDate.getMonth() 
+                                          && val.Date.getDate() == picker._activeDate.getDate() ));
+      picker._changeView(picker._view);
+      setTimesLoaded(true);
+
+    }
+    var prevDate = picker._activeDate;
+    var prevMonth = getMonthId(picker._activeDate);
+    setTimeout(() => activeDateWatch(picker, prevDate, prevMonth), 300);
+  }
 
   useEffect(() => {
+
+    
+      
+    
+
     const init = async () => {
+      
+      monthTimeOptions = await onGetAvailableTimes(initialDate);
+
       const { Datepicker, Input, initTE } = await import("tw-elements");
       initTE({ Datepicker, Input });
       
@@ -37,26 +65,44 @@ const AppointmentScheduler = ({prefix}) => {
       var containerHtmlElement = document.getElementById(`${prefix}_appointment_scheduler_container`);
       var appointmentDateInput = document.getElementById(`${prefix}_appointmentDateInput`);
       //const myInput = new Input(htmlElement);
+
+      //var minDate = 
+      /*internalTimeOptions && internalTimeOptions.length > 1 ?internalTimeOptions.reduce((prev, curr) => {
+        return prev.Date < curr.Date ? prev : curr
+      }, internalTimeOptions[0]).Date : new Date();*/
+/*
+      var maxDate = internalTimeOptions && internalTimeOptions.length > 1 ?internalTimeOptions.reduce((prev, curr) => {
+        return prev.Date > curr.Date ? prev : curr
+      }, internalTimeOptions[0]).Date : new Date();
+*/
       const options = {
-        //min: new Date(2023, 9, 13),
-        //max: new Date(2023, 9, 20),
+        //min: minDate,
+        //max: maxDate,
         //removeClearBtn: true,
         disableInput: false,
         disableToggleButton: false,
+        selected: new Date(),
         inline:true,
         filter: filterFunction,
         container:`#${prefix}_appointment_scheduler_container`
       };
+      
+
       const myDatepicker = new Datepicker( 
         htmlElement,
         options
 
       );
       
+      //setSelectedDate(options.selected);
+
       
-      htmlElement.addEventListener("dateChange.te.datepicker", (e) => {setSelectedDate(e.date)});
+      
+      //htmlElement.addEventListener("dateChange.te.datepicker", (e) => {/*setSelectedDate(e.date);*/ });
       htmlElement.addEventListener("close.te.datepicker", (e) => {e.preventDefault();  /*setTimeout(() => {myDatepicker.open();}, 100)*/});
       myDatepicker.open();
+      //Override "focus" to prevent autoscroll
+      myDatepicker.datesContainer.focus = () => {};
 
 
       myDatepicker._popper.setOptions({
@@ -73,43 +119,60 @@ const AppointmentScheduler = ({prefix}) => {
       });
       myDatepicker.disablePortal = true;
 
-      var innerDiv = containerHtmlElement.childNodes[1];
+      containerHtmlElement.style.height = containerHtmlElement.childNodes[0].clientHeight + containerHtmlElement.childNodes[1].clientHeight + "px";
+      appointmentDateInput.style.width = containerHtmlElement.childNodes[1].clientWidth  + 10 + "px";
+      activeDateWatch(myDatepicker, null, null);
 
-      
-      
-      containerHtmlElement.style.height = innerDiv.offsetHeight + 20 + "px";
-      appointmentDateInput.style.width = innerDiv.offsetWidth + 10 + "px";
-
-      //debugger;
-    
       
       
     };
+
+
+    
     init();
     
-    
-  }, []);
 
+    //setTimeout(() => {init()}, 1000);
+    
+    
+  },[]);//[prefix, appointmentType, appointmentLocation]);
+
+
+  
+
+  const onOptionSelected = async (optionId) => {
+    if(onBookTime){
+      onBookTime(optionId);
+    }
+  }
 
   const filterFunction = (date) => {
+    if(!timeOptions)return false;
+    var result = monthTimeOptions != null ? monthTimeOptions.filter((val) => 
+       val.Date.getYear() == date.getYear() 
+                && val.Date.getMonth() == date.getMonth()
+                && val.Date.getDate() == date.getDate()
+        ) : [];
+   
+    return result.length > 0;
+    /*
     const isSaturday = date.getDay() === 6;
     const isSunday = date.getDay() === 0;
   
     return !isSaturday && !isSunday;
+    */
   }
 
   return (
 <>
-{selectedDate.toDateString()}
 
-
-    <div id={`${prefix}_appointment_scheduler_main`} className="flex w-full">
+    <div id={`${prefix}_appointment_scheduler_main`} className="flex flex-wrap w-full justify-center sm:justify-start">
         <div id={`${prefix}_appointment_scheduler_container`} className="appointment-scheduler-container">
           <div
             id={`${prefix}_appointment_scheduler`}
-            className="relative mb-3 appointment-scheduler"
+            className="relative mb-3 appointment-scheduler "
           >
-            <div className="flex">
+            <div >
               
               <div>
                 <input
@@ -129,19 +192,68 @@ const AppointmentScheduler = ({prefix}) => {
             </div>
           </div>
         </div>
-        
+      
+     
 
-      <div className="appointment-time-list flex flex-wrap">
-        {timeOptions.map( (val) => {
+      <div className="appointment-time-list  ml-1 sm:ml-4 flex flex-wrap sm:mb-14 mb-1">
 
-          return (
-            <> 
-              <div className="appointment-time-option">
-                {val.label}
-              </div>
-            </>
-          )
-        })}
+        <div className="selected-appointment-date w-full mt-6 mb-3">
+          {selectedDate.toDateString()}  
+        </div>  
+
+        <div className={"w-full flex pt-4 flex " + (timesLoaded && !isProcessingData ? "hidden_div" : "")}>
+          <div className="mr-4 mt-1">Loading&nbsp;data...</div>
+          <div >
+            <div
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status">
+              <span
+                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                >Loading...</span>
+            </div>
+          </div>
+        </div>
+        {timesLoaded ? (
+          <>
+          <div className="w-full flex ">
+            {(timeOptions != null && timeOptions.length > 0) ? (
+              <>
+                <div className=" mb-2 pb-1 flex flex-wrap"> 
+                
+                  
+                    {timeOptions.map( (val) => {
+
+                      return (
+                        <>
+                          
+                            <Link  
+                              href="#"
+                              onClick={(e) => { e.preventDefault(); onOptionSelected(val.id) }}
+                              >
+                                <>
+                                  <div className="appointment-time-option">
+                                    {val.label}
+                                  </div> 
+                                </>
+                            </Link>
+                            
+                        </>
+                      )
+                    })}
+                  
+                </div>
+              </>
+              ) : (
+                <>
+                  <div className="no-appointment-options w-full mb-2 pb-1" dangerouslySetInnerHTML={{__html:noAvailabilityMessage}}>
+                  </div>
+                </> 
+
+              )
+            }
+          </div>
+        </>
+        ) : null }
       </div>
     </div>
 

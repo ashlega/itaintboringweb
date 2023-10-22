@@ -13,7 +13,7 @@ const resultProd = dotEnv.config({ path: '.env.production' })
 //...result.parsed, 
 
 var nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false, //react is rendering twice for some reason when this is true. See here: https://github.com/vercel/next.js/issues/35822
   //env: {...result.parsed, ...resultTest.parsed, ...resultProd.parsed, ...resultLocal.parsed}
   /*headers: async () => [
     {

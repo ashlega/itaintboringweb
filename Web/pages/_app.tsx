@@ -25,7 +25,6 @@ export default function App({
 }: AppProps<{ session: Session }>) {
 
   const [appState, setAppState] = useState({status : "loading", selected : "home"});
-
   return (
     <AppContext.Provider value={{appState: appState, setAppState: setAppState}}>
       <SessionProvider session={session}>
@@ -33,4 +32,5 @@ export default function App({
       </SessionProvider>
     </AppContext.Provider>
   )
+  
 }
