@@ -68,6 +68,7 @@ interface DataCache
   getRequestCommentListCacheKey(session : Session | null, requestid : string | null) : string;
   getContentCacheKey(contentid : string | null) : string;
   getActiveRequestListCacheKey(session : Session | null) : string 
+  getSubsribedServicesCacheKey(session : Session | null) : string 
   getInActiveRequestListCacheKey(session : Session | null) : string 
   getFileListKey(session : Session | null, objectId : string | null, objectType : string | null) : string
 }
@@ -123,6 +124,12 @@ export function getCache(
       getUserCacheKey: (email : string | null, provider: string | null | undefined) : string =>
       {
         return "user_"+email+"_provider_"+provider;
+      },
+
+      getSubsribedServicesCacheKey: (session : Session | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_subsribed_serices";
       },
 
       getRequestCommentListCacheKey: (session : Session | null, requestid : string | null) : string =>

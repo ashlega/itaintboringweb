@@ -7,6 +7,8 @@ import "../styles/project.css";
 import   AppContext   from "../components/Context/AppContext"
 import React, { useState } from "react";
 
+import  ErrorMessage  from "../components/Popup/ErrorMessage.js"
+
 
 import type { AppProps } from "next/app"
 import type { Session } from "next-auth"
@@ -24,9 +26,19 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps<{ session: Session }>) {
 
-  const [appState, setAppState] = useState({status : "loading", selected : "home"});
+  const [appState, setAppState] = useState(
+    {status : "loading", 
+     selected : "home", 
+     error: {
+      visible: false,
+      title: "Error",
+      message: null
+     }
+    });
   return (
     <AppContext.Provider value={{appState: appState, setAppState: setAppState}}>
+      <ErrorMessage visible={appState.error.visible} title={appState.error.title} message={appState.error.message}/>
+
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>

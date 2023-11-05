@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker'
 import { useSession } from "next-auth/react"
@@ -231,7 +231,7 @@ const AppointmentScheduler = ({
                               onClick={(e) => { e.preventDefault(); onOptionSelected(val.id) }}
                               >
                                 <>
-                                  <div className="appointment-time-option">
+                                  <div key={val.id} className="appointment-time-option">
                                     {val.label}
                                   </div> 
                                 </>

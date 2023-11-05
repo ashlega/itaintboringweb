@@ -1,38 +1,27 @@
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import { motion } from "framer-motion";
-import AppointmentScheduler from "../components/Scheduling/AppointmentScheduler.js"
+
 import getScrollAnimation from "../utils/getScrollAnimation";
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper";
 import SiteSettings from "../utils/SiteSettings";
 
-import { getAvailableTimes} from "../utils/appointmentFunctions.js"
 
+import AppContext from "../components/Context/AppContext";
 
 
 const Feature = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), []);
+  const { appState, setAppState } = useContext(AppContext);
 
-
-  const getTimes = async (activeDate) => {
-    var options = await getAvailableTimes(activeDate, "freeconsultation", "online");
-    return options;
-  }
-
-  const bookTime = async (selectedTime) => {
-    alert("Selected: " + selectedTime)
-  }
+  
 
   return (
+
     <div
       className="max-w-screen-xl mt-8 mb-6 sm:mt-14 sm:mb-14 px-6 sm:px-8 lg:px-16 mx-auto"
       id="feature"
     >
-      <div className="ml-2 sm:ml-12 ">
-         <AppointmentScheduler prefix="general" onGetAvailableTimes={getTimes} onBookTime={bookTime}
-            initialDate={new Date()}
-          />
-      </div>
 
       <div className="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-2 gap-8 p  y-8 my-12">
         <ScrollAnimationWrapper className="flex w-full justify-end">

@@ -37,6 +37,10 @@ const Header = () => {
       setAppState({...appState, /*selected:"about",*/ isContactFormOpen : false});
       router.push('/about');
     }
+    if(pageName == "booking"){
+      setAppState({...appState, /*selected:"about",*/ isContactFormOpen : false});
+      router.push('/booking');
+    }
     if(pageName == "digest"){
       //setAppState({...appState, selected:"digest", isContactFormOpen : false});
       //router.push('/');
@@ -101,6 +105,24 @@ const Header = () => {
               }
             >
               Questions&nbsp;&amp;&nbsp;Requests
+            </Link>
+
+
+            <Link
+              
+              href="#"
+              onClick={(e) => {
+                openPage(e,"booking");
+                
+              }}
+              className={
+                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative" +
+                (activeLink === "requests"
+                  ? " text-orange-500 animation-active "
+                  : " text-black-500 hover:text-orange-500 ")
+              }
+            >
+              Book&nbsp;a&nbsp;Service/Join&nbsp;an&nbsp;Event
             </Link>
             
             <Link
@@ -214,6 +236,37 @@ const Header = () => {
               </svg>
               Questions&nbsp;&amp;&nbsp;Requests
             </Link>
+            <Link
+              
+              href="#"
+              onClick={(e) => {
+                openPage(e,"booking");
+                
+              }}
+              className={
+                "cursor-pointer mx-1 sm:mx-2 px-3 sm:px-4 py-2 flex flex-col items-center text-xs border-t-2 transition-all " +
+                (activeLink === "testimoni"
+                  ? "  border-orange-500 text-orange-500"
+                  : " border-transparent ")
+              }
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
+              </svg>
+              Book&nbsp;a&nbsp;Service/Join&nbsp;an&nbsp;Event
+            </Link>
+
             <Link
               
               href="#"

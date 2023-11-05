@@ -179,9 +179,10 @@ input[type='file'] {
 
 .appointment-time-option
 {
-    width: 80px;
+    min-width: 80px;
     
     margin:1px;
+    margin-right:5px;
 
     padding: 8px;
     padding-top:10px;
