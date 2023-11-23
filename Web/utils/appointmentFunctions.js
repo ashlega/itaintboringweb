@@ -7,6 +7,10 @@ const bookAppointmentApi = `/api/booking`
 const serviceListApi = `/api/service`
 const bookingListApi = `/api/bookinglist`
 
+const padZeroLeft = function (nm) { 
+    if(nm < 10) return "0"+nm;
+    else return nm;
+  };
 
 export async function getAvailableTimes(activeDate, appointmentType, appointmentLocation) {
     
@@ -25,7 +29,11 @@ export async function getAvailableTimes(activeDate, appointmentType, appointment
     const data = await response.json()
     if(data.result == "OK"){
         data.data.map((val) => {
-            val.Date = new Date(val.Date)
+            val.Date = new Date(val.dtStart);
+            val.dtEnd = new Date(val.dtEnd);
+            val.dtStart = new Date(val.dtStart);
+            val.label =  padZeroLeft(val.dtStart.getHours()) + ":" + padZeroLeft(val.dtStart.getMinutes()) + " - " + padZeroLeft(val.dtEnd.getHours()) + ":" + padZeroLeft(val.dtEnd.getMinutes());
+      
         })
 	    
     }

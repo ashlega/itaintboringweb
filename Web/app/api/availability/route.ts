@@ -8,10 +8,7 @@ import { revalidateTag } from 'next/cache'
 
 import { getCache } from "../../../utils/cache"
  
-const padZeroLeft = function (nm : number) { 
-  if(nm < 10) return "0"+nm;
-  else return nm;
-};
+
 
 function isDayGreaterEqual(date1 : Date, date2 : Date) {
   return date1.getFullYear() > date2.getFullYear() || 
@@ -55,11 +52,13 @@ export async function POST(req: Request)
   {
     var dt = new Date(timeSlot["ita_start"]);
     var dtEnd = new Date(timeSlot["ita_end"]);
-    dt.setMinutes(dt.getMinutes() - timeZoneOffset);
-    dtEnd.setMinutes(dtEnd.getMinutes() - timeZoneOffset);
+    //dt.setMinutes(dt.getMinutes() - timeZoneOffset);
+    //dtEnd.setMinutes(dtEnd.getMinutes() - timeZoneOffset);
     options.push({
       Date: dt,
-      label: padZeroLeft(dt.getUTCHours()) + ":" + padZeroLeft(dt.getUTCMinutes()) + " - " + padZeroLeft(dtEnd.getUTCHours()) + ":" + padZeroLeft(dtEnd.getUTCMinutes()),
+      dtStart: dt,
+      dtEnd: dtEnd,
+      //label: padZeroLeft(dt.getUTCHours()) + ":" + padZeroLeft(dt.getUTCMinutes()) + " - " + padZeroLeft(dtEnd.getUTCHours()) + ":" + padZeroLeft(dtEnd.getUTCMinutes()),
       id: timeSlot["ita_itaavailabilityid"]
     });
   })
