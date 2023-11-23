@@ -42,7 +42,14 @@ export default class SiteSettings {
   static footerSlogan="Treecat Software Inc - boosting your power"
   static servicesAndEventsHeader = "Services & Events"
   static bookedServicesAndEventsHeader = "Your Bookings"
-
+  static ErrorMessageTitle = "Error"
+  static ConfirmationMessageTitle = "Confirmation"
+  static BookingCancelled = "Your booking has been cancelled"
+  static BookingConfirmed = "Your booking has been confirmed"
+  static NoBookingsMessage = "You have no bookings to show here yet!"
+  static bookingDetailsHeader = "Your Booking"
+  static BookingAdditionalDetailsHeader = "Additional Details and Joining Instructions"
+  
   static highlightsList  = [
     {
       description: "2+",

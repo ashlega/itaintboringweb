@@ -12,7 +12,7 @@ lerna-debug.log*
 
 .eslintcache
 
-*.production
+*.production*
 
 *.tsbuildinfo
 next-env.d.ts
