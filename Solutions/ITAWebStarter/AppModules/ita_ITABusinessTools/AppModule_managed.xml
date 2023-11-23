@@ -14,11 +14,18 @@
     <AppModuleComponent type="1" schemaName="contact" />
     <AppModuleComponent type="1" schemaName="ita_itaauthenticationid" />
     <AppModuleComponent type="1" schemaName="ita_itaauthenticationprovider" />
+    <AppModuleComponent type="1" schemaName="ita_itaavailability" />
     <AppModuleComponent type="1" schemaName="ita_itacomment" />
     <AppModuleComponent type="1" schemaName="ita_itacontent" />
     <AppModuleComponent type="1" schemaName="ita_itafile" />
     <AppModuleComponent type="1" schemaName="ita_itafiletorequest" />
     <AppModuleComponent type="1" schemaName="ita_itarequesttype" />
+    <AppModuleComponent type="1" schemaName="ita_itaresource" />
+    <AppModuleComponent type="1" schemaName="ita_itaresourcelocation" />
+    <AppModuleComponent type="1" schemaName="ita_itaresourcerequirement" />
+    <AppModuleComponent type="1" schemaName="ita_itaresourcetype" />
+    <AppModuleComponent type="1" schemaName="ita_itaservice" />
+    <AppModuleComponent type="1" schemaName="ita_itaservicebooking" />
     <AppModuleComponent type="1" schemaName="ita_queue" />
     <AppModuleComponent type="1" schemaName="ita_queueitem" />
     <AppModuleComponent type="1" schemaName="ita_request" />

@@ -8,7 +8,8 @@ import   AppContext   from "../components/Context/AppContext"
 import React, { useState } from "react";
 
 import  ErrorMessage  from "../components/Popup/ErrorMessage.js"
-
+import  ConfirmationPopup  from "../components/Popup/ConfirmationPopup.js"
+import  ProcessingOverlay  from "../components/Popup/ProcessingOverlay.js"
 
 import type { AppProps } from "next/app"
 import type { Session } from "next-auth"
@@ -33,12 +34,26 @@ export default function App({
       visible: false,
       title: "Error",
       message: null
+     },
+     confirmationRequest: {
+      visible: false,
+      title: "Confirmation",
+      message: null,
+      source: null,
+      result: null
+     },
+     processingOverlay: {
+        visible: false,
+        title: ""
      }
+
     });
   return (
     <AppContext.Provider value={{appState: appState, setAppState: setAppState}}>
       <ErrorMessage visible={appState.error.visible} title={appState.error.title} message={appState.error.message}/>
-
+      <ConfirmationPopup visible={appState.confirmationRequest.visible} title={appState.confirmationRequest.title} 
+         message={appState.confirmationRequest.message}/>
+      <ProcessingOverlay/>
       <SessionProvider session={session}>
         <Component {...pageProps} />
       </SessionProvider>

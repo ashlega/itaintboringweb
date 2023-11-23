@@ -38,7 +38,7 @@
                     <row>
                       <cell id="{ce62eeb6-6f60-4717-92b3-ba84a96d786a}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="ITA Authentication Id" languagecode="1033" />
+                          <label description="Authentication Id" languagecode="1033" />
                         </labels>
                         <control id="ita_itaauthenticationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_itaauthenticationid" disabled="false" />
                       </cell>

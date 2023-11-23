@@ -219,3 +219,37 @@ input[type='file'] {
     text-wrap:wrap;
     
 }
+
+.appointment-scheduler-header{
+    background-color: #eeeeee;
+}
+
+
+.page-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    display: block;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+    
+}
+
+.page-overlay-message {
+    border:1px solid blue;
+    padding:10px;
+    height:5em;
+    width:300px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.95);
+    font-weight: bold;
+    margin: auto;
+    width: 400px;
+    margin-top:20%;
+    padding-top:1.5em;
+}

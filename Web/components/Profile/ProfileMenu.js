@@ -47,8 +47,9 @@ const ProfileMenu = () => {
         router.push("/booking");
        }
        else if(action.id == 4){
-        router.push("/booking");
+        router.push("/bookingList");
        }
+       
     };
   
     return (
@@ -58,7 +59,7 @@ const ProfileMenu = () => {
 
             <TWDropdown 
               title={session?.user.name} 
-              actions={[{title: "My Requests", id: 1},{title: "Book a Service", id: 3},{title: "Join an Event", id: 4},{title:"Sign Out", id: 2}]}
+              actions={[{title: "My Requests", id: 1},{title: SiteSettings.servicesAndEventsHeader, id: 3},{title: SiteSettings.bookedServicesAndEventsHeader, id: 4},{title:"Sign Out", id: 2}]}
               onSelect={onSelect}
             />
    {

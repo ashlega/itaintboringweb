@@ -32,7 +32,8 @@
           "type": "Request",
           "kind": "Http",
           "inputs": {
-            "method": "GET"
+            "method": "GET",
+            "triggerAuthenticationType": "All"
           }
         }
       },

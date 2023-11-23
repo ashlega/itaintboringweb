@@ -40,6 +40,8 @@ export default class SiteSettings {
   static defaultAlt = "Treecat Software Inc"  
 
   static footerSlogan="Treecat Software Inc - boosting your power"
+  static servicesAndEventsHeader = "Services & Events"
+  static bookedServicesAndEventsHeader = "Your Bookings"
 
   static highlightsList  = [
     {

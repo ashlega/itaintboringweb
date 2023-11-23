@@ -30,7 +30,6 @@ export async function POST(req: Request)
   const timeZoneOffset = activeDate.getTimezoneOffset();
 
   const url = process.env.API_AVAILABILITY_URL;
-
   const response = await fetch(process.env.API_AVAILABILITY_URL ?? "", {
     method: 'POST',
     headers: {
@@ -38,13 +37,13 @@ export async function POST(req: Request)
     },
     body: JSON.stringify(
       {
-          "location": "online",
-          "service": "ItAintBoring Event",
-          "start_month": activeDate.getMonth(),
-          "start_day": activeDate.getDate(),
+          "location": serviceLocation,
+          "service": serviceType,
+          "start_month": activeDate.getMonth()+1,
+          "start_day": 1,//activeDate.getDate(),
           "start_year": activeDate.getFullYear(),
-          "end_month": nextMonth.getMonth(),
-          "end_day": nextMonth.getDate(),
+          "end_month": nextMonth.getMonth()+1,//nextMonth.getMonth(),
+          "end_day": 1,
           "end_year": nextMonth.getFullYear()
       }),
   })

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.23093.196" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.23105.202" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>ITAWebStarter</UniqueName>
     <LocalizedNames>
@@ -80,13 +80,22 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="account" behavior="1" />
+      <RootComponent type="1" schemaName="contact" behavior="1" />
       <RootComponent type="1" schemaName="ita_itaauthenticationid" behavior="0" />
       <RootComponent type="1" schemaName="ita_itaauthenticationprovider" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaavailability" behavior="0" />
       <RootComponent type="1" schemaName="ita_itacomment" behavior="0" />
       <RootComponent type="1" schemaName="ita_itacontent" behavior="0" />
       <RootComponent type="1" schemaName="ita_itafile" behavior="0" />
       <RootComponent type="1" schemaName="ita_itafiletorequest" behavior="0" />
       <RootComponent type="1" schemaName="ita_itarequesttype" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresource" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcelocation" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcerequirement" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcetype" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaservice" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaservicebooking" behavior="0" />
       <RootComponent type="1" schemaName="ita_queue" behavior="0" />
       <RootComponent type="1" schemaName="ita_queueitem" behavior="0" />
       <RootComponent type="1" schemaName="ita_request" behavior="0" />
@@ -100,6 +109,18 @@
       <MissingDependency>
         <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
         <Dependent type="80" schemaName="ita_ITABusinessTools" displayName="ITA Web Starter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="ITA Service quick create form" parentDisplayName="ITA Service" id="{5a89a7d8-916c-ee11-8179-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="Information" parentDisplayName="ITA Service" id="{bb03f178-e27b-46ac-8130-250e71f79e40}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="Information" parentDisplayName="ITA Service Booking" id="{e030094e-613b-4469-884d-9508dc21615f}" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>

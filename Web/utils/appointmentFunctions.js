@@ -1,9 +1,12 @@
+"use client";
+
 import React, { useMemo, useState, useEffect } from "react";
 
 const getAvailabilityApi = `/api/availability`
 const bookAppointmentApi = `/api/booking`
 const serviceListApi = `/api/service`
-const subscribedServiceListApi = `/api/subscribedservice`
+const bookingListApi = `/api/bookinglist`
+
 
 export async function getAvailableTimes(activeDate, appointmentType, appointmentLocation) {
     
@@ -26,6 +29,21 @@ export async function getAvailableTimes(activeDate, appointmentType, appointment
         })
 	    
     }
+    return data;
+}
+
+export async function cancelBookingById(bookingId){
+    const response = await fetch(bookAppointmentApi,{
+        method: 'DELETE',
+        cache: "no-store",
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            bookingId: bookingId
+        }),
+    });
+    const data = await response.json()
     return data;
 }
 
@@ -59,6 +77,46 @@ export async function getBookableServiceList() {
     return data;
 }
 
+
+export async function getBookings() {
+    
+    const response = await fetch(bookingListApi,{
+        method: 'GET',
+        cache: "no-store",
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    });
+    const data = await response.json()
+    var result = [];
+    data.data.map((booking) => {
+        booking.start = new Date(booking.start);
+        booking.end = new Date(booking.end);
+        result.push(booking);
+    })
+    return result;
+}
+
+export async function getBookingDetails(bookingId) {
+    
+    const response = await fetch(bookAppointmentApi + "?bookingid="+bookingId,{
+        method: 'GET',
+        cache: "no-store",
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    });
+    const result = await response.json()
+    if(result.result == "OK"){
+        result.data.start = new Date(result.data.start);
+        result.data.end = new Date(result.data.end);
+    }
+    
+
+    return result;
+}
+
+/*
 export async function getSubscribedServices() {
     
     const response = await fetch(subscribedServiceListApi,{
@@ -72,4 +130,4 @@ export async function getSubscribedServices() {
     return data;
 }
 
-
+*/

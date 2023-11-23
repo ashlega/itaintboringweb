@@ -11,7 +11,6 @@ export async function GET(request: Request)
   var cache = getCache();
   var serviceList : any = null
   serviceList = await cache.get("service_list")
-  
   if(!serviceList){
     const response = await fetch(url, { cache: 'no-cache' })
     const content = await response.json()

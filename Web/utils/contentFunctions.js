@@ -3,7 +3,7 @@ const getLinkedFilesApi = `/api/linkedfiles?`
 const uploadFilesApi = `/api/uploadfiles`
 
 export async function getContent(name) {
-    const response = await fetch(getContentApi+`?name=${name}`, {cache: 'no-store'})
+    const response = await fetch(getContentApi+`name=${name}`, {cache: 'no-store'})
     const data = await response.json()
 	return data;
 }

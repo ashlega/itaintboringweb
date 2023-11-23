@@ -3,6 +3,7 @@ import { getLinkedFiles, uploadFiles } from "../../utils/contentFunctions"
 import Link from "next/link";
 import  FileUpload  from "../misc/FileUpload"
 import { displayError } from "../../utils/onpageutils"
+import LoadingIndicator from "../misc/LoadingIndicator"
 
 import React, { useState, useEffect, title, useContext   } from "react";
 
@@ -96,7 +97,7 @@ const  LinkedFiles = ({objectId, objectType, className, title, setContentLoaded,
 
     return (
       <>
-      <div className="flex w-full mb-2">
+          <div className="flex w-full mb-2">
             <div className="mr-4">
               <h1 className="text-black-600 font-medium text-base mt-1">{title}</h1>
             </div>
@@ -104,24 +105,17 @@ const  LinkedFiles = ({objectId, objectType, className, title, setContentLoaded,
               <FileUpload title="Upload&nbsp;Files" displayPopup={false} onUploadFiles={onUploadFiles}/>
             </div>
           </div>
-      <div className={"w-full flex pt-4 flex " + (filesLoaded ? "hidden_div" : "")}>
-            <div className="mr-4 mt-1"></div>
-            <div >
-              <div
-                className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status">
-                <span
-                  className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                  >Loading...</span>
-              </div>
-            </div>
-          </div>
-          <div
+
+          {!filesLoaded ? (
+            <LoadingIndicator title=""/>
+          ) : null }
+
+        <div
           className={className}
         >
           
           
-      {contentData?.Files && contentData?.Files?.length > 0 ? (
+          {contentData?.Files && contentData?.Files?.length > 0 ? (
         
 
           

@@ -4,6 +4,7 @@ import SiteSettings from "../../utils/SiteSettings"
 import { getRequestTypes } from "../../utils/requestTypeFunctions"
 import { addNewRequest } from "../../utils/requestFunctions"
 import  ButtonOnPage  from "../../components/misc/ButtonOnPage"
+import LoadingIndicator from "../../components/misc/LoadingIndicator"
 import  LinkedFiles  from "../../components/Content/LinkedFiles"
 import { getCommentList, addNewComment } from "../../utils/commentFunctions"
 
@@ -219,18 +220,10 @@ const RequestEditor = ({ setIsEditorMode, reloadRequests, request = {
                     Back
                   </ButtonOnPage>
         </div>
-        <div className={"w-full flex pt-4 flex " + (commentsLoaded && !isProcessingData ? "hidden_div" : "")}>
-          <div className="mr-4 mt-1">Loading&nbsp;comments...</div>
-          <div >
-            <div
-              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-              role="status">
-              <span
-                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                >Loading...</span>
-            </div>
-          </div>
-        </div>
+        {!commentsLoaded || isProcessingData ? (
+          <LoadingIndicator title="Loading&nbsp;comments..."/>
+        ) : null }
+        
         <ol className="border-l border-neutral-300 dark:border-neutral-500 ">
           {commentList.map( (comment) => (  
              

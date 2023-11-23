@@ -46,7 +46,12 @@ module.exports = {
         500: "#DDDDDD",
       },
     },
-    extend: {},
+    extend: {
+      zIndex: {
+        '29': '29',
+      }
+
+    },
   },
   variants: {
     extend: {

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0a36700f-5776-ee11-8179-002248b1f6c0}</formid>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{aa51eb21-6fa5-49a6-abfb-ec6ca8d772da}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{438fdfed-f6f7-41f3-b9d7-c44101bff239}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{00a32bd5-f449-4ba4-9f24-089a862efb79}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d88ceea0-acfd-4c11-9926-308e5caa9582}" locklevel="0" colspan="1" rowspan="1" labelid="{d6dea7cc-cc35-4df4-a087-a085110934ba}">
+                        <labels>
+                          <label description="Service" languagecode="1033" />
+                        </labels>
+                        <control id="ita_service" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_service" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6fc4908c-9b7d-4f32-9245-808539565c45}" locklevel="0" colspan="1" rowspan="1" labelid="{5dc21d5e-160d-4282-9e95-754a3ded1a95}">
+                        <labels>
+                          <label description="Location" languagecode="1033" />
+                        </labels>
+                        <control id="ita_location" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_location" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{079883a0-2ebb-46f6-ab9e-93002c43b313}" locklevel="0" colspan="1" rowspan="1" labelid="{dded41e0-061b-4b0e-b7b2-be9697252948}">
+                        <labels>
+                          <label description="Start" languagecode="1033" />
+                        </labels>
+                        <control id="ita_start" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="ita_start" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a18ddb1b-242e-4789-90fe-a058e922361c}" locklevel="0" colspan="1" rowspan="1" labelid="{a4c7eb86-c72a-45b6-8ee1-a117982418b5}">
+                        <labels>
+                          <label description="End" languagecode="1033" />
+                        </labels>
+                        <control id="ita_end" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="ita_end" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7aa8166e-7972-4e0f-9958-9d8a6f48bac6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Number of Bookings" languagecode="1033" />
+                        </labels>
+                        <control id="ita_numberofbookings" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="ita_numberofbookings" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bf6223d7-2fd6-4fff-9aa4-e8a4042dde9f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Remaining Bookings" languagecode="1033" />
+                        </labels>
+                        <control id="ita_remainingbookings" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="ita_remainingbookings" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="1" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="ITA Availability quick view form" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

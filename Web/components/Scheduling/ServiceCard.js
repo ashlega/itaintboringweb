@@ -1,18 +1,23 @@
 "use client";
 import { useEffect, useState, useContext } from "react";
 import AppContext from "../Context/AppContext";
+import  ButtonOnPage  from "../misc/ButtonOnPage"
+import SiteSettings from "../../utils/SiteSettings";
 
-const ServiceCard = ({title, description, name, image = null, subscriptionRequired = false}) => {
+const ServiceCard = ({onSelectService, title, description, name, locationTitle, locationName, 
+    buttonTitle = "Book", image = null, subscriptionRequired = false, start=null, end=null, extraDetails=null}) => {
   
   const { appState, setAppState } = useContext(AppContext);
 
-  
+  const bookService = (e, serviceName, locationName, serviceDisplayName, serviceDescription) => {
+    if(onSelectService) onSelectService(serviceName, locationName, serviceDisplayName, serviceDescription)
+  }
 
   
   return (
     <>
       <div
-        class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+        class="mb-2 block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
         {image ? (
           <>
             <a href="#!">
@@ -26,18 +31,47 @@ const ServiceCard = ({title, description, name, image = null, subscriptionRequir
         <div class="p-6">
           <h5
             class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-            {title}
+            {locationTitle != null ? (locationTitle + ": ") : ""}{title}
           </h5>
-          <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
+          {start || end ? (
+            <>
+            <p class="text-sm  mb-3 text-base text-neutral-600 dark:text-neutral-200">
+             {start ? (
+              <>
+                
+                <span className="font-semibold">From:</span> {start.toLocaleString()}&nbsp;&nbsp;
+                
+              </>
+              ) : null}
+             {end ? (
+              <>
+                
+                <span className="font-semibold">To:</span> {end.toLocaleString()} 
+                
+              </>
+
+              ) : null}
+            </p>
+            </>
+          ) : null }
+          <p class="mb-6 text-base text-neutral-600 dark:text-neutral-200">
             {description}
+            
           </p>
-          <button
-            type="button"
-            class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-            data-te-ripple-init
-            data-te-ripple-color="light">
-            Button
-          </button>
+          
+          {extraDetails ? (
+              
+              <p class="mt-4 mb-4 text-base text-neutral-600 dark:text-neutral-200">
+                <div className="font-lg font-semibold mb-2">{SiteSettings.BookingAdditionalDetailsHeader}</div>
+                <div dangerouslySetInnerHTML={{__html: extraDetails}}></div>
+              </p>
+            ) : null }
+
+          <ButtonOnPage
+            onClick={(e)=>bookService(e, name, locationName, (locationTitle != null ? (locationTitle + ": ") : "") + title, description)}
+          >
+            {buttonTitle}
+          </ButtonOnPage>
         </div>
       </div>
     </>

@@ -67,6 +67,8 @@ interface DataCache
   getUserCacheKey(email : string | null, provider: string | null | undefined) : string;
   getRequestCommentListCacheKey(session : Session | null, requestid : string | null) : string;
   getContentCacheKey(contentid : string | null) : string;
+  getBookingCacheKey(session : Session | null, bookingid : string | null) : string;
+  getBookingListCacheKey(session : Session | null) : string;
   getActiveRequestListCacheKey(session : Session | null) : string 
   getSubsribedServicesCacheKey(session : Session | null) : string 
   getInActiveRequestListCacheKey(session : Session | null) : string 
@@ -123,13 +125,25 @@ export function getCache(
 
       getUserCacheKey: (email : string | null, provider: string | null | undefined) : string =>
       {
-        return "user_"+email+"_provider_"+provider;
+        return "user_"+email;//+"_provider_"+provider;
       },
 
       getSubsribedServicesCacheKey: (session : Session | null) : string =>
       {
         var anySession : any = session;
         return anySession?.user?.cachePrefix + anySession?.user?.id + "_subsribed_serices";
+      },
+
+      getBookingListCacheKey: (session : Session | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_booking_list";
+      },
+
+      getBookingCacheKey: (session : Session | null, bookingid : string | null) : string =>
+      {
+        var anySession : any = session;
+        return anySession?.user?.cachePrefix + anySession?.user?.id + "_booking_" + bookingid;
       },
 
       getRequestCommentListCacheKey: (session : Session | null, requestid : string | null) : string =>

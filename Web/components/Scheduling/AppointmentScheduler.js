@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import "react-toggle/style.css"
 import "react-datepicker/dist/react-datepicker.css";
 import Link from "next/link";
-
+import LoadingIndicator from "../misc/LoadingIndicator"
 
 
 
@@ -21,7 +21,7 @@ const AppointmentScheduler = ({
 
   const [isProcessingData, setIsProcessingData] = useState(false);
   const [timesLoaded, setTimesLoaded] = useState(true);
-
+  const [isInitialized, setIsInitialized] = useState(false);
   
   var monthTimeOptions = [];
 
@@ -41,11 +41,11 @@ const AppointmentScheduler = ({
                                           && val.Date.getDate() == picker._activeDate.getDate() ));
       picker._changeView(picker._view);
       setTimesLoaded(true);
-
+      setIsInitialized(true);
     }
     var prevDate = picker._activeDate;
     var prevMonth = getMonthId(picker._activeDate);
-    setTimeout(() => activeDateWatch(picker, prevDate, prevMonth), 300);
+    setTimeout(() => activeDateWatch(picker, prevDate, prevMonth), 100);
   }
 
   useEffect(() => {
@@ -166,96 +166,94 @@ const AppointmentScheduler = ({
   return (
 <>
 
-    <div id={`${prefix}_appointment_scheduler_main`} className="flex flex-wrap w-full justify-center sm:justify-start">
-        <div id={`${prefix}_appointment_scheduler_container`} className="appointment-scheduler-container">
-          <div
-            id={`${prefix}_appointment_scheduler`}
-            className="relative mb-3 appointment-scheduler "
-          >
-            <div >
-              
-              <div>
-                <input
-                  type="text"
-                  className="appointment-date-input peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                  placeholder="Select Appointment Date"
-                  id={`${prefix}_appointmentDateInput`}
-                />
+          
+
+      <div id={`${prefix}_appointment_scheduler_main`} 
+          className={"flex flex-wrap w-full justify-center sm:justify-start " }>
+          <div id={`${prefix}_appointment_scheduler_container`} className="appointment-scheduler-container">
+            <div
+              id={`${prefix}_appointment_scheduler`}
+              className="relative mb-3 appointment-scheduler "
+            >
+              <div >
                 
-                <label
-                  htmlFor={`${prefix}_appointmentDateInput`}
-                  className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                >
+                <div>
+                  <input
+                    type="text"
+                    className="appointment-date-input peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    placeholder="Select Appointment Date"
+                    id={`${prefix}_appointmentDateInput`}
+                  />
                   
-                </label>
+                  <label
+                    htmlFor={`${prefix}_appointmentDateInput`}
+                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                  >
+                    
+                  </label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        
       
-     
+        {isInitialized ? (
 
-      <div className="appointment-time-list  ml-1 sm:ml-4 flex flex-wrap sm:mb-14 mb-1">
+        <div className="appointment-time-list  ml-1 sm:ml-4 flex flex-wrap sm:mb-14 mb-1">
 
-        <div className="selected-appointment-date w-full mt-6 mb-3">
-          {selectedDate.toDateString()}  
-        </div>  
-
-        <div className={"w-full flex pt-4 flex " + (timesLoaded && !isProcessingData ? "hidden_div" : "")}>
-          <div className="mr-4 mt-1">Loading&nbsp;data...</div>
-          <div >
-            <div
-              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-              role="status">
-              <span
-                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-                >Loading...</span>
-            </div>
-          </div>
-        </div>
-        {timesLoaded ? (
-          <>
-          <div className="w-full flex ">
-            {(timeOptions != null && timeOptions.length > 0) ? (
-              <>
-                <div className=" mb-2 pb-1 flex flex-wrap"> 
-                
-                  
-                    {timeOptions.map( (val) => {
-
-                      return (
-                        <>
-                          
-                            <Link  
-                              href="#"
-                              onClick={(e) => { e.preventDefault(); onOptionSelected(val.id) }}
-                              >
-                                <>
-                                  <div key={val.id} className="appointment-time-option">
-                                    {val.label}
-                                  </div> 
-                                </>
-                            </Link>
-                            
-                        </>
-                      )
-                    })}
-                  
-                </div>
-              </>
-              ) : (
+          <div className="selected-appointment-date w-full mt-6 mb-3">
+            {selectedDate.toDateString()}  
+          </div>  
+          
+          {!timesLoaded || isProcessingData ? (
+            <LoadingIndicator title="Loading&nbsp;data"/>
+            ) : null
+          }
+          
+          {timesLoaded ? (
+            <>
+            <div className="w-full flex ">
+              {(timeOptions != null && timeOptions.length > 0) ? (
                 <>
-                  <div className="no-appointment-options w-full mb-2 pb-1" dangerouslySetInnerHTML={{__html:noAvailabilityMessage}}>
-                  </div>
-                </> 
+                  <div className=" mb-2 pb-1 flex flex-wrap"> 
+                  
+                    
+                      {timeOptions.map( (val) => {
 
-              )
-            }
-          </div>
-        </>
+                        return (
+                          <>
+                            
+                              <Link  
+                                href="#"
+                                onClick={(e) => { e.preventDefault(); onOptionSelected(val.id) }}
+                                >
+                                  <>
+                                    <div key={val.id} className="appointment-time-option">
+                                      {val.label}
+                                    </div> 
+                                  </>
+                              </Link>
+                              
+                          </>
+                        )
+                      })}
+                    
+                  </div>
+                </>
+                ) : (
+                  <>
+                    <div className="no-appointment-options w-full mb-2 pb-1" dangerouslySetInnerHTML={{__html:noAvailabilityMessage}}>
+                    </div>
+                  </> 
+
+                )
+              }
+            </div>
+          </>
+          ) : null }
+        </div>
         ) : null }
       </div>
-    </div>
 
     </>
 

@@ -51,6 +51,16 @@ export default class SiteSettings {
     static defaultAlt = SiteSettingsLocal ? SiteSettingsLocal.defaultAlt : "It Aint Boring"  
 
     static footerSlogan=SiteSettingsLocal ? SiteSettingsLocal.footerSlogan : "It Aint Boring - where some cool Power Platform stuff lives"
+    static servicesAndEventsHeader = "Services & Events"
+    static bookedServicesAndEventsHeader = "Your Bookings"
+    static ErrorMessageTitle = "Error"
+    static ConfirmationMessageTitle = "Confirmation"
+    static BookingCancelled = "Your booking has been cancelled"
+    static BookingConfirmed = "Your booking has been confirmed"
+    static NoBookingsMessage = "You have no bookings to show here yet!"
+    static bookingDetailsHeader = "Your Booking"
+    static BookingAdditionalDetailsHeader = "Additional Details and Joining Instructions"
+    
 
     static highlightsList  =SiteSettingsLocal ? SiteSettingsLocal.highlightsList :  [
       {
