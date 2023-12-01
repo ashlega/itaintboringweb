@@ -69,7 +69,7 @@ const Header = () => {
               openPage(e, "home");
              }}
             >
-            <img  src="../../assets/logo_new.png" className="h-14 w-auto" />
+            <img  src="../../assets/treecat/tclogo.png" className="h-14 w-auto" />
             </Link>
           </div>
           <ul className="hidden lg:flex col-start-4 col-end-8 text-black-500  items-center">
