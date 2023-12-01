@@ -1,0 +1,14 @@
+<environmentvariabledefinition schemaname="ita_ITAWebStarterNewCommentNotification">
+  <defaultvalue>New comment received</defaultvalue>
+  <description default="New comment notification">
+    <label description="New comment notification" languagecode="1033" />
+  </description>
+  <displayname default="ITA Web Starter New Comment Notification">
+    <label description="ITA Web Starter New Comment Notification" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

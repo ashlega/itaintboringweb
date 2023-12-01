@@ -1,0 +1,80 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cd1ca3cf-c336-4efa-bb45-24faccfa4d40"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "triggerAuthenticationType": "All",
+            "method": "GET"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f358cda-57ff-49ca-b04a-644c9c4d3a2a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ita_itaservicebookings",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\"  no-lock=\"false\" distinct=\"true\">\n\t<entity name=\"ita_itaservicebooking\">\n\t\t<attribute name=\"ita_itaservicebookingid\"/>\n\t\t<attribute name=\"ita_name\"/>\n\t\t<filter type=\"and\">\n\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t<condition attribute=\"ita_authenticationid\" operator=\"eq\" value=\"@{triggerOutputs()['queries']['userid']}\"  />\n\t\t</filter>\n\t\t<link-entity alias=\"availability\" name=\"ita_itaavailability\" to=\"ita_serviceavailability\" from=\"ita_itaavailabilityid\" link-type=\"inner\">\n\t\t\t<attribute name=\"ita_start\"/>\n\t\t\t<attribute name=\"ita_end\"/>\n   <attribute name=\"ita_participationinstructions\"/>\n               <order attribute=\"ita_start\" descending=\"false\"/>\n<filter type=\"and\"><condition attribute=\"ita_start\" operator=\"next-x-years\" value=\"10\"/></filter>\n\n\t\t\t<link-entity name=\"ita_itaservice\" alias=\"service\" link-type=\"inner\" from=\"ita_itaserviceid\" to=\"ita_service\">\n                   <attribute name=\"ita_displayname\"/> \n                   <attribute name=\"ita_description\"/> \n                   <filter type=\"and\">\n\t\t\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t\t</filter>\n\t\t\t</link-entity>\n\t\t\t<link-entity name=\"ita_itaresourcelocation\" alias=\"location\" link-type=\"inner\" from=\"ita_itaresourcelocationid\" to=\"ita_location\">\n\t\t\t\t<attribute name=\"ita_displayname\"/> \n                   <filter type=\"and\">\n\t\t\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t\t</filter>\n\t\t\t</link-entity>\n\t\t</link-entity>\n\t</entity>\n</fetch>"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('List_rows')?['body/value']"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

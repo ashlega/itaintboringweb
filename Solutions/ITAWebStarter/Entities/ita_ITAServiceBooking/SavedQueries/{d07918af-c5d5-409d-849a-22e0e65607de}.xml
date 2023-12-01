@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{d07918af-c5d5-409d-849a-22e0e65607de}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="ita_name" select="1" icon="1" preview="1">
+        <row name="result" id="ita_itaservicebookingid">
+          <cell name="ita_name" width="173" />
+          <cell name="ita_client" width="100" />
+          <cell name="ita_authenticationid" width="139" />
+          <cell name="a_d0108226cca146439a290a548191a58e.ita_service" width="207" />
+          <cell name="a_d0108226cca146439a290a548191a58e.ita_location" width="214" />
+          <cell name="a_d0108226cca146439a290a548191a58e.ita_start" width="191" />
+          <cell name="a_d0108226cca146439a290a548191a58e.ita_end" width="187" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="ita_itaservicebooking">
+          <attribute name="ita_itaservicebookingid" />
+          <attribute name="ita_name" />
+          <order attribute="ita_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="ita_client" />
+          <attribute name="ita_authenticationid" />
+          <link-entity alias="a_d0108226cca146439a290a548191a58e" name="ita_itaavailability" to="ita_serviceavailability" from="ita_itaavailabilityid" link-type="outer" visible="false">
+            <attribute name="ita_start" />
+            <attribute name="ita_end" />
+            <attribute name="ita_service" />
+            <attribute name="ita_location" />
+          </link-entity>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active ITA Service Bookings" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

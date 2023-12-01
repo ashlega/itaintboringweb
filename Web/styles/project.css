@@ -1,0 +1,255 @@
+.accessdenied {
+   margin-top: 12em;
+   font-weight: bold;
+   padding-bottom: 12em;
+   line-height: 2em;
+}
+
+.pageHeader{
+    margin-top: 7em;
+    
+    font-weight: bold;
+    padding-bottom: 2em;
+    
+    flex-wrap:wrap;
+}
+
+.pageHeader b{
+    font-size:170%;
+    padding-right: 1em;
+}
+
+.user-consent{
+    
+    font-size: 100%;
+
+}
+.user-consent h1{
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1em;
+    font-size: 150%;
+    
+}
+
+.request_buttons{
+    padding-bottom:1em;
+    padding-top:0.2em;
+    margin-bottom:1em;
+
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}
+
+.requestHeader{
+    color: black;
+    font-size: 1.1rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    padding-bottom: 0.5em;
+    min-width:200px;
+}
+
+
+.requestStatus{
+    color: black;
+    font-size: 1.1rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    padding-bottom: 0.5em;
+}
+
+.request_form{
+    text-align: left;
+    border-radius: 0.5em;
+    /*border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;*/
+}
+
+
+.request_form input{
+    width: 100%;
+    margin-bottom: 0.5em;
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid gray
+}
+.request_form select{
+    width: 100%;
+    margin-bottom: 0.5em;
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid gray
+}
+.request_form textarea{
+    width: 100%;
+    margin-bottom: 0.5em;
+    min-height: 7em;
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid gray
+}
+
+.hidden_div
+{
+    display: none;
+}
+
+.react-toggle--checked .react-toggle-track
+{
+    background-color: #3b71ca !important;
+}
+
+.request-filter-label
+{
+    font-weight: bolder;
+}
+
+.request-comment{
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid black
+}
+
+.add-comment{
+    margin-left: 0px;
+    min-width:100px;
+}
+
+.footer-title
+{
+    min-height: 3em;
+}
+
+input[type='file'] {
+    color: transparent;
+    border: 0;
+}
+
+.inactive_request{
+    background-color: #eeeeee;
+}
+
+
+.appointment-date-picker-input {
+    visibility: hidden !important;
+}
+
+.appointment-date-picker {
+    position: relative;
+}
+
+.appointment-scheduler button {
+    visibility: hidden !important;
+}
+
+.appointment-date-input {
+    padding-top:30px;
+    opacity: 0;
+}
+
+.appointment-scheduler-container{
+    /*height:400px;*/
+
+    position: relative;
+    margin-top:-60px;
+    margin-bottom: 5px;
+    
+    
+}
+
+.appointment-scheduler-container .border{
+   border:none;
+}
+
+
+
+.appointment-scheduler-container div{
+    z-index:15 !important;
+}
+
+.appointment-time-list{
+    margin-top: 1px;
+    min-width: 250px;
+    max-width: 350px;
+    vertical-align: top;
+    height:100px;
+    
+}
+
+.appointment-time-option
+{
+    min-width: 80px;
+    
+    margin:1px;
+    margin-right:5px;
+
+    padding: 8px;
+    padding-top:10px;
+    padding-bottom:10px;
+    
+    opacity: 0.85;
+    
+    background-color: #eeeeee;
+    border: black solid 1px;
+    font-weight:bold;
+    text-align: center;
+}
+
+.appointment-time-option:hover
+{
+    background-color:rgb(245, 56, 85);
+    color: white;
+}
+
+.selected-appointment-date{
+    font-weight:bold;
+}
+
+.no-appointment-options{
+    font-weight:normal;
+    background-color: #eeeeee;
+    opacity: 0.8;
+    border: black solid 1px;
+    font-weight:normal;
+    text-align: center;
+    padding: 5px;
+    padding-top:10px;
+    padding-bottom:10px;
+    text-wrap:wrap;
+    
+}
+
+.appointment-scheduler-header{
+    background-color: #eeeeee;
+}
+
+
+.page-overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    display: block;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+    
+}
+
+.page-overlay-message {
+    border:1px solid blue;
+    padding:10px;
+    height:5em;
+    width:300px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.95);
+    font-weight: bold;
+    margin: auto;
+    width: 400px;
+    margin-top:20%;
+    padding-top:1.5em;
+}

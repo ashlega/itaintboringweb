@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{5a89a7d8-916c-ee11-8179-002248b1f6c0}</formid>
+    <IntroducedVersion>1.0.0.1</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="F931FFE2-B873-473F-8F95-9502F0AA3F5E" name="tab_1" showlabel="false" labelid="{a0f3cf13-2556-4928-b081-40fccdadb774}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="34%">
+              <sections>
+                <section id="0C655D4E-C6E3-424E-9AF5-71E72D30D12E" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{1490f53c-5fa9-4613-b0ac-99223a07a91e}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="542FBFBE-0E4C-496C-8012-555DE6581923" labelid="{e37f10f5-da76-4cac-bed2-7f704fcb7ad3}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7a5d7e7a-841d-40f9-a83e-0ed4cfaf68a9}" locklevel="0" colspan="1" rowspan="1" labelid="{4529e967-10dd-474d-bcd9-0164c006c840}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="ita_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="ita_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{026bd6c5-fc77-4ed4-8d14-85e477272bb8}" locklevel="0" colspan="1" rowspan="1" labelid="{bc7f5f81-35bf-4c1c-bcda-6f9686e9272c}">
+                        <labels>
+                          <label description="Duration" languagecode="1033" />
+                        </labels>
+                        <control id="ita_duration" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="ita_duration" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{19649b7c-b774-4bac-b899-9053d481f3cf}" locklevel="0" colspan="1" rowspan="1" labelid="{a26e2881-8fca-4c4d-95c3-6f3843b45a69}">
+                        <labels>
+                          <label description="Max Clients per Time Slot" languagecode="1033" />
+                        </labels>
+                        <control id="ita_maxclientspertimeslot" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="ita_maxclientspertimeslot" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{07ef99ba-0472-4328-b316-96f334184354}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="ita_subscriptionrequired" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="ita_subscriptionrequired" disabled="false" uniqueid="{676d68d7-372c-4374-97bb-1713a345faad}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fbb07c6c-3b7c-4a7e-a3d8-519175405590}" locklevel="0" colspan="1" rowspan="7">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="ita_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="ita_description" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="02DECBA0-3AE2-484D-A19F-C5353AF4F4F2" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{419ade51-bf3c-45ab-ba6e-ec3b67cd2370}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="266FE48D-4D04-4E9A-8C5A-7DEF9A2F059B" labelid="{867c965f-6c33-4c31-9eba-f28716ce1171}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="46FD66EA-B686-41D9-AAE0-C565BD78EC1F" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{7b734245-5a74-4588-9e4d-eb46f6da2fcd}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="07C04A4E-A482-45CC-BAB7-7FCA3CD02938" labelid="{fc7b840c-577c-4fe7-ad7a-84dfd230f265}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{676d68d7-372c-4374-97bb-1713a345faad}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>ita_subscriptionrequired</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">ita_subscriptionrequired</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">ita_subscriptionrequired</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">ita_subscriptionrequired</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="ITA Service quick create form" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

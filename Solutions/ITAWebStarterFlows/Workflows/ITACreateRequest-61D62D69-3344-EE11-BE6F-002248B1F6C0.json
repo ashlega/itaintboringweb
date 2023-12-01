@@ -1,0 +1,156 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c1a5a09f-8a74-43f0-aafd-0c66626f727b"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "type": "string",
+                  "required": false
+                },
+                "details": {
+                  "type": "string",
+                  "required": false
+                },
+                "type": {
+                  "type": "string",
+                  "required": false
+                },
+                "userid": {
+                  "type": "string",
+                  "required": false
+                },
+                "anonymous": {
+                  "type": "string",
+                  "required": false
+                },
+                "email": {
+                  "type": "string",
+                  "required": false
+                },
+                "name": {
+                  "type": "string",
+                  "required": false
+                }
+              }
+            },
+            "triggerAuthenticationType": "All"
+          }
+        }
+      },
+      "actions": {
+        "Response": {
+          "runAfter": {
+            "Condition": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "37ef8669-c662-407a-b1c7-85a4fb84b8a4"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('Add_a_new_row')?['body']"
+          }
+        },
+        "Add_a_new_row": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "19429abf-2e97-45a5-b6c8-aa71227aedfd"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_requests",
+              "item/ita_clientemail": "@triggerBody()?['email']",
+              "item/ita_details": "@triggerBody()?['details']",
+              "item/ita_origin": 556780000,
+              "item/ita_subject": "@triggerBody()?['subject']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Update_a_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "ce75faa5-900c-42ac-b6ba-a1aa598b3bb0"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ita_requests",
+                  "recordId": "@outputs('Add_a_new_row')?['body/ita_requestid']",
+                  "item/ita_ITAAuthenticationId@odata.bind": "ita_itarequesttypes(@{triggerBody()?['userid']})",
+                  "item/ita_RequestType@odata.bind": "ita_itarequesttypes(@{triggerBody()?['type']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Add_a_new_row": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@empty(triggerBody()?['userid'])",
+              "@false"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "dfcea0c7-1314-496d-b855-1be225fed025"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

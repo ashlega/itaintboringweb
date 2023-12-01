@@ -1,0 +1,81 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "2ba9a10d-705b-409c-833b-8e4ad0477fcb"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "method": "GET",
+            "triggerAuthenticationType": "All"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6347a0cc-cdd2-4cc0-97a2-34c6a39a2849"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_itafiles",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" savedqueryid=\"6aefc7c2-ed74-4710-8bf7-07e1e2851b47\" no-lock=\"false\" distinct=\"true\">\n<entity name=\"ita_itafile\"><attribute name=\"ita_itafileid\"/>\n<attribute name=\"ita_name\"/>\n<attribute name=\"ita_itafileid\"/>\n<attribute name=\"createdon\"/>\n<attribute name=\"ita_externallink\"/>\n<attribute name=\"ita_externaldescription\"/>\n<attribute name=\"ita_itaauthenticationid\"/>\n<order attribute=\"createdon\" descending=\"true\"/>\n<filter type=\"and\">\n   <condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n   <condition attribute=\"ita_requestid\" entityname=\"request\" operator=\"not-null\"/>\n</filter>\n\n<link-entity name=\"ita_itafiletorequest\" link-type=\"outer\" visible=\"false\" from=\"ita_file\" to=\"ita_itafileid\">\n   <link-entity name=\"ita_request\" link-type=\"outer\" alias=\"request\" from=\"ita_requestid\" to=\"ita_request\">\n     <filter type=\"and\">\n       <condition attribute=\"ita_requestid\" operator=\"eq\" value=\"@{triggerOutputs()['queries']['objectid']}\" />\n        <condition attribute=\"ita_itaauthenticationid\" operator=\"eq\" value=\"@{triggerOutputs()['queries']['userid']}\" />\n     </filter>\n   </link-entity>\n</link-entity>\n</entity>\n</fetch>"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a30dcf53-b986-4583-9704-f32c9363c8bd"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('List_rows')?['body/value']"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

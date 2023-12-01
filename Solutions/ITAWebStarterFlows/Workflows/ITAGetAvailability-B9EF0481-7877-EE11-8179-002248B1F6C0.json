@@ -1,0 +1,128 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cd1ca3cf-c336-4efa-bb45-24faccfa4d40"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "location": {
+                  "type": "string"
+                },
+                "service": {
+                  "type": "string"
+                },
+                "start_month": {
+                  "type": "integer"
+                },
+                "start_day": {
+                  "type": "integer"
+                },
+                "start_year": {
+                  "type": "integer"
+                },
+                "end_month": {
+                  "type": "integer"
+                },
+                "end_year": {
+                  "type": "integer"
+                },
+                "end_day": {
+                  "type": "integer"
+                }
+              }
+            },
+            "method": "POST",
+            "triggerAuthenticationType": "All"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f358cda-57ff-49ca-b04a-644c9c4d3a2a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_itaavailabilities",
+              "$select": "ita_start, ita_end, ita_itaavailabilityid",
+              "$orderby": "ita_start asc",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\">\n   <entity name=\"ita_itaavailability\">\n      <attribute name=\"ita_start\"/>\n      <attribute name=\"ita_end\"/>\n      <attribute name=\"ita_itaavailabilityid\"/>\n\n      <filter type=\"and\">\n         <condition attribute=\"statecode\" operator=\"eq\" value=\"0\" />\n         <condition attribute=\"ita_start\" operator=\"on-or-after\" value=\"@{concat(triggerBody()?['start_year'],'-',triggerBody()?['start_month'],'-',triggerBody()?['start_day'])}\" />\n         <condition attribute=\"ita_end\" operator=\"on-or-before\" value=\"@{concat(triggerBody()?['end_year'],'-',triggerBody()?['end_month'],'-',triggerBody()?['end_day'])}\" />\n         <condition attribute=\"ita_remainingbookings\" operator=\"gt\" value=\"0\" />\n      </filter>\n      <link-entity name=\"ita_itaservice\" alias=\"ab\" link-type=\"inner\" from=\"ita_itaserviceid\" to=\"ita_service\">\n         <filter type=\"and\">\n            <condition attribute=\"ita_name\" operator=\"like\" value=\"%@{triggerBody()?['service']}%\" />\n         </filter>\n      </link-entity>\n\n      <link-entity name=\"ita_itaresourcelocation\" alias=\"aj\" link-type=\"inner\" from=\"ita_itaresourcelocationid\" to=\"ita_location\">\n         <filter type=\"and\">\n            <condition attribute=\"ita_name\" operator=\"eq\" value=\"@{triggerBody()?['location']}\" />\n         </filter>\n      </link-entity>\n   </entity>\n</fetch>\n"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Response": {
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": "@outputs('List_rows')?['body/value']"
+          }
+        },
+        "Response_2": {
+          "runAfter": {
+            "List_rows": [
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": []
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

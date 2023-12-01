@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass redis123_
+    volumes:
+      - /path/to/local/dаta:/root/redis
+      - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_PASSWORD=rediscanada123_
+#      - REDIS_PORT: 6379
+#      - REDIS_DATABASES=2
+    networks:
+      - proxynew
+
+
+  nextjs_treecat:
+    build: ./Web/
+    restart: always
+    container_name: nextjs_treecat
+    volumes:
+      - ./Web/:/usr/app
+      - ./Web/.next:/usr/app/.next
+      - ./Web/.env.production:/usr/app/.env
+      - ./Web/utils/SiteSettings.Production.js:/usr/app/utils/SiteSettings.js
+      - ./Web/node_modules:/usr/app/node_modules
+#    ports:
+#      - 3000:3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs_treecat.entrypoints=https"
+      - "traefik.http.routers.nextjs_treecat.rule=Host(`treecatsoftware.com`) || Host(`www.treecatsoftware.com`)"
+      - "traefik.http.services.nextjs_treecat.loadbalancer.server.port=3000"
+      - "traefik.http.routers.nextjs_treecat.tls=true"
+      - "traefik.http.routers.nextjs_treecat.tls.certresolver=letsEncrypt"
+    environment:
+      NODE_ENV: dev
+    networks:
+      - proxynew
+
+
+networks:
+  proxynew:
+   enable_ipv6: true
+   external:
+    name: proxynew

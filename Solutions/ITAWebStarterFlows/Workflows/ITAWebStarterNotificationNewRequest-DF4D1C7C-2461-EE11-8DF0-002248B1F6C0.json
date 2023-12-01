@@ -1,0 +1,127 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_powerappsnotification": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedpowerappsnotification_3da7a"
+        },
+        "api": {
+          "name": "shared_powerappsnotification"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "ITA Web Starter New Request Notification (ita_ITAWebStarterNewRequestNotification)": {
+          "defaultValue": "New request received",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ita_ITAWebStarterNewRequestNotification",
+            "description": "New requestion notification message"
+          }
+        },
+        "ITA Web Starter Request Notification Users (ita_ITAWebStarterRequestNotificationUsers)": {
+          "defaultValue": "[\"info@treecatsoftware.com\"]",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ita_ITAWebStarterRequestNotificationUsers",
+            "description": "List of users to notify of new requests"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "bcb0b05a-7f56-4a18-a21e-750472fd7730"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "ita_request",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "ita_origin eq 556780000"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Send_push_notification": {
+          "runAfter": {
+            "Add_a_new_row": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c01ec0d2-e374-4e11-8c4b-eefb9430d5d3"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_powerappsnotification",
+              "operationId": "SendPushNotification",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_powerappsnotification"
+            },
+            "parameters": {
+              "payload/recipients": "@json(parameters('ITA Web Starter Request Notification Users (ita_ITAWebStarterRequestNotificationUsers)'))",
+              "payload/message": "@parameters('ITA Web Starter New Request Notification (ita_ITAWebStarterNewRequestNotification)')",
+              "payload/openApp": true,
+              "payload/params": {
+                "requestid": "@{triggerOutputs()?['body/ita_requestid']}"
+              }
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Add_a_new_row": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6b3a67e6-acfb-495d-82a2-2fa3319305ef"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_queueitems",
+              "item/ita_Request@odata.bind": "ita_requests(@{triggerOutputs()?['body/ita_requestid']})",
+              "item/statuscode": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

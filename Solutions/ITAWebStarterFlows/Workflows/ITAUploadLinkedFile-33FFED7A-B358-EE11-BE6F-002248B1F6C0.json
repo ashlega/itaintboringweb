@@ -1,0 +1,210 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "2ba9a10d-705b-409c-833b-8e4ad0477fcb"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filename": {
+                  "type": "string"
+                },
+                "filedata": {
+                  "type": "string"
+                },
+                "objectid": {
+                  "type": "string"
+                },
+                "objecttype": {
+                  "type": "string"
+                },
+                "userid": {
+                  "type": "string"
+                }
+              }
+            },
+            "method": "POST",
+            "triggerAuthenticationType": "All"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6347a0cc-cdd2-4cc0-97a2-34c6a39a2849"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "ita_requests",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\">\n<entity name=\"ita_request\">\n<attribute name=\"ita_requestid\"/>\n\n     <filter type=\"and\">\n       <condition attribute=\"ita_requestid\" operator=\"eq\" value=\"@{triggerBody()?['objectid']}\" />\n        <condition attribute=\"ita_itaauthenticationid\" operator=\"eq\" value=\"@{triggerBody()?['userid']}\" />\n     </filter>\n\n</entity>\n</fetch>"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Response": {
+              "runAfter": {
+                "Create_a_relationship": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a30dcf53-b986-4583-9704-f32c9363c8bd"
+              },
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                "statusCode": 200,
+                "body": {
+                  "Result": true
+                }
+              }
+            },
+            "Upload_a_file_or_an_image": {
+              "runAfter": {
+                "Add_a_new_row": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "717b4b75-b937-455d-97cc-45984bd81327"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateEntityFileImageFieldContent",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ita_itafiles",
+                  "recordId": "@outputs('Add_a_new_row')?['body/ita_itafileid']",
+                  "fileImageFieldName": "ita_contentfile",
+                  "item": "@base64ToBinary(triggerBody()?['filedata'])",
+                  "x-ms-file-name": "@triggerBody()?['filename']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Add_a_new_row": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "9f693793-7efc-4d2d-9035-48b257e8a2ff"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ita_itafiles",
+                  "item/ita_name": "@triggerBody()?['filename']"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Create_a_relationship": {
+              "runAfter": {
+                "Upload_a_file_or_an_image": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "33321c38-9832-4aba-bce6-05d5ba80107d"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "ita_itafiletorequests",
+                  "item/ita_File@odata.bind": "ita_itafiles(@{outputs('Add_a_new_row')?['body/ita_itafileid']})",
+                  "item/ita_Request@odata.bind": "ita_requests(@{triggerBody()?['objectid']})"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Response_2": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "a30dcf53-b986-4583-9704-f32c9363c8bd"
+                },
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                  "statusCode": 200,
+                  "body": {
+                    "Result": false,
+                    "Error": "This request does not exist or you have no access to it"
+                  }
+                }
+              }
+            }
+          },
+          "expression": {
+            "greater": [
+              "@length(outputs('List_rows')?['body/value'])",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "9a3d97b3-2905-47e1-90f9-1f6c3fff608b"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

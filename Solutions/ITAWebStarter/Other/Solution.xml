@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.23105.202" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SolutionManifest>
+    <UniqueName>ITAWebStarter</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="ITAWebStarter" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.1</Version>
+    <Managed>2</Managed>
+    <Publisher>
+      <UniqueName>itaintboring</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="ItAintBoring" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description description="ItAintBoring" languagecode="1033" />
+      </Descriptions>
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl>http://www.itaintboring.com</SupportingWebsiteUrl>
+      <CustomizationPrefix>ita</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>55678</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="account" behavior="1" />
+      <RootComponent type="1" schemaName="contact" behavior="1" />
+      <RootComponent type="1" schemaName="ita_itaauthenticationid" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaauthenticationprovider" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaavailability" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itacomment" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itacontent" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itafile" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itafiletorequest" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itarequesttype" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresource" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcelocation" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcerequirement" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaresourcetype" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaservice" behavior="0" />
+      <RootComponent type="1" schemaName="ita_itaservicebooking" behavior="0" />
+      <RootComponent type="1" schemaName="ita_queue" behavior="0" />
+      <RootComponent type="1" schemaName="ita_queueitem" behavior="0" />
+      <RootComponent type="1" schemaName="ita_request" behavior="0" />
+      <RootComponent type="29" id="{7cb9200e-ed62-ee11-8df0-002248b1f6c0}" behavior="0" />
+      <RootComponent type="62" schemaName="ita_ITABusinessTools" behavior="0" />
+      <RootComponent type="80" schemaName="ita_ITABusinessTools" behavior="0" />
+      <RootComponent type="9" schemaName="ita_itawebstarteroriging" behavior="0" />
+      <RootComponent type="9" schemaName="ita_subscriptionstatus" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="ita_ITABusinessTools" displayName="ITA Web Starter" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="ITA Service quick create form" parentDisplayName="ITA Service" id="{5a89a7d8-916c-ee11-8179-002248b1f6c0}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="Information" parentDisplayName="ITA Service" id="{bb03f178-e27b-46ac-8130-250e71f79e40}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2310.5018)" />
+        <Dependent type="60" displayName="Information" parentDisplayName="ITA Service Booking" id="{e030094e-613b-4469-884d-9508dc21615f}" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

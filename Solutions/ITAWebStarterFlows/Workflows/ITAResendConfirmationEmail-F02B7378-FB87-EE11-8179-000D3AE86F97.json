@@ -1,0 +1,209 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedoffice365_ed5ed"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "ITA Web Starter Portal Root (ita_WebStarterPortalRoot)": {
+          "defaultValue": "https://localhost:3000",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ita_WebStarterPortalRoot"
+          }
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "metadata": {
+            "operationMetadataId": "5051eb45-202c-4ed9-907b-194ef8ed2588"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 4,
+              "subscriptionRequest/entityname": "ita_itaservicebooking",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filteringattributes": "ita_resendconfirmationemail",
+              "subscriptionRequest/filterexpression": "ita_resendconfirmationemail eq true",
+              "subscriptionRequest/name": "f02b7378-fb87-ee11-8179-000d3ae86f97"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_Availability": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "737680da-086e-4cf2-9033-b5c5656f40d1"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ita_itaavailabilities",
+              "recordId": "@triggerOutputs()?['body/_ita_serviceavailability_value']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Get_Service": {
+          "runAfter": {
+            "Get_Availability": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6a47457d-9aa1-4b5a-b98d-af0d998ae395"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ita_itaservices",
+              "recordId": "@outputs('Get_Availability')?['body/_ita_service_value']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Is_Active": {
+          "actions": {
+            "Set_variable": {
+              "metadata": {
+                "operationMetadataId": "6b272fc8-0cdc-44a9-8f02-2e749fd5a658"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "EmailBody",
+                "value": "@{replace(replace(replace(outputs('Get_Service')?['body/ita_bookingconfirmation'],'{service_display_name}',body('Get_Service')?['ita_displayname']),'{start_time}',formatDateTime(convertFromUtc(body('Get_Availability')?['ita_start'],'Eastern Standard Time'), 'yyyy-MM-dd HH:mm:ss EST')),'{booking_url}',concat(parameters('ITA Web Starter Portal Root (ita_WebStarterPortalRoot)'),'/booking-details/',triggerBody()?['ita_itaservicebookingid']))}"
+              }
+            },
+            "Send_an_email_(V2)": {
+              "runAfter": {
+                "Get_Authentication_Id": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c4224d6e-ebfc-4e43-b9c6-8439bacb7c7b"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "emailMessage/To": "@outputs('Get_Authentication_Id')?['body/ita_name']",
+                  "emailMessage/Subject": "Booking Confirmation for @{outputs('Get_Service')?['body/ita_displayname']}",
+                  "emailMessage/Body": "<p>@{variables('EmailBody')}</p>",
+                  "emailMessage/Importance": "Normal"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                  "operationId": "SendEmailV2",
+                  "connectionName": "shared_office365"
+                }
+              }
+            },
+            "Get_Authentication_Id": {
+              "runAfter": {
+                "Set_variable": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "8f8662db-ba69-4c33-8ea6-c9354bacf90e"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "ita_itaauthenticationids",
+                  "recordId": "@triggerOutputs()?['body/_ita_authenticationid_value']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {}
+          },
+          "expression": {
+            "equals": [
+              "@triggerOutputs()?['body/statecode']",
+              0
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "49939ae8-67c5-4cfa-acc1-2f98c704ac37"
+          },
+          "type": "If"
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "Get_Service": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "2e6482e9-a957-4f32-b4b1-5aa61b9b78f3"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EmailBody",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

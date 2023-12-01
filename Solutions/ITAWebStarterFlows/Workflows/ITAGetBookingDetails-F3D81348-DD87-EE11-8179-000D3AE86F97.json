@@ -1,0 +1,124 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cd1ca3cf-c336-4efa-bb45-24faccfa4d40"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "triggerAuthenticationType": "All",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bookingId": {
+                  "type": "string"
+                },
+                "userid": {
+                  "type": "string"
+                }
+              }
+            },
+            "method": "POST"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f358cda-57ff-49ca-b04a-644c9c4d3a2a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ita_itaservicebookings",
+              "$select": "ita_itaservicebookingid",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\">\n   <entity name=\"ita_itaservicebooking\">\n      <attribute name=\"ita_itaservicebookingid\"/>\n      <filter type=\"and\">\n         <condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n         <condition attribute=\"ita_itaservicebookingid\" operator=\"eq\" value=\"@{triggerBody()?['bookingId']}\" />\n         <condition attribute=\"ita_authenticationid\" operator=\"eq\" value=\"@{triggerBody()?['userid']}\" />\n      </filter>\n      <link-entity alias=\"availability\" name=\"ita_itaavailability\" to=\"ita_serviceavailability\" from=\"ita_itaavailabilityid\" link-type=\"inner\">\n\t\t\t<attribute name=\"ita_start\"/>\n\t\t\t<attribute name=\"ita_end\"/>\n\t  <attribute name=\"ita_participationinstructions\"/>\n               <order attribute=\"ita_start\" descending=\"false\"/>\n<filter type=\"and\"><condition attribute=\"ita_start\" operator=\"next-x-years\" value=\"10\"/></filter>\n\n\t\t\t<link-entity name=\"ita_itaservice\" alias=\"service\" link-type=\"inner\" from=\"ita_itaserviceid\" to=\"ita_service\">\n                   <attribute name=\"ita_displayname\"/> \n                   <attribute name=\"ita_description\"/> \n                   <filter type=\"and\">\n\t\t\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t\t</filter>\n\t\t\t</link-entity>\n\t\t\t<link-entity name=\"ita_itaresourcelocation\" alias=\"location\" link-type=\"inner\" from=\"ita_itaresourcelocationid\" to=\"ita_location\">\n\t\t\t\t<attribute name=\"ita_displayname\"/> \n                   <filter type=\"and\">\n\t\t\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t\t</filter>\n\t\t\t</link-entity>\n\t\t</link-entity>\n   </entity>\n</fetch>\n"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Available_or_not": {
+          "actions": {
+            "Response": {
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                "statusCode": 200,
+                "body": {
+                  "result": "OK",
+                  "data": "@first(outputs('List_rows')?['body/value'])"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Response_2": {
+                "metadata": {
+                  "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+                },
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                  "statusCode": 200,
+                  "body": {
+                    "result": "ERROR",
+                    "error": "There was an error. Please try signing in again"
+                  }
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@length(outputs('List_rows')?['body/value'])",
+              1
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "cd2c8cfc-54a1-4578-8de4-64d744695cff"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

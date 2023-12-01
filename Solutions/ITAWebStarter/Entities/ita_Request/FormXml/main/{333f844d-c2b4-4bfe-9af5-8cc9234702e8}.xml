@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{333f844d-c2b4-4bfe-9af5-8cc9234702e8}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{e0cd210a-7361-4500-9be8-14c642d58d28}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{cac7c611-3daf-415d-9cd5-ec39e0000ca7}" name="generalTab" columns="1">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{da343683-d14c-4f24-9b86-863b9d44d240}">
+                        <labels>
+                          <label description="Id" languagecode="1033" />
+                        </labels>
+                        <control id="ita_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ita_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d35c99fa-9d76-4bbf-9dc0-fd3a803ea594}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Origin" languagecode="1033" />
+                        </labels>
+                        <control id="ita_origin" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="ita_origin" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce62eeb6-6f60-4717-92b3-ba84a96d786a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Authentication Id" languagecode="1033" />
+                        </labels>
+                        <control id="ita_itaauthenticationid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_itaauthenticationid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{dfbdc3b9-2ec9-4527-87a4-6223b20482ab}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Client" languagecode="1033" />
+                        </labels>
+                        <control id="ita_client" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_client" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3ba59561-94fb-4caf-be35-9f0f49539c36}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Client Email" languagecode="1033" />
+                        </labels>
+                        <control id="ita_clientemail" classid="{ADA2203E-B4CD-49BE-9DDF-234642B43B52}" datafieldname="ita_clientemail" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ae7815d0-4251-433f-adeb-97adfb7496d9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Request Type" languagecode="1033" />
+                        </labels>
+                        <control id="ita_requesttype" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_requesttype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b23e92fc-415a-4fcf-9e20-805d46a648d5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Subject" languagecode="1033" />
+                        </labels>
+                        <control id="ita_subject" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="ita_subject" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0729b1a0-7f26-47e6-adb7-32da097929e5}" locklevel="0" colspan="1" rowspan="7">
+                        <labels>
+                          <label description="Details" languagecode="1033" />
+                        </labels>
+                        <control id="ita_details" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="ita_details" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{e92ee902-b759-418a-9ea7-af54d3e3552b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Follow Up By" languagecode="1033" />
+                        </labels>
+                        <control id="ita_followupby" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="ita_followupby" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0227b5c5-45c5-4f22-a558-452fa98512cf}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="_section_606" id="64d06c1a-8be4-4d4c-a37f-020ca2edd0fa" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{0508b856-e140-4216-aeb0-a89565e67e82}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{f71099bc-4cc3-49f4-a0f5-954499a2638d}" rowspan="15" colspan="1">
+                        <labels>
+                          <label description="Note Text" languagecode="1033" />
+                        </labels>
+                        <control id="notescontrol" classid="{06375649-C143-495E-A496-C962E5B4488E}" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_2" id="ff46045e-7da4-41a2-9233-0802276ed2d4" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Comments" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_2_section_1" id="0ff4f9ff-512b-44cf-bb5f-26a5afe5a0ea" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{92786d73-f578-442b-bf22-bc2e774482c3}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{4b53e87d-70ec-42c6-b1ec-653ee427f084}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1693510012142" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>ita_itacomment</TargetEntityType>
+                            <ViewId>{37BEDCCF-429A-4A09-A5CC-702ED7485955}</ViewId>
+                            <ViewIds>{37BEDCCF-429A-4A09-A5CC-702ED7485955}</ViewIds>
+                            <RelationshipName>ita_ita_itacomment_RequestId_ita_request</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_3" id="237b18a3-e96f-42ed-8d5a-9953cdb27750" IsUserDefined="0" locklevel="0" showlabel="true">
+          <labels>
+            <label description="Files" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_3_section_1" id="55df4884-c523-46f0-9b02-85a0893acdb9" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{e474e520-9029-4a29-a467-69d880ea70cc}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{00f01438-3c5f-4fde-838d-ffefe4862300}" rowspan="4" colspan="1" auto="false" showlabel="false">
+                        <labels>
+                          <label description="New SG control 1694994496969" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_2" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>ita_itafiletorequest</TargetEntityType>
+                            <ViewId>{734FCB3C-2C23-4F82-87DB-04F49BE87B36}</ViewId>
+                            <ViewIds>{734FCB3C-2C23-4F82-87DB-04F49BE87B36}</ViewIds>
+                            <RelationshipName>ita_ita_itafiletorequest_Request_ita_request</RelationshipName>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{1a31e847-bab3-4c03-8ddf-d645b04c8117}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{dff7548c-a4ee-4e2c-8b5d-a47048d9fb92}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{90b87ece-ea84-4cfd-a800-8b187d055991}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aa2aae80-e83f-4fe3-8bf4-31411b7d9f82}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b8071013-bd20-4e58-889e-7e9f6854667b}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Created On" languagecode="1033" />
+              </labels>
+              <control id="header_createdon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="false" />
+            </cell>
+            <cell id="{e326e989-3b76-4c01-b87c-378e6ca6b942}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Status Reason" languagecode="1033" />
+              </labels>
+              <control id="header_statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{51269eb2-43e7-4af7-8020-de70f3f676d3}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{8a68e3b2-1cbe-4db5-8eb8-5a342d93c464}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{46053708-840e-49c1-bd6f-0c46c5f813bc}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c4d6c54b-f00a-4937-bd5c-0a5cde58c50e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

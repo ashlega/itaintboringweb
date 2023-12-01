@@ -1,0 +1,208 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ita_sharedcommondataserviceforapps_2f8c2"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "cd1ca3cf-c336-4efa-bb45-24faccfa4d40"
+          },
+          "type": "Request",
+          "kind": "Http",
+          "inputs": {
+            "triggerAuthenticationType": "All",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "timeSlotId": {
+                  "type": "string"
+                },
+                "userid": {
+                  "type": "string"
+                }
+              }
+            },
+            "method": "POST"
+          }
+        }
+      },
+      "actions": {
+        "List_rows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2f358cda-57ff-49ca-b04a-644c9c4d3a2a"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "entityName": "ita_itaavailabilities",
+              "$select": "ita_start, ita_end, ita_itaavailabilityid",
+              "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\">\n   <entity name=\"ita_itaavailability\">\n      <attribute name=\"ita_start\"/>\n      <attribute name=\"ita_end\"/>\n      <attribute name=\"ita_itaavailabilityid\"/>\n\n      <filter type=\"and\">\n         <condition attribute=\"ita_itaavailabilityid\" operator=\"eq\" value=\"@{triggerBody()?['timeSlotId']}\" />\n         <condition attribute=\"ita_remainingbookings\" operator=\"gt\" value=\"0\" />\n      </filter>\n      \n   </entity>\n</fetch>\n"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          }
+        },
+        "Available_or_not": {
+          "actions": {
+            "Check_if_a_booking_exists": {
+              "metadata": {
+                "operationMetadataId": "469cc563-3ae3-4352-bbc1-9d4c2c396d2d"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "ita_itaservicebookings",
+                  "fetchXml": "<fetch version=\"1.0\" mapping=\"logical\" no-lock=\"false\" distinct=\"true\">\n\t<entity name=\"ita_itaservicebooking\">\n\t\t<attribute name=\"ita_itaservicebookingid\"/>\n\t\t<attribute name=\"ita_name\"/>\n\t\t<order attribute=\"ita_name\" descending=\"false\"/>\n\t\t<attribute name=\"ita_client\"/>\n\t\t<attribute name=\"ita_authenticationid\"/>\n\t\t<filter type=\"and\">\n\t\t\t<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>\n\t\t\t<condition attribute=\"ita_serviceavailability\" operator=\"eq\" value=\"@{first(outputs('List_rows')?['body/value'])['ita_itaavailabilityid']}\" />\n\t\t\t<condition attribute=\"ita_authenticationid\" operator=\"eq\" value=\"@{triggerBody()?['userid']}\" />\n\t\t</filter>\n\t\t\n\t</entity>\n</fetch>"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps"
+                }
+              }
+            },
+            "Condition": {
+              "actions": {
+                "Add_a_new_row": {
+                  "metadata": {
+                    "operationMetadataId": "fe0203a3-d117-48fd-b87f-3d08f4de1a0a"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "parameters": {
+                      "entityName": "ita_itaservicebookings",
+                      "item/ita_AuthenticationId@odata.bind": "ita_itaauthenticationids(@{triggerBody()?['userid']})",
+                      "item/ita_resendconfirmationemail": true,
+                      "item/ita_ServiceAvailability@odata.bind": "ita_itaavailabilities(@{first(outputs('List_rows')?['body/value'])['ita_itaavailabilityid']})",
+                      "item/statuscode": 1
+                    },
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "connectionName": "shared_commondataserviceforapps"
+                    }
+                  }
+                },
+                "Response_3": {
+                  "runAfter": {
+                    "Add_a_new_row": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+                  },
+                  "type": "Response",
+                  "kind": "Http",
+                  "inputs": {
+                    "statusCode": 200,
+                    "body": {
+                      "result": "OK",
+                      "data": {
+                        "booking_id": "@{outputs('Add_a_new_row')?['body/ita_name']}"
+                      }
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Check_if_a_booking_exists": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Response": {
+                    "metadata": {
+                      "operationMetadataId": "3430126f-a91c-46ab-96d3-f4b622b1ee2b"
+                    },
+                    "type": "Response",
+                    "kind": "Http",
+                    "inputs": {
+                      "statusCode": 200,
+                      "body": {
+                        "result": "ERROR",
+                        "error": "You have already booked this timeslot - no need to book again!"
+                      }
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('Check_if_a_booking_exists')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "86d8bfff-d3ec-4f39-a971-d6b31f8169dd"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "List_rows": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Response_2": {
+                "metadata": {
+                  "operationMetadataId": "4526cf7a-3313-4aee-bda1-e1ca7fb677d0"
+                },
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                  "statusCode": 200,
+                  "body": {
+                    "result": "ERROR",
+                    "error": "This timeslot is not available, please try another one"
+                  }
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@length(outputs('List_rows')?['body/value'])",
+              1
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "cd2c8cfc-54a1-4578-8de4-64d744695cff"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

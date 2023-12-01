@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{b429e12b-b124-4f24-94ee-c2658b90ed94}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{c019f415-76fb-443e-85e9-8a1d98b73736}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{eb964b9f-8e3f-44b3-8905-482305e851fc}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{afd8d216-9602-4e93-bb3a-e9ba8d31f4e6}">
+                        <labels>
+                          <label description="Id" languagecode="1033" />
+                        </labels>
+                        <control id="ita_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="ita_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8d247125-3b4f-4f5c-a43b-f1a6356f9277}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Full Name" languagecode="1033" />
+                        </labels>
+                        <control id="ita_fullname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="ita_fullname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c41ceddb-7048-4827-bbfa-488fb8bf168c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Cache Prefix" languagecode="1033" />
+                        </labels>
+                        <control id="ita_cacheprefix" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="ita_cacheprefix" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{517b88c6-6676-42ef-bb49-224fb464e5bc}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Terms Accepted" languagecode="1033" />
+                        </labels>
+                        <control id="ita_termsaccepted" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="ita_termsaccepted" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a627d4ce-1033-497c-a54b-921afb4773b3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Subscription Status" languagecode="1033" />
+                        </labels>
+                        <control id="ita_subscriptionstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="ita_subscriptionstatus" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{301e4d64-fa1f-44b7-91c4-604dc5ed1f87}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Client" languagecode="1033" />
+                        </labels>
+                        <control id="ita_client" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_client" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1f2cc365-f32e-42e1-ae79-8f6e2193f84c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Authentication Provider" languagecode="1033" />
+                        </labels>
+                        <control id="ita_authenticationprovider" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ita_authenticationprovider" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{16ede872-0969-4fcf-a41b-b4ccce701106}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{66989f5a-a37b-4726-8086-4a9b3d87b153}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{1a28c87d-b98c-4e13-ae4d-a9655f7e68c2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{000db5b0-77fa-4339-9f6b-9f7e7d282b78}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{36c3c765-8e60-40e5-822d-577ba6e2aa0a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4af4c21b-eade-4ffe-a56f-68cb14e13480}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="Status Reason" languagecode="1033" />
+              </labels>
+              <control id="header_statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{b8ef711e-2a40-4d2d-8b2b-3ff4e770f5d1}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{360d63d5-0016-4bc1-bcd8-e549eac0eb2d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c921057a-27fe-4bde-b527-d4e156982f68}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{44d05386-b9af-4d28-a433-6d32b12e5f2f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions />
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
