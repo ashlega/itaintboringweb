@@ -253,3 +253,11 @@ input[type='file'] {
     margin-top:20%;
     padding-top:1.5em;
 }
+
+.ai_input{
+    width: 100%;
+    margin-bottom: 0.5em;
+    border-radius: 0.2em;
+    padding:4px;
+    border:1px solid gray
+}

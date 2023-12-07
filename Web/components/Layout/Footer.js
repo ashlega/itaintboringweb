@@ -14,8 +14,9 @@ const Footer = () => {
             {SiteSettings.footerSlogan}
             
             </p>
+            
           </div>
-          
+
           <p className="text-gray-400">©{new Date().getFullYear()} - {SiteSettings.companyName}</p>
         </div>
         <div className=" row-span-2 sm:col-span-2 sm:col-start-7 sm:col-end-9 flex flex-col">
@@ -29,6 +30,9 @@ const Footer = () => {
             </li>
             <li className="my-2 hover:text-orange-500 cursor-pointer transition-all">
               <Link href="https://learn.microsoft.com/en-us/certifications/browse/?terms=power%20platform" target="_blank">Certifications</Link>
+            </li>
+            <li className="my-2 hover:text-orange-500 cursor-pointer transition-all">
+              <Link href="/ai/assistant">Chat to our AI Assistant</Link>
             </li>
           </ul>
         </div>

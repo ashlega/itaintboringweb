@@ -60,7 +60,7 @@ export default class SiteSettings {
     static NoBookingsMessage = "You have no bookings to show here yet!"
     static bookingDetailsHeader = "Your Booking"
     static BookingAdditionalDetailsHeader = "Additional Details and Joining Instructions"
-    
+    static AskAssistantTitle = "Ask The Assistant:"
 
     static highlightsList  =SiteSettingsLocal ? SiteSettingsLocal.highlightsList :  [
       {
